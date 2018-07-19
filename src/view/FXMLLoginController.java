@@ -15,6 +15,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,7 +51,7 @@ public class FXMLLoginController implements Initializable {
                     User user = controlUser.verificaLogin(login);
                     Parent root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
                     Scene cenaPerfil = new Scene(root);
-                    Stage palco = new Stage();
+                    Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();
                     palco.setScene(cenaPerfil);
                 } else {
                     System.out.println("Usuário ou senha incorretos, tente novamente");
@@ -60,6 +61,15 @@ public class FXMLLoginController implements Initializable {
                 } catch (Exception ex) {
                 }
 
+    }
+    
+    @FXML
+    public void registrar(Event event) throws IOException{
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLRegistro.fxml"));
+                    Scene cenaPerfil = new Scene(root);
+                    
+                    Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
     }
 
     @Override

@@ -6,9 +6,7 @@
 package view;
 
 import controller.ControllerUser;
-import java.io.IOException;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -16,25 +14,19 @@ import javafx.stage.Stage;
 
 /**
  *
- * @author Matheus Nascimento
+ * @author User
  */
-public class Login extends Application {
-    private ControllerUser user;
+public class AppView extends Application {
+    ControllerUser controlUser;
+    
     @Override
-    public void start(Stage stage) throws IOException {
-        
+    public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
-        
-        Scene scene = new Scene(root);
-        
-        stage.setScene(scene);
-        stage.show();
+        Scene cena = new Scene(root);
+        primaryStage.setScene(cena);
+        primaryStage.show();
     }
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+     public static void main(String[] args) {
         launch(args);
     }
     

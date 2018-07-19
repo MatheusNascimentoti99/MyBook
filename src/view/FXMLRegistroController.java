@@ -41,5 +41,19 @@ public class FXMLRegistroController implements Initializable {
         palco.setScene(cenaPerfil);
 
     }
+    
+    @FXML
+    public void registrar(Event evento) throws IOException {
+        /*
+        
+        Falta pegar dados do campo de texto e criar um novo usuário.
+        */
+        
+        Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+        Scene cenaPerfil = new Scene(root);
+        Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+        palco.setScene(cenaPerfil);
+
+    }
 
 }

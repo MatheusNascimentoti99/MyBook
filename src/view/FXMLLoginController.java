@@ -54,6 +54,7 @@ public class FXMLLoginController implements Initializable {
                     Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();
                     palco.setScene(cenaPerfil);
                 } else {
+                    // Ao invés do print, colocar uma caixa de dialogo. 
                     System.out.println("Usuário ou senha incorretos, tente novamente");
                 }
                 try {

@@ -1,0 +1,39 @@
+/*
+ * Empty Stylesheet file.
+ */
+
+
+.LoginFxmlClass {
+    
+
+    .button {
+        -fx-padding: 5 22 5 22;   
+        -fx-border-color: #e2e2e2;
+        -fx-border-width: 2;
+        -fx-background-radius: 0;
+        -fx-background-color: #FF8C00;
+        -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+        -fx-font-size: 11pt;
+        -fx-text-fill: #FFFAFA;
+        -fx-background-insets: 0 0 0 0, 0, 1, 2;
+    }
+    .logo{
+        max-width:2px;
+        max-height:1px;
+        width: 1px;
+        height: 1px;
+        -fx-background-image: url("ComputerTelaLogin.jpeg");
+
+
+
+    }
+    .archoPene {
+        -fx-background-color: #00000000; 
+        -fx-padding: 5 22 5 22;   
+        -fx-border-color: #00000000;
+        -fx-border-width: 2;
+        -fx-background-radius: 0;
+        -fx-background-color: #00000000;
+ 
+    }
+}

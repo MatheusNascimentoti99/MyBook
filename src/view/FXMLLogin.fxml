@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="" fx:id="password" prefHeight="400.0" prefWidth="600.0" styleClass="archoPene" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLLoginController">
+  <children>
+    <Label id="titulo" layoutX="356.0" layoutY="53.0" prefHeight="45.0" prefWidth="143.0" text="My Book">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="32.0" />
+      </font>
+    </Label>
+    <Label id="lblNomeUser" layoutX="328.0" layoutY="125.0" text="USERNAME">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x1" />
+      </font>
+    </Label>
+    <Label id="lblPassword" font="$x1" layoutX="328.0" layoutY="210.0" text="PASSWORD" />
+    <PasswordField id="password" fx:id="textoSenhaEntrada" layoutX="328.0" layoutY="224.0" prefWidth="200.0" />
+    <Button id="" fx:id="entrar" contentDisplay="TOP" layoutX="356.0" layoutY="274.0" mnemonicParsing="false" onAction="#doLogin" prefHeight="34.0" prefWidth="143.0" style="&#10;" styleClass="LoginFxmlClass" text="ENTRAR" textFill="BLACK">
+      <stylesheets>
+        <URL value="@fxmllogin.css" />
+      </stylesheets>
+    </Button>
+    <TextField id="" fx:id="textoEntrada" layoutX="328.0" layoutY="139.0" prefWidth="200.0" />
+    <Label id="lblOpRegistrar" layoutX="385.0" layoutY="323.0" text="Ainda não tem uma conta?" />
+    <Label fx:id="registrar" layoutX="538.0" layoutY="323.0" text="Registrar" textFill="#0029ff" />
+    <Label layoutX="-95.0" layoutY="-67.0" prefHeight="573.0" prefWidth="501.3333435058594" scaleX="0.6" scaleY="0.6" scaleZ="1.0" styleClass="logo" text="">
+      <stylesheets>
+        <URL value="@fxmllogin.css" />
+      </stylesheets>
+    </Label>
+  </children>
+  <stylesheets>
+    <URL value="@fxmllogin.css" />
+  </stylesheets>
+</AnchorPane>

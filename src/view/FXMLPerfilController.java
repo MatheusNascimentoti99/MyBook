@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerUser;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
@@ -15,7 +16,7 @@ import javafx.fxml.Initializable;
  * @author Matheus Nascimento
  */
 public class FXMLPerfilController implements Initializable {
-
+    ControllerUser controlUser;
     /**
      * Initializes the controller class.
      */
@@ -23,5 +24,8 @@ public class FXMLPerfilController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }    
+    
+
+  
     
 }

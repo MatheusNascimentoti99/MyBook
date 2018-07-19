@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerUser;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -23,7 +24,6 @@ import javafx.stage.Stage;
  * @author Matheus Nascimento
  */
 public class FXMLRegistroController implements Initializable {
-
     /**
      * Initializes the controller class.
      */
@@ -55,5 +55,7 @@ public class FXMLRegistroController implements Initializable {
         palco.setScene(cenaPerfil);
 
     }
+    
+
 
 }

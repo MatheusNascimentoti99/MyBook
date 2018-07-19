@@ -17,17 +17,34 @@ import javafx.stage.Stage;
  * @author User
  */
 public class AppView extends Application {
-    ControllerUser controlUser;
-    
+
+    private static ControllerUser controlUser;
+
+    public static ControllerUser getControlUser() {
+        return controlUser;
+    }
+
+    public static void setControlUser(ControllerUser controlUser) {
+        AppView.controlUser = controlUser;
+    }
+
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene cena = new Scene(root);
         primaryStage.setScene(cena);
+        
         primaryStage.show();
     }
-     public static void main(String[] args) {
+
+    public static void main(String[] args) {
         launch(args);
     }
-    
+
+    public AppView() {
+        controlUser = new ControllerUser();
+        
+    }
+
 }

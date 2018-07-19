@@ -32,7 +32,6 @@ import model.User;
  */
 public class FXMLLoginController implements Initializable {
 
-    ControllerUser controlUser;
     @FXML
     TextField textoEntrada;
     @FXML
@@ -44,11 +43,10 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     public void doLogin(ActionEvent event) throws IOException {
-        controlUser.setGrafoUsers(controlUser.readRegisters());
                 String login = textoEntrada.getText();
                 String senha = String.valueOf(textoSenhaEntrada.getText());
-                if (controlUser.checkLogin(login, senha)) {
-                    User user = controlUser.verificaLogin(login);
+                if (AppView.getControlUser().checkLogin(login, senha)) {
+                    User user = AppView.getControlUser().verificaLogin(login);
                     Parent root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
                     Scene cenaPerfil = new Scene(root);
                     Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -58,7 +56,7 @@ public class FXMLLoginController implements Initializable {
                     System.out.println("Usuário ou senha incorretos, tente novamente");
                 }
                 try {
-                    controlUser.saveRegisters();
+                    AppView.getControlUser().saveRegisters();
                 } catch (Exception ex) {
                 }
 
@@ -75,7 +73,8 @@ public class FXMLLoginController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        controlUser = new ControllerUser();
     }
+
+ 
 
 }

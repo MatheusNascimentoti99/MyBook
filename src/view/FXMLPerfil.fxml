@@ -5,14 +5,15 @@
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
 <AnchorPane id="AnchorPane" onDragDetected="#abrir" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilController">
   <children>
-    <Pane fx:id="pnFundo" disable="false" focusTraversable="true" layoutX="0.0" layoutY="0.0" prefHeight="433.0" prefWidth="671.0" visible="true">
+    <Pane fx:id="pnFundo" disable="false" focusTraversable="true" layoutX="0.0" layoutY="0.0" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" visible="true">
       <children>
-        <VBox layoutX="197.0" layoutY="39.0" prefHeight="63.0" prefWidth="413.0">
+        <VBox layoutX="129.0" layoutY="41.0" prefHeight="63.0" prefWidth="413.0">
           <children>
             <TextArea editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="63.0" prefWidth="444.0" text="O que você está pensando?" wrapText="true" />
             <HBox prefHeight="24.0" prefWidth="429.0">
@@ -20,13 +21,14 @@
                 <Label text="Imagem" />
                 <Separator orientation="VERTICAL" prefHeight="16.0" prefWidth="24.0" />
                 <Label text="Vídeo" />
+                <Separator orientation="VERTICAL" prefHeight="21.0" prefWidth="253.0" />
+                <Button alignment="BASELINE_RIGHT" mnemonicParsing="false" text="Postar" />
               </children>
             </HBox>
           </children>
         </VBox>
         <ListView fx:id="listAmigos" blendMode="BLUE" layoutX="13.0" layoutY="229.0" prefHeight="200.0" prefWidth="93.0" />
         <Label layoutX="13.0" layoutY="212.0" text="Amigos" />
-        <Button alignment="BASELINE_RIGHT" layoutX="556.0" layoutY="94.0" mnemonicParsing="false" text="Postar" />
         <Label layoutX="451.0" layoutY="16.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="54.0" text="MyBook" textFill="#007f58d3">
           <font>
             <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x1" />
@@ -35,20 +37,20 @@
             <Label font="$x1" text="Logout" textFill="BLACK" />
           </graphic>
         </Label>
-        <Label font="$x1" layoutX="82.0" layoutY="88.0" prefHeight="23.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="mudarFoto" text="" textFill="#33ffe7">
+        <Label font="$x1" layoutX="86.0" layoutY="115.0" prefHeight="23.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="mudarFoto" text="" textFill="#33ffe7">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Label>
-        <Label fx:id="lblFoto" blendMode="RED" cache="true" cacheHint="DEFAULT" layoutX="4.0" layoutY="7.0" mouseTransparent="false" pickOnBounds="false" prefHeight="102.0" prefWidth="82.0" style="" text="" textFill="#006641">
+        <Label fx:id="lblFoto" blendMode="RED" cache="true" cacheHint="DEFAULT" layoutX="10.0" layoutY="39.0" mouseTransparent="false" pickOnBounds="false" prefHeight="102.0" prefWidth="82.0" style="" text="" textFill="#006641">
           <contextMenu>
             <ContextMenu />
           </contextMenu>
         </Label>
         <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="160.0" prefHeight="223.0" prefWidth="490.0" visible="false" />
         <ListView focusTraversable="false" layoutX="475.0" layoutY="36.0" prefHeight="320.0" prefWidth="164.0" visible="false" />
-        <TextField layoutX="104.0" layoutY="10.0" prefWidth="329.0" text="Pesquisar" />
-        <Button fx:id="btnSobre" layoutX="7.0" layoutY="132.0" mnemonicParsing="false" onAction="#sobre" prefHeight="30.0" prefWidth="30.0" scaleX="0.8" scaleY="0.8" styleClass="sobre" text="btnSobre">
+        <TextField fx:id="txtPesquisar" layoutX="104.0" layoutY="10.0" onAction="#pesquisar" onInputMethodTextChanged="#pesquisar" prefWidth="329.0" text="Pesquisar" />
+        <Button fx:id="btnSobre" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#sobre" prefHeight="30.0" prefWidth="30.0" scaleX="0.8" scaleY="0.8" styleClass="sobre" text="btnSobre">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -58,10 +60,29 @@
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Label>
-        <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="107.0" text="Nome" />
+        <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="148.0" text="Nome" />
       </children>
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
     </Pane>
-    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" styleClass="fundo" visible="true">
+    <Pane fx:id="pnPesquisa" focusTraversable="true" layoutX="0.0" layoutY="39.0" prefHeight="394.0" prefWidth="671.0" styleClass="fundo" visible="false">
+      <children>
+        <ListView layoutX="127.0" layoutY="78.0" prefHeight="316.0" prefWidth="485.0" visible="true">
+          <effect>
+            <ColorAdjust brightness="1.0" contrast="0.6183206106870229" hue="0.3129770992366412" saturation="1.0">
+              <input>
+                <Glow level="0.9352201257861634" />
+              </input>
+            </ColorAdjust>
+          </effect>
+        </ListView>
+      </children>
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
+    </Pane>
+    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" styleClass="fundo" visible="false">
       <children>
         <Label layoutX="43.0" layoutY="139.0" text="Nome:" />
         <Label layoutX="43.0" layoutY="171.0" text="E-mail:" />

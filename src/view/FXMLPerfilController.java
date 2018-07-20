@@ -16,6 +16,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
+import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import model.User;
 import util.Edge;
@@ -60,7 +62,12 @@ public class FXMLPerfilController implements Initializable {
     private Label txtTelefone;
     @FXML
     private Label txtEndereco;
-
+    @FXML
+    private Pane pnPesquisa;
+    @FXML
+    private ListView listPesquisa;
+    @FXML
+    private TextField txtPesquisar;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -73,6 +80,15 @@ public class FXMLPerfilController implements Initializable {
             listAmigos.getItems().add(amigos);
         }
 
+    }
+    
+    
+    @FXML
+    public void pesquisar(ActionEvent evento){
+        txtPesquisar.setText("");
+        pnFundo.setVisible(false);
+        pnPesquisa.setVisible(true);
+        
     }
 
     @FXML
@@ -92,6 +108,8 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     public void voltar(Event evento) {
         pnSobre.setVisible(false);
+        System.out.println(":)");
+           
         pnFundo.setVisible(true);
     }
 

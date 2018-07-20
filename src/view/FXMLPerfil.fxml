@@ -33,14 +33,15 @@
     </VBox>
     <Button alignment="BASELINE_RIGHT" layoutX="557.0" layoutY="91.0" mnemonicParsing="false" text="Postar" />
     <ListView focusTraversable="false" layoutX="475.0" layoutY="36.0" prefHeight="320.0" prefWidth="164.0" visible="false" />
-    <Label layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="24.0" styleClass="mainFxmlClass" text="" AnchorPane.rightAnchor="2.0">
+    <Label layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="24.0" styleClass="mainFxmlClass" text="" AnchorPane.rightAnchor="66.0">
       <stylesheets>
         <URL value="@fxmlperfil.css" />
       </stylesheets>
     </Label>
     <Label font="$x1" layoutX="452.0" layoutY="13.0" prefHeight="16.0" prefWidth="54.0" text="MyBook" textFill="#007f58d3" />
+    <Label font="$x1" layoutX="611.0" layoutY="15.0" text="Logout" textFill="BLACK" />
   </children>
   <stylesheets>
-    <URL value="@fxmlperfil.css" />
+    <URL value="@../style/fxmlperfil.css" />
   </stylesheets>
 </AnchorPane>

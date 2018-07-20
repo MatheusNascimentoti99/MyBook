@@ -50,9 +50,10 @@ public class FXMLRegistroController implements Initializable {
 
     @FXML
     public void cancelar(Event evento) throws IOException {
+        //Altera a cena para o login
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
         Scene cenaPerfil = new Scene(root);
-
+        
         Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
         palco.setScene(cenaPerfil);
 
@@ -77,10 +78,7 @@ public class FXMLRegistroController implements Initializable {
 
     @FXML
     public void registrar(Event evento) throws IOException {
-        /*
-        
-        Falta pegar dados do campo de texto e criar um novo usuário.
-         */
+
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         boolean registroOk = true;
         String nome = null;
@@ -90,6 +88,12 @@ public class FXMLRegistroController implements Initializable {
         String senha = null;
         String userName = null;
         String dataNasc = null;
+        
+        /*
+                    implementação futura:
+                    Colocar mais tratamentos de erros, como na data, nome e telefone.
+                    séria bom também poder alterar a cor dos campos de texto, até agora não sei como fazer isso
+                    */
         if (checkRegistro(txtUserName, 1, registroOk)) {
             userName = txtUserName.getText();
             txtUserName.setStyle(nome);

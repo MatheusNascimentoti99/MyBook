@@ -23,7 +23,17 @@ public class User implements Serializable{
     private  String endereco;
     private  String login;
     private  LinkedList solicitacoes;
+    private String dirFoto;
+
+    public String getDirFoto() {
+        return dirFoto;
+    }
+
+    public void setDirFoto(String dirFoto) {
+        this.dirFoto = dirFoto;
+    }
   
+    
     public User(String nome, String email, String password, String telefone, String dataNasc, 
             String endereco, String login) {
         this.nome = nome;

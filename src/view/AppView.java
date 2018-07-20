@@ -33,6 +33,7 @@ public class AppView extends Application {
     public void start(Stage primaryStage) throws Exception {
         //A primeira cena é o ceneLogin
         Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+        
         Scene cena = new Scene(root);
         primaryStage.setScene(cena);
         

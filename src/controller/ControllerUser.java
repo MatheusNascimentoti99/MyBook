@@ -17,7 +17,7 @@
      * @author Matheus Nascimento
      */
     public class ControllerUser {
-
+        private User loginCorrent;
         private Graph grafoUsers;
 
         public ControllerUser() {
@@ -35,6 +35,12 @@
                 return false;
             }
         }
+        public User loginCorrent(){
+            return loginCorrent;
+        }
+        public void alterarFoto(String local){
+            loginCorrent.setDirFoto(local);
+        }
 
         public boolean checkLogin(String login, String senha) {
 
@@ -44,6 +50,7 @@
                     Vertex entry = (Vertex) iterador.next();
                     User user = (User) entry.getValue();
                     if (user.getLogin().equals(login)) {
+                        loginCorrent = user;
                         return user.getPassword().equals(senha);
                     }
                 }

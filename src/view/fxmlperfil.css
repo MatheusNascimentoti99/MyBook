@@ -4,8 +4,36 @@
 
 .mainFxmlClass {
 
+
+
     
+    .solicitacao{
+        width:2px;
+        height:1px;
+        -fx-background-color: #FFFFFF;
+        -fx-background-image: url("solicitacao.png");
+    }
+
+    .mudarFoto{
+        width:2px;
+        height:1px;
+        -fx-background-color: #FFFFFF;
+        -fx-background-image: url("mudarFoto.png");
+    }
+
+    .sobre{
+        width:2px;
+        height:1px;
+        -fx-background-color: #FFFFFF;
+        -fx-background-image: url("sobre.png");
+    }
     
+    .voltar{
+        width:2px;
+        height:1px;
+        -fx-background-color: #FFFFFF;
+        -fx-background-image: url("voltar.png");
+    }
     .fundo {
         -fx-background-color: #FFFFFF; 
         -fx-padding: 5 22 5 22;   
@@ -14,11 +42,5 @@
         -fx-background-radius: 0;
         -fx-background-color: #FFFFFF;
  
-    }
-    .solicitacao{
-        width:2px;
-        height:1px;
-
-        -fx-background-image: url("solicitacao.png");
     }
 }

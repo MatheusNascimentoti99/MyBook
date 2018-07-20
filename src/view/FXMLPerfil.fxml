@@ -61,7 +61,7 @@
         <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="107.0" text="Nome" />
       </children>
     </Pane>
-    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" styleClass="fundo" visible="false">
+    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" styleClass="fundo" visible="true">
       <children>
         <Label layoutX="43.0" layoutY="139.0" text="Nome:" />
         <Label layoutX="43.0" layoutY="171.0" text="E-mail:" />
@@ -70,7 +70,7 @@
         <Label layoutX="43.0" layoutY="155.0" text="Username:" />
         <Label layoutX="43.0" layoutY="217.0" text="Data de Nascimento:" />
         <Label fx:id="txtNome" layoutX="85.0" layoutY="139.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtUsername" layoutX="105.0" layoutY="152.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtUsername" layoutX="105.0" layoutY="155.0" prefWidth="317.0" text="" />
         <Label fx:id="txtEmail" layoutX="85.0" layoutY="171.0" prefWidth="317.0" text="" />
         <Label fx:id="txtTelefone" layoutX="98.0" layoutY="187.0" prefWidth="317.0" text="" />
         <Label fx:id="txtEndereco" layoutX="101.0" layoutY="201.0" prefWidth="317.0" text="" />

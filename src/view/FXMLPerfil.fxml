@@ -61,26 +61,30 @@
         <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="107.0" text="Nome" />
       </children>
     </Pane>
-    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" visible="true">
+    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="0.0" layoutY="2.0" prefHeight="431.0" prefWidth="671.0" styleClass="fundo" visible="false">
       <children>
-        <Label layoutX="69.0" layoutY="122.0" text="Nome:" />
-        <Label layoutX="69.0" layoutY="154.0" text="E-mail:" />
-        <Label layoutX="69.0" layoutY="170.0" text="Telefone:" />
-        <Label layoutX="69.0" layoutY="186.0" text="Endereço:" />
-        <Label layoutX="69.0" layoutY="138.0" text="Username:" />
-        <Label layoutX="69.0" layoutY="200.0" text="Data de Nascimento:" />
-        <Label fx:id="txtNome" layoutX="111.0" layoutY="122.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtUsername" layoutX="131.0" layoutY="135.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtEmail" layoutX="111.0" layoutY="154.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtTelefone" layoutX="124.0" layoutY="170.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtEndereco" layoutX="127.0" layoutY="184.0" prefWidth="317.0" text="" />
-        <Label fx:id="txtDataNascimento" layoutX="186.0" layoutY="200.0" prefWidth="317.0" text="" />
+        <Label layoutX="43.0" layoutY="139.0" text="Nome:" />
+        <Label layoutX="43.0" layoutY="171.0" text="E-mail:" />
+        <Label layoutX="43.0" layoutY="187.0" text="Telefone:" />
+        <Label layoutX="43.0" layoutY="203.0" text="Endereço:" />
+        <Label layoutX="43.0" layoutY="155.0" text="Username:" />
+        <Label layoutX="43.0" layoutY="217.0" text="Data de Nascimento:" />
+        <Label fx:id="txtNome" layoutX="85.0" layoutY="139.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtUsername" layoutX="105.0" layoutY="152.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtEmail" layoutX="85.0" layoutY="171.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtTelefone" layoutX="98.0" layoutY="187.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtEndereco" layoutX="101.0" layoutY="201.0" prefWidth="317.0" text="" />
+        <Label fx:id="txtDataNascimento" layoutX="160.0" layoutY="217.0" prefWidth="317.0" text="" />
         <Button fx:id="btnVoltar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="32.0" prefWidth="32.0" styleClass="voltar" text="">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Button>
+        <Label layoutX="465.0" layoutY="4.0" prefHeight="211.9609375" prefWidth="192.0" text="" />
       </children>
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
     </Pane>
   </children>
   <stylesheets>

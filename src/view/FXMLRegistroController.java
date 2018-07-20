@@ -28,6 +28,8 @@ import javafx.stage.Stage;
  */
 public class FXMLRegistroController implements Initializable {
 
+    private final String styleError = "-fx-background-color: #EEEE00;";
+    private final String styleAcept = "-fx-background-color: #FFFFFFF;";
     @FXML
     TextField txtUserName;
     @FXML
@@ -96,44 +98,57 @@ public class FXMLRegistroController implements Initializable {
                     */
         if (checkRegistro(txtUserName, 1, registroOk)) {
             userName = txtUserName.getText();
-            txtUserName.setStyle(nome);
+            txtUserName.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtUserName.setStyle(styleError);
 
         }
-        if (checkRegistro(txtEmail, 1, registroOk)) {
+        if (checkRegistro(txtEmail, 5, registroOk)) {
             email = txtEmail.getText();
+            txtEmail.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtEmail.setStyle(styleError);
 
         }
-        if (checkRegistro(txtEndereco, 1, registroOk)) {
+        if (checkRegistro(txtEndereco, 5, registroOk)) {
             endereco = txtEndereco.getText();
+            txtEndereco.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtEndereco.setStyle(styleError);
 
         }
         if (checkRegistro(txtTelefone, 8, registroOk)) {
             telefone = txtTelefone.getText();
+            txtTelefone.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtTelefone.setStyle(styleError);
 
         }
         if (checkSenha(passSenha, 8, registroOk)) {
             senha = passSenha.getText();
+            passSenha.setStyle(styleAcept);
         } else {
             registroOk = false;
+            passSenha.setStyle(styleError);
         }
-        if (checkRegistro(txtDataNascimento, 1, registroOk)) {
+        if (checkRegistro(txtDataNascimento, 8, registroOk)) {
             dataNasc = txtDataNascimento.getText();
+            txtDataNascimento.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtDataNascimento.setStyle(styleError);
         }
 
-        if (checkRegistro(txtNomeCompleto, 1, registroOk)) {
+        if (checkRegistro(txtNomeCompleto, 5, registroOk)) {
             nome = txtNomeCompleto.getText();
+            txtNomeCompleto.setStyle(styleAcept);
         } else {
             registroOk = false;
+            txtNomeCompleto.setStyle(styleError);
         }
 
         if (registroOk) {

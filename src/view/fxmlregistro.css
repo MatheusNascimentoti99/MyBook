@@ -3,5 +3,12 @@
  */
 
 .mainFxmlClass {
-
+    .texto{
+        -fx-background-color: #00000000; 
+        -fx-padding: 5 22 5 22;   
+        -fx-border-color: #00000000;
+        -fx-border-width: 2;
+        -fx-background-radius: 0;
+        -fx-background-color: #00000000;
+    }
 }

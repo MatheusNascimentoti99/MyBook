@@ -81,6 +81,7 @@ public class FXMLRegistroController implements Initializable {
         
         Falta pegar dados do campo de texto e criar um novo usuário.
          */
+        AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         boolean registroOk = true;
         String nome = null;
         String email = null;

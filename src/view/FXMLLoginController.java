@@ -43,6 +43,7 @@ public class FXMLLoginController implements Initializable {
 
     @FXML
     public void doLogin(ActionEvent event) throws IOException {
+                AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
                 String login = textoEntrada.getText();
                 String senha = String.valueOf(textoSenhaEntrada.getText());
                 if (AppView.getControlUser().checkLogin(login, senha)) {
@@ -64,6 +65,7 @@ public class FXMLLoginController implements Initializable {
     
     @FXML
     public void registrar(Event event) throws IOException{
+        AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         Parent root = FXMLLoader.load(getClass().getResource("FXMLRegistro.fxml"));
                     Scene cenaPerfil = new Scene(root);
                     

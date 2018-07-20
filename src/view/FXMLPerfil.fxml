@@ -8,23 +8,37 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="433.0" prefWidth="671.0" styleClass="mainFxmlClass" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilController">
+<AnchorPane id="AnchorPane" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilController">
   <children>
     <TextField layoutX="105.0" layoutY="7.0" prefWidth="329.0" text="Pesquisar" />
-    <Button layoutX="481.0" layoutY="113.0" mnemonicParsing="false" text="Postar" />
-    <Label layoutX="105.0" layoutY="112.0" text="Vídeo" />
-    <Label layoutX="147.0" layoutY="112.0" text="Imagem" />
-    <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="true" layoutX="116.0" layoutY="170.0" prefHeight="223.0" prefWidth="490.0" visible="true" />
-    <Label layoutX="116.0" layoutY="146.0" text="Postagens">
+    <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="160.0" prefHeight="223.0" prefWidth="490.0" visible="false" />
+    <Label blendMode="RED" cache="true" cacheHint="DEFAULT" layoutX="17.0" layoutY="10.0" mouseTransparent="false" pickOnBounds="false" prefHeight="102.0" prefWidth="82.0" style="" text="" textFill="#006641" />
+    <Label layoutX="11.0" layoutY="115.0" text="Alterar" textFill="#33ffe7">
       <font>
-        <Font size="18.0" />
+        <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x1" />
       </font>
     </Label>
-    <Label blendMode="RED" cache="true" cacheHint="DEFAULT" layoutX="11.0" layoutY="10.0" mouseTransparent="false" pickOnBounds="false" prefHeight="102.0" prefWidth="82.0" style="" text="Foto" textFill="#006641" />
-    <Label layoutX="11.0" layoutY="115.0" text="Mudar Foto" />
     <ListView blendMode="BLUE" layoutX="11.0" layoutY="193.0" prefHeight="200.0" prefWidth="93.0" />
     <Label layoutX="14.0" layoutY="174.0" text="Amigos" />
-    <TextArea layoutX="91.0" layoutY="35.0" prefHeight="63.0" prefWidth="444.0" text="O que você está pensando?" wrapText="true" />
+    <VBox layoutX="198.0" layoutY="36.0" prefHeight="63.0" prefWidth="413.0">
+      <children>
+        <TextArea editable="true" prefHeight="63.0" prefWidth="444.0" text="O que você está pensando?" wrapText="true" />
+        <HBox prefHeight="24.0" prefWidth="429.0">
+          <children>
+            <Label text="Imagem" />
+            <Label text="Vídeo" />
+          </children>
+        </HBox>
+      </children>
+    </VBox>
+    <Button alignment="BASELINE_RIGHT" layoutX="557.0" layoutY="91.0" mnemonicParsing="false" text="Postar" />
+    <ListView focusTraversable="false" layoutX="475.0" layoutY="36.0" prefHeight="320.0" prefWidth="164.0" visible="false" />
+    <Label layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="22.0" prefWidth="24.0" styleClass="mainFxmlClass" text="" AnchorPane.rightAnchor="2.0">
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
+    </Label>
+    <Label font="$x1" layoutX="452.0" layoutY="13.0" prefHeight="16.0" prefWidth="54.0" text="MyBook" textFill="#007f58d3" />
   </children>
   <stylesheets>
     <URL value="@fxmlperfil.css" />

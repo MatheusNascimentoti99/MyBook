@@ -4,4 +4,21 @@
 
 .mainFxmlClass {
 
+    .solicitacao{
+        max-width:2px;
+        max-height:1px;
+        width: 1px;
+        height: 1px;
+        -fx-background-image: url("solicitacao.png");
+    }
+    
+    .fundo {
+        -fx-background-color: #FFFFFF; 
+        -fx-padding: 5 22 5 22;   
+        -fx-border-color: #FFFFFF;
+        -fx-border-width: 2;
+        -fx-background-radius: 0;
+        -fx-background-color: #FFFFFF;
+ 
+    }
 }

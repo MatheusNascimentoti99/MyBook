@@ -44,6 +44,7 @@ public class User implements Serializable{
         this.endereco = endereco;
         this.login = login;
         solicitacoes = new LinkedList();
+        dirFoto =  new String();
     }
 
 

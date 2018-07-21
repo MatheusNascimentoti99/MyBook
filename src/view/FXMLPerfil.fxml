@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.image.*?>
 <?import java.lang.*?>
 <?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" onDragDetected="#abrir" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPerfilController">
+<AnchorPane id="AnchorPane" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilController">
   <children>
     <Pane fx:id="pnFundo" disable="false" focusTraversable="true" layoutX="0.0" layoutY="0.0" prefHeight="433.0" prefWidth="671.0" styleClass="fundo" visible="true">
       <children>
@@ -38,7 +38,7 @@
             <Label font="$x1" text="Logout" textFill="BLACK" />
           </graphic>
         </Label>
-        <Label fx:id="mudarPerfil" font="$x1" layoutX="86.0" layoutY="115.0" onMouseClicked="#abrir" prefHeight="23.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="mudarFoto" text="" textFill="#33ffe7">
+        <Label id="mudarPerfil" fx:id="lblMudaFoto" font="$x1" layoutX="86.0" layoutY="115.0" onMouseClicked="#abrir" prefHeight="23.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="mudarFoto" text="" textFill="#33ffe7">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -46,7 +46,7 @@
         <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="160.0" prefHeight="223.0" prefWidth="490.0" visible="false" />
         <ListView focusTraversable="false" layoutX="475.0" layoutY="36.0" prefHeight="320.0" prefWidth="164.0" visible="false" />
         <TextField fx:id="txtPesquisar" layoutX="104.0" layoutY="10.0" onAction="#pesquisar" onInputMethodTextChanged="#pesquisar" prefWidth="329.0" text="Pesquisar" />
-        <Button fx:id="btnSobre" layoutX="10.0" layoutY="175.0" mnemonicParsing="false" onAction="#sobre" prefHeight="30.0" prefWidth="30.0" scaleX="0.8" scaleY="0.8" styleClass="sobre" text="btnSobre">
+        <Button fx:id="btnSobre" layoutX="10.0" layoutY="144.0" mnemonicParsing="false" onAction="#sobre" prefHeight="30.0" prefWidth="30.0" scaleX="0.8" scaleY="0.8" styleClass="sobre" text="btnSobre">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -56,8 +56,8 @@
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Label>
-        <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="148.0" text="Nome" />
-            <ImageView fx:id="fotoPerfil" fitHeight="119.0" fitWidth="93.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" />
+        <Label fx:id="lblNome" font="$x1" layoutX="10.0" layoutY="135.0" text="Nome" />
+        <ImageView fx:id="fotoPerfil" fitHeight="119.0" fitWidth="93.0" layoutX="6.0" pickOnBounds="true" preserveRatio="true" />
       </children>
       <stylesheets>
         <URL value="@fxmlperfil.css" />

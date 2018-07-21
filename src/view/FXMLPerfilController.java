@@ -25,7 +25,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
 import javax.imageio.ImageIO;
@@ -47,7 +46,7 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private ImageView fotoPerfil;
     @FXML
-    private Label mudarPerfil;
+    private Label lblMudaFoto;
     @FXML
     private Label lblNome;
     @FXML
@@ -81,6 +80,8 @@ public class FXMLPerfilController implements Initializable {
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
+    
+   
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -127,7 +128,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     @FXML
-    public void abrir(ActionEvent evento) {
+    public void abrir(Event evento) {
              FileChooser fileChooser = new FileChooser();
             
             //Set extension filter

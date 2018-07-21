@@ -143,6 +143,7 @@ public class FXMLPerfilController implements Initializable {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 fotoPerfil.setImage(image);
+                AppView.getControlUser().loginCorrent().setDirFoto(file.toURI().toURL().toString());
             } catch (IOException ex) {
                 Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
             }

@@ -136,23 +136,24 @@ public class FXMLPerfilController implements Initializable {
 
     @FXML
     public void abrir(Event evento) {
-        FileChooser fileChooser = new FileChooser();
-
-        //Set extension filter
-        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-
-        //Show open file dialog
-        File file = fileChooser.showOpenDialog(null);
-
-        try {
-            BufferedImage bufferedImage = ImageIO.read(file);
-            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-            fotoPerfil.setImage(image);
-        } catch (IOException ex) {
-            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-        }
+             FileChooser fileChooser = new FileChooser();
+            
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+             
+            //Show open file dialog
+            File file = fileChooser.showOpenDialog(null);
+                      
+            try {
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                fotoPerfil.setImage(image);
+                AppView.getControlUser().loginCorrent().setDirFoto(file.toURI().toURL().toString());
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
     }
 

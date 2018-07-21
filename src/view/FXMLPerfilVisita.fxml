@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="716.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilVisitaController">
+  <children>
+    <Pane id="pnFundo" depthTest="INHERIT" disable="false" focusTraversable="true" layoutX="5.0" layoutY="45.0" prefHeight="355.0" prefWidth="711.0" styleClass="fundo" visible="true">
+      <children>
+        <VBox focusTraversable="true" layoutX="158.0" layoutY="-6.0" minHeight="15.9609375" prefHeight="32.0" prefWidth="435.0" />
+        <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="160.0" prefHeight="223.0" prefWidth="490.0" visible="false" />
+        <ListView focusTraversable="false" layoutX="475.0" layoutY="36.0" prefHeight="320.0" prefWidth="164.0" visible="false" />
+        <Label id="lblNome" layoutX="0.0" layoutY="0.0" prefWidth="151.0" text="">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="18.0" />
+          </font>
+        </Label>
+        <ImageView id="fotoPerfil" fitHeight="118.99999692398409" fitWidth="93.0" layoutX="5.0" layoutY="9.0" pickOnBounds="true" preserveRatio="true" />
+        <ListView cache="true" editable="false" layoutX="111.0" layoutY="43.0" pickOnBounds="false" prefHeight="298.0" prefWidth="490.0" styleClass="optionVisita">
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </ListView>
+        <HBox layoutX="111.0" layoutY="-9.0" minHeight="13.88671875" prefHeight="26.830078125" prefWidth="416.0">
+          <children>
+            <Button maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" styleClass="optionVisita" text="Sobre">
+              <effect>
+                <DropShadow color="#74ff33" height="0.0" radius="2.2202380952380953" width="10.880952380952381" fx:id="x1" />
+              </effect>
+              <stylesheets>
+                <URL value="@fxmlperfil.css" />
+              </stylesheets>
+            </Button>
+            <Button effect="$x1" maxHeight="-1.0" maxWidth="-1.0" minHeight="20.830078125" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" styleClass="optionVisita" text="Amigos">
+              <stylesheets>
+                <URL value="@fxmlperfil.css" />
+              </stylesheets>
+            </Button>
+            <Button contentDisplay="CENTER" effect="$x1" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="180.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
+              <stylesheets>
+                <URL value="@fxmlperfil.css" />
+              </stylesheets>
+            </Button>
+          </children>
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </HBox>
+      </children>
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
+    </Pane>
+    <Pane focusTraversable="true" layoutX="-12.0" layoutY="0.0" prefHeight="32.0" prefWidth="728.0">
+      <children>
+        <Label id="lblSair" layoutX="673.0" layoutY="9.0" onMouseClicked="#logout" text="Logout" textFill="BLACK">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x2" />
+          </font>
+        </Label>
+        <Label font="$x2" layoutX="591.0" layoutY="10.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="16.0" prefWidth="54.0" text="MyBook" textFill="#007f58d3" />
+        <TextField id="txtPesquisar" layoutX="126.0" layoutY="8.0" onAction="#pesquisar" onInputMethodTextChanged="#pesquisar" onMouseClicked="#clickPesquisar" prefHeight="24.0" prefWidth="329.0" text="Pesquisar" />
+        <HBox layoutX="466.0" layoutY="9.0" prefHeight="15.9609375" prefWidth="93.0">
+          <children>
+            <ImageView fitHeight="16.249969482421875" fitWidth="21.6666259765625" pickOnBounds="true" preserveRatio="true" />
+            <Label prefWidth="71.0" text="" />
+          </children>
+        </HBox>
+        <Button layoutX="22.0" layoutY="9.0" mnemonicParsing="false" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="">
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </Button>
+      </children>
+    </Pane>
+  </children>
+  <stylesheets>
+    <URL value="@fxmlperfil.css" />
+  </stylesheets>
+</AnchorPane>

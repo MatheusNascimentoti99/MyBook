@@ -19,6 +19,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -174,6 +175,9 @@ public class FXMLPerfilController implements Initializable {
                 Label nome = new Label(user.getLogin());
                 perfilPesquisa.getChildren().add(fotoNode);
                 perfilPesquisa.getChildren().add(nome);
+                perfilPesquisa.setOnMouseClicked((Event event) -> {
+                    System.out.println(":)");
+                });
                 listPesquisa.getItems().add(perfilPesquisa);
             }
         }

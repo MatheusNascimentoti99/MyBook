@@ -19,7 +19,7 @@
     public class ControllerUser {
         private User loginCorrent;
         private Graph grafoUsers;
-
+        private User perfilCorrent;
         public ControllerUser() {
             this.grafoUsers = new Graph();
         }

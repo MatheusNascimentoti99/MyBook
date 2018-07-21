@@ -6,9 +6,15 @@
 package view;
 
 import controller.ControllerUser;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -17,8 +23,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import static javafx.scene.input.KeyCode.ENTER;
 import javafx.scene.layout.Pane;
+import javafx.stage.FileChooser;
+import javax.imageio.ImageIO;
 import model.User;
 import util.Edge;
 import util.Vertex;
@@ -34,7 +44,10 @@ public class FXMLPerfilController implements Initializable {
     /**
      * Initializes the controller class.
      */
-
+    @FXML
+    private ImageView fotoPerfil;
+    @FXML
+    private Label mudarPerfil;
     @FXML
     private Label lblNome;
     @FXML
@@ -115,6 +128,23 @@ public class FXMLPerfilController implements Initializable {
 
     @FXML
     public void abrir(ActionEvent evento) {
+             FileChooser fileChooser = new FileChooser();
+            
+            //Set extension filter
+            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+             
+            //Show open file dialog
+            File file = fileChooser.showOpenDialog(null);
+                      
+            try {
+                BufferedImage bufferedImage = ImageIO.read(file);
+                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                fotoPerfil.setImage(image);
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
     }
 

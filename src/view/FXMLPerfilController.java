@@ -102,10 +102,13 @@ public class FXMLPerfilController implements Initializable {
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image image;
-        System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        if (AppView.getControlUser().getLoginCorrent().getDirFoto() != null) {
-            image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        } else {
+        try {
+            if (!AppView.getControlUser().getLoginCorrent().getDirFoto().equals("")) {
+                image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+            } else {
+                image = new Image("icon/Person.png");
+            }
+        } catch (RuntimeException exe) {
             image = new Image("icon/Person.png");
         }
         fotoPerfil.setImage(image);
@@ -155,19 +158,24 @@ public class FXMLPerfilController implements Initializable {
             HBox perfilPesquisa = new HBox(5);
             Image foto;
             User user = (User) ((Vertex) it.next()).getValue();
-            System.out.println(user.getDirFoto());
-            if (user.getDirFoto() != null) {
-                foto = new Image(user.getDirFoto());
-            } else {
-                foto = new Image("icon/Person.png");
+            if (user.getNome().substring(0, txtPesquisar.getText().length()).equalsIgnoreCase(txtPesquisar.getText())) {
+                try {
+                    if (!user.getDirFoto().equals("")) {
+                        foto = new Image(user.getDirFoto());
+                    } else {
+                        foto = new Image("icon/Person.png");
+                    }
+                } catch (RuntimeException exe) {
+                    foto = new Image("icon/Person.png");
+                }
+                ImageView fotoNode = new ImageView(foto);
+                fotoNode.setFitHeight(50);
+                fotoNode.setFitWidth(50);
+                Label nome = new Label(user.getLogin());
+                perfilPesquisa.getChildren().add(fotoNode);
+                perfilPesquisa.getChildren().add(nome);
+                listPesquisa.getItems().add(perfilPesquisa);
             }
-            ImageView fotoNode = new ImageView(foto);
-            fotoNode.setFitHeight(50);
-            fotoNode.setFitWidth(50);
-            Label nome = new Label(user.getLogin());
-            perfilPesquisa.getChildren().add(fotoNode);
-            perfilPesquisa.getChildren().add(nome);
-            listPesquisa.getItems().add(perfilPesquisa);
         }
         pnPesquisa.setVisible(true);
 
@@ -217,10 +225,13 @@ public class FXMLPerfilController implements Initializable {
             File file = fileChooser.showOpenDialog(null);
             if (file != null) {
                 BufferedImage bufferedImage = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                fotoPerfil.setImage(image);
-                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
-                AppView.getControlUser().getLoginCorrent().setDirFoto(file.getAbsolutePath());
+                if (bufferedImage != null) {
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    fotoPerfil.setImage(image);
+                    ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
+                    AppView.getControlUser().getLoginCorrent().setDirFoto(file.getAbsolutePath());
+                }
+
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

@@ -35,9 +35,15 @@
                 return false;
             }
         }
-        public User loginCorrent(){
-            return loginCorrent;
-        }
+
+    public User getLoginCorrent() {
+        return loginCorrent;
+    }
+
+    public void setLoginCorrent(User loginCorrent) {
+        this.loginCorrent = loginCorrent;
+    }
+        
         public void alterarFoto(String local){
             loginCorrent.setDirFoto(local);
         }

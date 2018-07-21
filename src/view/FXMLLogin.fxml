@@ -1,20 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import java.net.*?>
 <?import java.net.URL?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.*?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="" fx:id="password" prefHeight="400.0" prefWidth="600.0" styleClass="archoPene" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLLoginController">
+<AnchorPane id="" fx:id="password" prefHeight="400.0" prefWidth="600.0" styleClass="archoPene" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLLoginController">
   <children>
-    <Label id="titulo" layoutX="356.0" layoutY="53.0" prefHeight="45.0" prefWidth="143.0" text="My Book">
-      <font>
-        <Font name="Arial Rounded MT Bold" size="32.0" />
-      </font>
-    </Label>
     <Label id="lblNomeUser" layoutX="328.0" layoutY="125.0" text="USERNAME">
       <font>
         <Font name="Arial Rounded MT Bold" size="12.0" fx:id="x1" />
@@ -34,6 +34,11 @@
       <stylesheets>
         <URL value="@fxmllogin.css" />
       </stylesheets>
+    </Label>
+    <Label layoutX="344.0" layoutY="44.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="40.0" prefWidth="168.0" text="MyBook" textFill="#007f58d3">
+      <font>
+        <Font name="Arial Rounded MT Bold" size="38.0" />
+      </font>
     </Label>
   </children>
   <stylesheets>

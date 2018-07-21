@@ -20,8 +20,11 @@ import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
@@ -31,6 +34,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javax.imageio.ImageIO;
 import model.User;
 import util.Edge;
@@ -69,6 +73,8 @@ public class FXMLPerfilController implements Initializable {
     private Button btnVoltarPesquisa;
 
     @FXML
+    private Label lblSair;
+    @FXML
     private Label txtNome;
     @FXML
     private Label txtUsername;
@@ -81,6 +87,9 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private Label txtEndereco;
     @FXML
+    private ImageView imvFotoSobre;
+
+    @FXML
     private Pane pnPesquisa;
     @FXML
     private ListView listPesquisa;
@@ -90,21 +99,21 @@ public class FXMLPerfilController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
-        lblNome.setText(AppView.getControlUser().loginCorrent().getLogin());
-        Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().loginCorrent());
+        lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
+        Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image image;
-            System.out.println(AppView.getControlUser().loginCorrent().getDirFoto());
-            if (AppView.getControlUser().loginCorrent().getDirFoto() != null) {
-                image = new Image(AppView.getControlUser().loginCorrent().getDirFoto());
-            } else {
-                image = new Image("icon/Person.png");
-            }
+        System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        if (AppView.getControlUser().getLoginCorrent().getDirFoto() != null) {
+            image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        } else {
+            image = new Image("icon/Person.png");
+        }
         fotoPerfil.setImage(image);
         for (int i = 0; i < atual.getArestas().size(); i++) {
             User amigo = (User) ((Edge) atual.getArestas().get(i)).getPre().getValue();
             Label amigos = new Label(amigo.getLogin());
             listAmigos.getItems().add(amigos);
-            
+
         }
 
     }
@@ -115,9 +124,30 @@ public class FXMLPerfilController implements Initializable {
         txtPesquisar.setText("");
     }
 
-    
+    @FXML
+    public void logout(Event evento) {
+        AppView.getControlUser().setLoginCorrent(null);
+        try {
+            AppView.getControlUser().saveRegisters();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        Scene cenaPerfil = new Scene(root);
+        Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+        palco.setScene(cenaPerfil);
+        palco.show();
+    }
+
     @FXML
     public void pesquisar(ActionEvent evento) {
+        pnFundo.setVisible(false);
+        pnSobre.setVisible(false);
         btnVoltar.setVisible(true);
         listPesquisa.getItems().clear();
         Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
@@ -147,13 +177,21 @@ public class FXMLPerfilController implements Initializable {
     public void sobre(Event evento) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         pnFundo.setVisible(false);
-        txtNome.setText(AppView.getControlUser().loginCorrent().getNome());
-        txtUsername.setText(AppView.getControlUser().loginCorrent().getLogin());
-        txtEmail.setText(AppView.getControlUser().loginCorrent().getEmail());
-        txtTelefone.setText(AppView.getControlUser().loginCorrent().getTelefone());
-        txtEndereco.setText(AppView.getControlUser().loginCorrent().getEndereco());
-        txtDataNascimento.setText(AppView.getControlUser().loginCorrent().getDataNasc());
+        pnPesquisa.setVisible(false);
+        txtNome.setText(AppView.getControlUser().getLoginCorrent().getNome());
+        txtUsername.setText(AppView.getControlUser().getLoginCorrent().getLogin());
+        txtEmail.setText(AppView.getControlUser().getLoginCorrent().getEmail());
+        txtTelefone.setText(AppView.getControlUser().getLoginCorrent().getTelefone());
+        txtEndereco.setText(AppView.getControlUser().getLoginCorrent().getEndereco());
+        txtDataNascimento.setText(AppView.getControlUser().getLoginCorrent().getDataNasc());
         pnSobre.setVisible(true);
+        Image image;
+        if (AppView.getControlUser().getLoginCorrent().getDirFoto() != null) {
+            image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        } else {
+            image = new Image("icon/Person.png");
+        }
+        imvFotoSobre.setImage(image);
 
     }
 
@@ -181,8 +219,8 @@ public class FXMLPerfilController implements Initializable {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                 fotoPerfil.setImage(image);
-                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().loginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
-                AppView.getControlUser().loginCorrent().setDirFoto(file.getAbsolutePath());
+                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
+                AppView.getControlUser().getLoginCorrent().setDirFoto(file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

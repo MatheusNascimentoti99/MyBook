@@ -61,6 +61,11 @@
         <Label font="$x1" layoutX="347.0" layoutY="235.0" mnemonicParsing="false" text="Telefone:" />
         <PasswordField id="senha" fx:id="passSenha" layoutX="30.0" layoutY="252.0" prefWidth="200.0" />
         <Label font="$x1" layoutX="30.0" layoutY="333.0" prefWidth="256.0" text="" textFill="RED" />
+        <Label layoutX="490.0" layoutY="11.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="102.0" text="MyBook" textFill="#007f58d3">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="24.0" />
+          </font>
+        </Label>
       </children>
     </Pane>
   </children>

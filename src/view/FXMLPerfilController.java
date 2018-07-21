@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Iterator;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -61,6 +62,8 @@ public class FXMLPerfilController implements Initializable {
     private Pane pnSobre;
     @FXML
     private Button btnVoltar;
+    @FXML
+    private Button btnVoltarPesquisa;
 
     @FXML
     private Label txtNome;
@@ -80,8 +83,7 @@ public class FXMLPerfilController implements Initializable {
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
-    
-   
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -95,14 +97,19 @@ public class FXMLPerfilController implements Initializable {
         }
 
     }
-    
-    
+
     @FXML
-    public void pesquisar(ActionEvent evento){
+    public void clickPesquisar(Event evento) {
+        if (txtPesquisar.getText().equals("Pesquisar"));
         txtPesquisar.setText("");
-        pnFundo.setVisible(false);
+    }
+
+    @FXML
+    public void pesquisar(ActionEvent evento) {
+        btnVoltar.setVisible(true);
+        Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
         pnPesquisa.setVisible(true);
-        
+
     }
 
     @FXML
@@ -122,30 +129,30 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     public void voltar(Event evento) {
         pnSobre.setVisible(false);
-        System.out.println(":)");
-           
+        pnPesquisa.setVisible(false);
+
         pnFundo.setVisible(true);
     }
 
     @FXML
     public void abrir(Event evento) {
-             FileChooser fileChooser = new FileChooser();
-            
-            //Set extension filter
-            FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
-            FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-            fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-             
-            //Show open file dialog
-            File file = fileChooser.showOpenDialog(null);
-                      
-            try {
-                BufferedImage bufferedImage = ImageIO.read(file);
-                Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-                fotoPerfil.setImage(image);
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+
+        //Show open file dialog
+        File file = fileChooser.showOpenDialog(null);
+
+        try {
+            BufferedImage bufferedImage = ImageIO.read(file);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            fotoPerfil.setImage(image);
+        } catch (IOException ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 

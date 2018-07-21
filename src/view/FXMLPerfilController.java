@@ -115,6 +115,7 @@ public class FXMLPerfilController implements Initializable {
         txtPesquisar.setText("");
     }
 
+    
     @FXML
     public void pesquisar(ActionEvent evento) {
         btnVoltar.setVisible(true);

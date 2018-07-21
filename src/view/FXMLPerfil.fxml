@@ -93,7 +93,7 @@
         <Label fx:id="txtTelefone" layoutX="98.0" layoutY="187.0" prefWidth="317.0" text="" />
         <Label fx:id="txtEndereco" layoutX="101.0" layoutY="201.0" prefWidth="317.0" text="" />
         <Label fx:id="txtDataNascimento" layoutX="160.0" layoutY="217.0" prefWidth="317.0" text="" />
-        <Button fx:id="btnVoltar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="32.0" prefWidth="32.0" styleClass="voltar" text="">
+        <Button fx:id="btnVoltar" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>

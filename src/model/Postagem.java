@@ -5,14 +5,16 @@
  */
 package model;
 
+import java.util.LinkedList;
+
 /**
  *
  * @author Matheus Nascimento
  */
 public class Postagem {
     private String textoPostagem;
-    private String urlImagem;
-    private String urlVideo;
+    private LinkedList urlImagem;
+    private LinkedList urlVideo;
 
     public String getTextoPostagem() {
         return textoPostagem;
@@ -22,19 +24,21 @@ public class Postagem {
         this.textoPostagem = textoPostagem;
     }
 
-    public String getUrlImagem() {
+    public LinkedList getUrlImagem() {
         return urlImagem;
     }
 
-    public void setUrlImagem(String urlImagem) {
+    public void setUrlImagem(LinkedList urlImagem) {
         this.urlImagem = urlImagem;
     }
 
-    public String getUrlVideo() {
+    public LinkedList getUrlVideo() {
         return urlVideo;
     }
 
-    public void setUrlVideo(String urlVideo) {
+    public void setUrlVideo(LinkedList urlVideo) {
         this.urlVideo = urlVideo;
     }
+
+ 
 }

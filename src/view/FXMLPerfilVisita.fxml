@@ -41,7 +41,7 @@
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </ListView>
-        <Button fx:id="btnSolicitacao" layoutX="14.0" layoutY="166.0" mnemonicParsing="false" onAction="#enviarSolicitacao" onMouseClicked="#enviarSolicitacao" prefHeight="24.0" prefWidth="24.0" scaleX="1.0" scaleY="1.0" styleClass="mainFxmlClass" text="">
+        <Button fx:id="btnSolicitacao" layoutX="18.0" layoutY="135.0" mnemonicParsing="false" onAction="#enviarSolicitacao" onMouseClicked="#enviarSolicitacao" prefHeight="24.0" prefWidth="24.0" scaleX="1.0" scaleY="1.0" styleClass="mainFxmlClass" text="">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -49,15 +49,15 @@
             <Tooltip text="Enviar solicitação de amizade" />
           </tooltip>
         </Button>
-        <Button fx:id="btnSobre" layoutX="14.0" layoutY="192.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
+        <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="5.440476190476191" radius="3.5803571428571432" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="8.160714285714286" radius="4.260416666666667" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Button>
-        <Button fx:id="btnArquivos" contentDisplay="CENTER" effect="$x1" layoutX="14.0" layoutY="219.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="93.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
+        <Button fx:id="btnArquivos" contentDisplay="CENTER" effect="$x1" layoutX="14.0" layoutY="193.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="93.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>

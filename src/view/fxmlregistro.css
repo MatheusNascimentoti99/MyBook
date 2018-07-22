@@ -3,6 +3,7 @@
  */
 
 .mainFxmlClass {
+    
     .texto{
         -fx-background-color: #00000000; 
         -fx-padding: 5 22 5 22;   
@@ -10,9 +11,9 @@
         -fx-border-width: 2;
         -fx-background-radius: 0;
     }
-    .mudarBotão{
-        -fx-background-color: #FF8C00;
-    }
+
+
+
     .fundo {
         -fx-background-color: #FFFFFF; 
         -fx-padding: 5 22 5 22;   
@@ -20,6 +21,13 @@
         -fx-border-width: 2;
         -fx-background-radius: 0;
         -fx-background-color: #FFFFFF;
- 
+
+    }
+    
+    
+    .mudarBotao{
+        -fx-border-width: 2;
+        -fx-background-radius: 0;
+        -fx-background-color: #66CDAA;
     }
 }

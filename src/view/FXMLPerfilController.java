@@ -11,6 +11,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 
 import java.util.LinkedList;
@@ -412,12 +415,30 @@ public class FXMLPerfilController implements Initializable {
             postagem.setTextoPostagem(post.getText());
             AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
             VBox campoPostagem = new VBox(5);
-            campoPostagem.alignmentProperty().setValue(Pos.CENTER);
             Label txtPost = new Label(post.getText());
             txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = new Date();
+
+            DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+            Date date2 = new Date();
+            Label nome = new Label(AppView.getControlUser().getLoginCorrent().getLogin());
+            Label data = new Label("----- Postagem do Dia: "
+                    + dateFormat.format(date) + " às: " + dateFormat2.format(date2) + " -----\n");
+            data.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 9pt;");
+            nome.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
             txtPost.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
                     + "    -fx-font-size: 12pt;");
+            campoPostagem.getChildren().add(nome);
+            campoPostagem.getChildren().add(data);
             campoPostagem.getChildren().add(txtPost);
+            campoPostagem.setSpacing(10);
+            campoPostagem.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                    + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                    + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+
             Iterator it = listPostagem.getItems().iterator();
             while (it.hasNext()) {
                 Object o = it.next();

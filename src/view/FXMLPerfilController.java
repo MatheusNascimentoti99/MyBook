@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
 
@@ -28,14 +29,20 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javax.imageio.ImageIO;
+import model.Postagem;
 import model.User;
 import util.Edge;
 import util.Vertex;
@@ -51,6 +58,19 @@ public class FXMLPerfilController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    
+    @FXML
+    private VBox VboxPosts;
+    @FXML
+    private ListView listPostagem;
+    @FXML
+    private Label fotoPostagem;
+    @FXML
+    private Label videoPostagem;
+    @FXML
+    private ListView listPosts;
+    @FXML
+    private TextArea post;
     @FXML
     private ImageView fotoPerfil;
     @FXML
@@ -59,6 +79,10 @@ public class FXMLPerfilController implements Initializable {
     private Label lblNome;
     @FXML
     private Label lblFoto;
+    @FXML
+    private Label labelPostFoto;
+    @FXML
+    private Label labelPostVideo;
     @FXML
     private ListView listAmigos;
     @FXML
@@ -88,14 +112,15 @@ public class FXMLPerfilController implements Initializable {
     private Label txtEndereco;
     @FXML
     private ImageView imvFotoSobre;
-
+    @FXML
+    private Button botaoPostar;
     @FXML
     private Pane pnPesquisa;
     @FXML
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
-
+    private boolean foto, video;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -118,7 +143,6 @@ public class FXMLPerfilController implements Initializable {
             listAmigos.getItems().add(amigos);
 
         }
-
     }
 
     @FXML
@@ -243,5 +267,62 @@ public class FXMLPerfilController implements Initializable {
         }
 
     }
-
+    
+    public void postagem(Event evento){
+        if (!listPostagem.getItems().isEmpty()){
+            listPosts.getItems().add(listPostagem);
+        }
+    }
+    
+    public void postagemTexto(){
+        if(post.getText()!= null){
+            Label label = new Label(post.getText());
+            listPostagem.getItems().add(label);
+        }
+    }
+    public void postagemFoto(Event evento){
+        foto = true;
+        FileChooser filechooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
+        FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
+        filechooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        
+          try {
+            File file = filechooser.showOpenDialog(null);
+            if (file != null) {
+                BufferedImage bufferedImage = ImageIO.read(file);
+                if (bufferedImage != null) {
+                    Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+                    ImageView imageView = new ImageView(image);
+                    listPostagem.getItems().add(imageView);
+                }
+            }
+        } catch (IOException | RuntimeException ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void postagemVideo(Event evento) throws MalformedURLException{
+        video = true;
+        FileChooser filechooser = new FileChooser();
+        FileChooser.ExtensionFilter extFilterAVI = new FileChooser.ExtensionFilter("AVI files (*.avi)", "*.AVI");
+        FileChooser.ExtensionFilter extFilterMPG = new FileChooser.ExtensionFilter("MPEG files (*.mpg)", "*.MPEG");
+        FileChooser.ExtensionFilter extFilterMP4 = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
+        filechooser.getExtensionFilters().addAll(extFilterAVI, extFilterMPG, extFilterMP4);
+        
+        try{
+            File file = filechooser.showOpenDialog(null);
+            if(file!= null){
+                Media media = new Media(file.toURI().toURL().toString());
+                MediaPlayer mediaPlayer = new MediaPlayer(media);
+                MediaView mediaView = new MediaView(mediaPlayer);
+                listPostagem.getItems().add(mediaView);
+            }
+        } catch (IOException | RuntimeException ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }
+    
+

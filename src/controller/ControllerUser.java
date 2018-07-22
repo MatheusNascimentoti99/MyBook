@@ -19,6 +19,15 @@
     public class ControllerUser {
         private User loginCorrent;
         private Graph grafoUsers;
+        private Vertex vertexLoginCurrent;
+
+    public Vertex getVertexLoginCurrent() {
+        return vertexLoginCurrent;
+    }
+
+    public void setVertexLoginCurrent(Vertex vertexLoginCurrent) {
+        this.vertexLoginCurrent = vertexLoginCurrent;
+    }
 
         public ControllerUser() {
             this.grafoUsers = new Graph();
@@ -35,7 +44,8 @@
                 return false;
             }
         }
-
+    
+        
     public User getLoginCorrent() {
         return loginCorrent;
     }
@@ -57,6 +67,7 @@
                     User user = (User) entry.getValue();
                     if (user.getLogin().equals(login)) {
                         loginCorrent = user;
+                        vertexLoginCurrent = entry;
                         return user.getPassword().equals(senha);
                     }
                 }
@@ -130,4 +141,5 @@
         public void solicitacao(User origem, User destino){
                destino.getSolicitacoes().add(origem);
         }
+        
     }

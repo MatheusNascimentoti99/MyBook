@@ -5,6 +5,7 @@
  */
 package view;
 
+import controller.ControllerPostagem;
 import controller.ControllerUser;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -141,6 +142,9 @@ public class FXMLPerfilController implements Initializable {
     private LinkedList Urlfotos;
 
     private LinkedList UrlVideo;
+    
+    private ControllerPostagem controlPost = new ControllerPostagem();
+
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -206,6 +210,61 @@ public class FXMLPerfilController implements Initializable {
                 }
             }
         }
+        
+        Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
+        while(iterador.hasNext()){
+            Postagem postagem = (Postagem) iterador.next();
+            VBox campoPostagem = new VBox(5);
+            Label txtPost = new Label(postagem.getTextoPostagem());
+            txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = postagem.getDataPostagem();
+
+            DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+            Date date2 = postagem.getHoraPostagem();
+            Label nome = new Label(AppView.getControlUser().getLoginCorrent().getLogin());
+            Label data = new Label("----- Postagem do Dia: "
+                    + dateFormat.format(date) + " às: " + dateFormat2.format(date2) + " -----\n");
+            data.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 9pt;");
+            nome.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
+            txtPost.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
+            campoPostagem.getChildren().add(nome);
+            campoPostagem.getChildren().add(data);
+            campoPostagem.getChildren().add(txtPost);
+            campoPostagem.setSpacing(10);
+            campoPostagem.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                    + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                    + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+
+            if(!postagem.getUrlImagem().isEmpty()){
+                Iterator it = postagem.getUrlImagem().iterator();
+                while(it.hasNext()){
+                    String urlImage = (String) it.next();
+                    Image imagemPost = new Image(urlImage);
+                    ImageView imageView = new ImageView(imagemPost);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(150);
+                    campoPostagem.getChildren().add(imageView);
+                }
+            }
+            if(!postagem.getUrlVideo().isEmpty()){
+                Iterator it = postagem.getUrlVideo().iterator();
+                while(it.hasNext()){
+                    String urlVideo = (String) it.next();
+                    Media media = new Media(urlVideo);
+                    MediaPlayer mediaPlayer = new MediaPlayer(media);
+                    MediaView mediaView = new MediaView(mediaPlayer);
+                    mediaView.setFitHeight(150);
+                    mediaView.setFitWidth(150);
+                    campoPostagem.getChildren().add(mediaView);
+                }
+            }
+         listPosts.getItems().add(campoPostagem);
+        }
+        
     }
 
     @FXML
@@ -437,6 +496,9 @@ public class FXMLPerfilController implements Initializable {
         if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
             Postagem postagem = new Postagem();
             postagem.setTextoPostagem(post.getText());
+            postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
+            postagem.getUrlImagem().addAll(controlPost.getUrlsVideo());
+
             AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
             VBox campoPostagem = new VBox(5);
             Label txtPost = new Label(post.getText());
@@ -514,6 +576,7 @@ public class FXMLPerfilController implements Initializable {
                     imageView.setFitWidth(50);
                     listPostagem.getItems().add(imageView);
                     Urlfotos.add(file.getAbsolutePath());
+                    controlPost.getUrlsFoto().add(file.getAbsolutePath());
                 }
             }
         } catch (IOException | RuntimeException ex) {
@@ -539,6 +602,7 @@ public class FXMLPerfilController implements Initializable {
                 mediaView.setFitWidth(50);
                 listPostagem.getItems().add(mediaView);
                 UrlVideo.add(file.getAbsolutePath());
+                controlPost.getUrlsVideo().add(file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

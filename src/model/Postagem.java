@@ -6,6 +6,7 @@
 package model;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.LinkedList;
 
 /**
@@ -17,7 +18,25 @@ public class Postagem implements Serializable{
     private String textoPostagem;
     private LinkedList urlImagem;
     private LinkedList urlVideo;
+    private Date dataPostagem;
+    private Date horaPostagem;
 
+    public Date getHoraPostagem() {
+        return horaPostagem;
+    }
+
+    public void setHoraPostagem(Date horaPostagem) {
+        this.horaPostagem = horaPostagem;
+    }
+    
+    public Date getDataPostagem() {
+        return dataPostagem;
+    }
+
+    public void setDataPostagem(Date dataPostagem) {
+        this.dataPostagem = dataPostagem;
+    }
+    
     public String getTextoPostagem() {
         return textoPostagem;
     }

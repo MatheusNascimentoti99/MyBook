@@ -13,6 +13,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -120,9 +121,15 @@ public class FXMLPerfilController implements Initializable {
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
+    
     private boolean foto, video;
+    
+    private LinkedList Urlfotos;
+    
+    private LinkedList UrlVideo;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Urlfotos = UrlVideo = new LinkedList();
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
@@ -270,8 +277,16 @@ public class FXMLPerfilController implements Initializable {
     
     public void postagem(Event evento){
         if (!listPostagem.getItems().isEmpty()){
+            Postagem postagem = new Postagem();
+            if(Urlfotos.isEmpty() && UrlVideo.isEmpty()){
+                Label labell = (Label) listPostagem.getItems().get(0);
+                postagem.setTextoPostagem(labell.getText());
+                AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
+            }
             listPosts.getItems().add(listPostagem);
-        }
+        }else{
+            System.out.println("Sem nada para se postar");
+        } 
     }
     
     public void postagemTexto(){
@@ -295,6 +310,7 @@ public class FXMLPerfilController implements Initializable {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     ImageView imageView = new ImageView(image);
                     listPostagem.getItems().add(imageView);
+                    Urlfotos.add(file.toURI().toURL().toString());
                 }
             }
         } catch (IOException | RuntimeException ex) {
@@ -317,6 +333,7 @@ public class FXMLPerfilController implements Initializable {
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 MediaView mediaView = new MediaView(mediaPlayer);
                 listPostagem.getItems().add(mediaView);
+                UrlVideo.add(file.toURI().toURL().toString());
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

@@ -267,7 +267,7 @@ public class FXMLPerfilController implements Initializable {
                     campoPostagem.getChildren().add(mediaView);
                 }
             }
-            listPosts.getItems().add(campoPostagem);
+            listPosts.getItems().add(0,campoPostagem);
         }
 
     }
@@ -550,7 +550,7 @@ public class FXMLPerfilController implements Initializable {
             AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
             ((User)AppView.getControlUser().getGrafoUsers().
                     getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(postagem);
-            listPosts.getItems().add(campoPostagem);
+            listPosts.getItems().add(0,campoPostagem);
         } else {
             System.out.println("Sem nada para se postar");
         }

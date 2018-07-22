@@ -74,6 +74,25 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     private Label lblHome;
 
+    
+    @FXML
+    private Label desNome;
+    @FXML
+    private Label desEmail;
+    @FXML
+    private Label desDataNascimento;
+    @FXML
+    private Label desTelefone;
+    @FXML
+    private Label desUserName;
+    @FXML
+    private Label desEndereco;
+    @FXML
+    private ImageView desFoto;
+    @FXML
+    private Pane pnSobre;
+    @FXML
+    private Button desVoltar;
     /**
      * Initializes the controller class.
      */
@@ -154,6 +173,27 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     @FXML
+    public void sobre(Event evento) {
+        AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
+        pnFundo.setVisible(false);
+        pnPesquisa.setVisible(false);
+        desNome.setText(AppView.getControlUser().getPerfilCorrent().getNome());
+        desUserName.setText(AppView.getControlUser().getPerfilCorrent().getLogin());
+        desEmail.setText(AppView.getControlUser().getPerfilCorrent().getEmail());
+        desTelefone.setText(AppView.getControlUser().getPerfilCorrent().getTelefone());
+        desEndereco.setText(AppView.getControlUser().getPerfilCorrent().getEndereco());
+        desDataNascimento.setText(AppView.getControlUser().getPerfilCorrent().getDataNasc());
+        pnSobre.setVisible(true);
+        Image image;
+        if (AppView.getControlUser().getPerfilCorrent().getDirFoto() != null) {
+            image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+        } else {
+            image = new Image("icon/Person.png");
+        }
+        desFoto.setImage(image);
+
+    }
+    @FXML
     private void enviarSolicitacao(Event evento) {
         if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).
                 getValue()).getSolicitacoes().
@@ -208,7 +248,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     public void voltar(Event evento) {
         pnPesquisa.setVisible(false);
-
+        pnSobre.setVisible(false);
         pnFundo.setVisible(true);
     }
 

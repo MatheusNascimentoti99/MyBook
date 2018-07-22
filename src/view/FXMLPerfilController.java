@@ -298,7 +298,6 @@ public class FXMLPerfilController implements Initializable {
     public void voltar(Event evento) {
         pnSobre.setVisible(false);
         pnPesquisa.setVisible(false);
-
         pnFundo.setVisible(true);
     }
 

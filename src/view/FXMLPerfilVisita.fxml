@@ -49,9 +49,9 @@
             <Tooltip text="Enviar solicitação de amizade" />
           </tooltip>
         </Button>
-        <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
+        <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" onAction="#sobre" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="8.160714285714286" radius="4.260416666666667" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="9.520833333333334" radius="4.600446428571429" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
@@ -89,6 +89,31 @@
           </children>
         </HBox>
       </children>
+    </Pane>
+    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="-5.0" layoutY="0.0" prefHeight="403.0" prefWidth="733.0" styleClass="fundo" visible="false">
+      <children>
+        <Label font="$x2" layoutX="43.0" layoutY="139.0" text="Nome:" />
+        <Label font="$x2" layoutX="43.0" layoutY="171.0" text="E-mail:" />
+        <Label font="$x2" layoutX="43.0" layoutY="187.0" text="Telefone:" />
+        <Label font="$x2" layoutX="43.0" layoutY="203.0" text="Endereço:" />
+        <Label font="$x2" layoutX="43.0" layoutY="155.0" text="Username:" />
+        <Label font="$x2" layoutX="43.0" layoutY="217.0" text="Data de Nascimento:" />
+        <Label id="txtNome" fx:id="desNome" font="$x2" layoutX="98.0" layoutY="139.0" prefWidth="317.0" text="" />
+        <Label id="txtUsername" fx:id="desUserName" font="$x2" layoutX="118.0" layoutY="155.0" prefWidth="317.0" text="" />
+        <Label id="txtEmail" fx:id="desEmail" font="$x2" layoutX="98.0" layoutY="171.0" prefWidth="317.0" text="" />
+        <Label id="txtTelefone" fx:id="desTelefone" font="$x2" layoutX="111.0" layoutY="187.0" prefWidth="317.0" text="" />
+        <Label id="txtEndereco" fx:id="desEndereco" font="$x2" layoutX="114.0" layoutY="201.0" prefWidth="317.0" text="" />
+        <Label id="txtDataNascimento" fx:id="desDataNascimento" font="$x2" layoutX="173.0" layoutY="217.0" prefWidth="317.0" text="" />
+        <Button id="btnVoltar" fx:id="desVoltar" layoutX="14.0" layoutY="2.0" mnemonicParsing="false" onAction="#voltar" onMouseClicked="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="" visible="true">
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </Button>
+        <ImageView id="imvFotoSobre" fx:id="desFoto" fitHeight="163.00001525878906" fitWidth="217.3333391220479" focusTraversable="true" layoutX="415.0" layoutY="68.0" pickOnBounds="true" preserveRatio="true" scaleX="1.0" visible="true" />
+      </children>
+      <stylesheets>
+        <URL value="@fxmlperfil.css" />
+      </stylesheets>
     </Pane>
   </children>
   <stylesheets>

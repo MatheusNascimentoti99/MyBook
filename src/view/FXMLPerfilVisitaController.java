@@ -7,6 +7,9 @@ package view;
 
 import java.io.IOException;
 import java.net.URL;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.ResourceBundle;
 import java.util.Set;
@@ -18,6 +21,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -29,7 +33,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import model.Postagem;
 import model.User;
 import util.Edge;
 import util.Vertex;
@@ -168,6 +177,71 @@ public class FXMLPerfilVisitaController implements Initializable {
                     Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
+        }
+        Iterator iterador = AppView.getControlUser().getPerfilCorrent().getPostagens().iterator();
+        while (iterador.hasNext()) {
+            Postagem postagem = (Postagem) iterador.next();
+            VBox campoPostagem = new VBox(5);
+            Label txtPost = new Label(postagem.getTextoPostagem());
+            txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
+            DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+            Date date = postagem.getDataPostagem();
+
+            DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+            Date date2 = postagem.getHoraPostagem();
+            Label nome = new Label(AppView.getControlUser().getPerfilCorrent().getLogin());
+            Label data = new Label("----- Postagem do Dia: "
+                    + dateFormat.format(date) + " às: " + dateFormat2.format(date2) + " -----\n");
+            data.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 9pt;");
+            nome.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
+            txtPost.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
+            campoPostagem.getChildren().add(nome);
+            campoPostagem.getChildren().add(data);
+            campoPostagem.getChildren().add(txtPost);
+            campoPostagem.setSpacing(10);
+            campoPostagem.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
+                    + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
+                    + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
+
+            if (!postagem.getUrlImagem().isEmpty()) {
+                Iterator it = postagem.getUrlImagem().iterator();
+                while (it.hasNext()) {
+                    Image imagePost;
+
+                    String urlImagem = (String) it.next();
+                    System.out.println(urlImagem);
+                    try {
+                        if (urlImagem != null) {
+                            imagePost = new Image(urlImagem);
+                        } else {
+                            imagePost = new Image("icon/Empty.png");
+                        }
+                    } catch (RuntimeException exe) {
+                        imagePost = new Image("icon/Empty.png");
+                    }
+                    System.out.println(imagePost);
+                    ImageView imageView = new ImageView(imagePost);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(150);
+                    campoPostagem.getChildren().add(imageView);
+                }
+            }
+            if (!postagem.getUrlVideo().isEmpty()) {
+                Iterator it = postagem.getUrlVideo().iterator();
+                while (it.hasNext()) {
+                    String urlVideo = (String) it.next();
+                    Media media = new Media(urlVideo);
+                    MediaPlayer mediaPlayer = new MediaPlayer(media);
+                    MediaView mediaView = new MediaView(mediaPlayer);
+                    mediaView.setFitHeight(150);
+                    mediaView.setFitWidth(150);
+                    campoPostagem.getChildren().add(mediaView);
+                }
+            }
+            ltvPostagens.getItems().add(0,campoPostagem);
         }
         // TODO
     }

@@ -14,6 +14,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -83,31 +84,34 @@ public class FXMLPerfilVisitaController implements Initializable {
         lblUserLogin.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent());
 
-        Image image;
+        Image imageUserLogin;
         try {
             if (!AppView.getControlUser().getLoginCorrent().getDirFoto().equals("")) {
-                image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+                imageUserLogin = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
             } else {
-                image = new Image("icon/Person.png");
+                imageUserLogin = new Image("icon/Person.png");
             }
         } catch (RuntimeException exe) {
-            image = new Image("icon/Person.png");
+            imageUserLogin = new Image("icon/Person.png");
         }
-        imvUserLogin.setImage(image);
+        imvUserLogin.setImage(imageUserLogin);
+        Image imagemPerfilVisit;
         try {
             if (!AppView.getControlUser().getPerfilCorrent().getDirFoto().equals("")) {
-                image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+                imagemPerfilVisit = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
             } else {
-                image = new Image("icon/Person.png");
+                imagemPerfilVisit = new Image("icon/Person.png");
             }
         } catch (RuntimeException exe) {
-            image = new Image("icon/Person.png");
+            imagemPerfilVisit = new Image("icon/Person.png");
         }
+        imvFoto.setImage(imagemPerfilVisit);
         Set<Integer> chaves = atual.getArestas().keySet();
+        
         for (Integer chave : chaves) {
             if (chave != null) {
                 User amigo = (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue();
-                HBox Perfilamigo = new HBox(5);
+                HBox perfilamigo = new HBox(5);
                 Image imageAmigo;
                 Label nomeAmigo = new Label(amigo.getLogin());
                 try {
@@ -117,14 +121,27 @@ public class FXMLPerfilVisitaController implements Initializable {
                         imageAmigo = new Image("icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    image = new Image("icon/Person.png");
+                    imageAmigo = new Image("icon/Person.png");
                 }
-                ImageView fotoAmigo = new ImageView(image);
+                ImageView fotoAmigo = new ImageView(imageAmigo);
                 fotoAmigo.setFitHeight(50);
                 fotoAmigo.setFitWidth(50);
-                Perfilamigo.getChildren().add(fotoAmigo);
-                Perfilamigo.getChildren().add(nomeAmigo);
-                ltvAmigos.getItems().add(Perfilamigo);
+                perfilamigo.getChildren().add(fotoAmigo);
+                perfilamigo.getChildren().add(nomeAmigo);
+                perfilamigo.setOnMouseClicked((Event event) -> {
+                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Scene cenaPerfil = new Scene(root);
+                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
+                    palco.show();
+                });
+                ltvAmigos.getItems().add(perfilamigo);
 
                 try {
                     AppView.getControlUser().saveRegisters();

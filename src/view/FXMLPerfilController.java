@@ -9,11 +9,9 @@ import controller.ControllerUser;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Iterator;
-import java.util.Map;
 
 import java.util.LinkedList;
 
@@ -27,6 +25,7 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -35,9 +34,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -63,7 +62,7 @@ public class FXMLPerfilController implements Initializable {
     /**
      * Initializes the controller class.
      */
-    
+
     @FXML
     private VBox VboxPosts;
     @FXML
@@ -132,12 +131,13 @@ public class FXMLPerfilController implements Initializable {
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
-    
+
     private boolean foto, video;
-    
+
     private LinkedList Urlfotos;
-    
+
     private LinkedList UrlVideo;
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Urlfotos = UrlVideo = new LinkedList();
@@ -158,32 +158,32 @@ public class FXMLPerfilController implements Initializable {
         Set<Integer> chaves = atual.getArestas().keySet();
         for (Integer chave : chaves) {
             if (chave != null) {
-                User amigo = (User) ((Edge)atual.getArestas().get(chave)).getPre().getValue();
+                User amigo = (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue();
                 HBox Perfilamigo = new HBox(5);
-                    Image imageAmigo;
-                    Label nomeAmigo = new Label(amigo.getLogin());
-                    try {
-                        if (!amigo.getDirFoto().equals("")) {
-                            image = new Image(amigo.getDirFoto());
-                        } else {
-                            image = new Image("icon/Person.png");
-                        }
-                    } catch (RuntimeException exe) {
+                Image imageAmigo;
+                Label nomeAmigo = new Label(amigo.getLogin());
+                try {
+                    if (!amigo.getDirFoto().equals("")) {
+                        image = new Image(amigo.getDirFoto());
+                    } else {
                         image = new Image("icon/Person.png");
                     }
-                    ImageView fotoAmigo = new ImageView(image);
-                    fotoAmigo.setFitHeight(50);
-                    fotoAmigo.setFitWidth(50);
-                    Perfilamigo.getChildren().add(fotoAmigo);
-                    Perfilamigo.getChildren().add(nomeAmigo);
-                    ltvAmigos.getItems().add(Perfilamigo);
-                    ltvSolicitacao.getItems().remove(Perfilamigo);
+                } catch (RuntimeException exe) {
+                    image = new Image("icon/Person.png");
+                }
+                ImageView fotoAmigo = new ImageView(image);
+                fotoAmigo.setFitHeight(50);
+                fotoAmigo.setFitWidth(50);
+                Perfilamigo.getChildren().add(fotoAmigo);
+                Perfilamigo.getChildren().add(nomeAmigo);
+                ltvAmigos.getItems().add(Perfilamigo);
+                ltvSolicitacao.getItems().remove(Perfilamigo);
 
-                    try {
-                        AppView.getControlUser().saveRegisters();
-                    } catch (Exception ex) {
-                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                    }
+                try {
+                    AppView.getControlUser().saveRegisters();
+                } catch (Exception ex) {
+                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
@@ -223,21 +223,21 @@ public class FXMLPerfilController implements Initializable {
         Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
         while (it.hasNext()) {
             HBox perfilPesquisa = new HBox(5);
-            Image foto;
+            Image fotoP;
             User user = (User) ((Vertex) it.next()).getValue();
             int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
                 try {
                     if (!user.getDirFoto().equals("")) {
-                        foto = new Image(user.getDirFoto());
+                        fotoP = new Image(user.getDirFoto());
                     } else {
-                        foto = new Image("icon/Person.png");
+                        fotoP = new Image("icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    foto = new Image("icon/Person.png");
+                    fotoP = new Image("icon/Person.png");
                 }
 
-                ImageView fotoNode = new ImageView(foto);
+                ImageView fotoNode = new ImageView(fotoP);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -296,29 +296,38 @@ public class FXMLPerfilController implements Initializable {
 
     @FXML
     private void aceitarSolicitacao(Event evento) {
+        ltvSolicitacao.getItems().clear();
         if (pnSolicitacao.visibleProperty().getValue() == false) {
+
             Iterator it = AppView.getControlUser().getLoginCorrent().getSolicitacoes().iterator();
+            if (!it.hasNext()) {
+                Label aviso = new Label("Sem solicitações de amizade");
+                aviso.alignmentProperty().setValue(Pos.TOP_LEFT);
+                aviso.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                        + "    -fx-font-size: 12pt;");
+            }
             while (it.hasNext()) {
                 HBox perfilSolicita = new HBox(5);
-                Image foto;
+                Image fotoS;
                 User user = (User) it.next();
                 try {
                     if (!user.getDirFoto().equals("")) {
-                        foto = new Image(user.getDirFoto());
+                        fotoS = new Image(user.getDirFoto());
                     } else {
-                        foto = new Image("icon/Person.png");
+                        fotoS = new Image("icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    foto = new Image("icon/Person.png");
+                    fotoS = new Image("icon/Person.png");
                 }
 
-                ImageView fotoNode = new ImageView(foto);
+                ImageView fotoNode = new ImageView(fotoS);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
                 Button aceitar = new Button();
                 aceitar.setPrefSize(24, 24);
                 aceitar.setStyle("-fx-background-color: #FFFFFF;");
+                aceitar.setTooltip(new Tooltip("Aceitar solicitação"));
                 aceitar.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("solicitacao.png"))));
                 perfilSolicita.getChildren().add(fotoNode);
                 perfilSolicita.getChildren().add(nome);
@@ -396,72 +405,99 @@ public class FXMLPerfilController implements Initializable {
         }
 
     }
-    
-    public void postagem(Event evento){
-        if (!listPostagem.getItems().isEmpty()){
+
+    public void postagem(Event evento) {
+        if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
             Postagem postagem = new Postagem();
-            if(Urlfotos.isEmpty() && UrlVideo.isEmpty()){
-                Label labell = (Label) listPostagem.getItems().get(0);
-                postagem.setTextoPostagem(labell.getText());
-                AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
+            postagem.setTextoPostagem(post.getText());
+            AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
+            VBox campoPostagem = new VBox(5);
+            campoPostagem.alignmentProperty().setValue(Pos.CENTER);
+            Label txtPost = new Label(post.getText());
+            txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
+            txtPost.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
+                    + "    -fx-font-size: 12pt;");
+            campoPostagem.getChildren().add(txtPost);
+            Iterator it = listPostagem.getItems().iterator();
+            while (it.hasNext()) {
+                Object o = it.next();
+                if (o instanceof ImageView) {
+                    ImageView imagemPost = (ImageView) o;
+                    imagemPost.setFitHeight(150);
+                    imagemPost.setFitWidth(150);
+                    campoPostagem.getChildren().add(imagemPost);
+                } else if (o instanceof MediaView) {
+                    MediaView videoPost = (MediaView) o;
+                    videoPost.setFitHeight(150);
+                    videoPost.setFitWidth(150);
+                    campoPostagem.getChildren().add(videoPost);
+
+                }
+
             }
-            listPosts.getItems().add(listPostagem);
-        }else{
+            listPosts.getItems().add(campoPostagem);
+        } else {
             System.out.println("Sem nada para se postar");
-        } 
+        }
+        post.setText("");
+        listPostagem.getItems().clear();
+
     }
-    
-    public void postagemTexto(){
-        if(post.getText()!= null){
+
+    public void postagemTexto() {
+        if (post.getText() != null) {
             Label label = new Label(post.getText());
             listPostagem.getItems().add(label);
         }
     }
-    public void postagemFoto(Event evento){
+
+    public void postagemFoto(Event evento) {
         foto = true;
         FileChooser filechooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
         filechooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
-        
-          try {
+
+        try {
             File file = filechooser.showOpenDialog(null);
             if (file != null) {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 if (bufferedImage != null) {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     ImageView imageView = new ImageView(image);
+                    imageView.setFitHeight(50);
+                    imageView.setFitWidth(50);
                     listPostagem.getItems().add(imageView);
-                    Urlfotos.add(file.toURI().toURL().toString());
+                    Urlfotos.add(file.getAbsolutePath());
                 }
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void postagemVideo(Event evento) throws MalformedURLException{
+
+    public void postagemVideo(Event evento) throws MalformedURLException {
         video = true;
         FileChooser filechooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterAVI = new FileChooser.ExtensionFilter("AVI files (*.avi)", "*.AVI");
         FileChooser.ExtensionFilter extFilterMPG = new FileChooser.ExtensionFilter("MPEG files (*.mpg)", "*.MPEG");
         FileChooser.ExtensionFilter extFilterMP4 = new FileChooser.ExtensionFilter("MP4 files (*.mp4)", "*.MP4");
         filechooser.getExtensionFilters().addAll(extFilterAVI, extFilterMPG, extFilterMP4);
-        
-        try{
+
+        try {
             File file = filechooser.showOpenDialog(null);
-            if(file!= null){
+            if (file != null) {
                 Media media = new Media(file.toURI().toURL().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 MediaView mediaView = new MediaView(mediaPlayer);
+                mediaView.setFitHeight(50);
+                mediaView.setFitWidth(50);
                 listPostagem.getItems().add(mediaView);
-                UrlVideo.add(file.toURI().toURL().toString());
+                UrlVideo.add(file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-}
-    
 
+}

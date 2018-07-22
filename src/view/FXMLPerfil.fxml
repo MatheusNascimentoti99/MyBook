@@ -10,19 +10,19 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="432.999977929685" prefWidth="727.0" styleClass="fundo" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.FXMLPerfilController">
+<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="432.999977929685" prefWidth="727.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilController">
   <children>
     <Pane fx:id="pnFundo" depthTest="INHERIT" disable="false" focusTraversable="true" layoutY="39.0" prefHeight="393.0" prefWidth="726.0" styleClass="fundo" visible="true">
       <children>
         <VBox focusTraversable="true" layoutX="189.0" layoutY="14.0" prefHeight="82.0" prefWidth="435.0">
           <children>
-                  <ListView fx:id="ListPostagem" prefHeight="200.0" prefWidth="200.0" />
-            <TextArea fx:id="post" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="57.0" prefWidth="438.0" wrapText="true" />
+            <TextArea fx:id="post" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="47.0" prefWidth="435.0" wrapText="true" />
+            <ListView id="ListPostagem" fx:id="listPostagem" prefHeight="21.0" prefWidth="435.0" />
             <HBox prefHeight="24.0" prefWidth="429.0">
               <children>
-                <Label fx:id="labelPostFoto" text="Imagem" />
+                <Label fx:id="labelPostFoto" onDragDetected="#postagemFoto" onMouseClicked="#postagemFoto" text="Imagem" />
                 <Separator orientation="VERTICAL" prefHeight="16.0" prefWidth="24.0" />
-                <Label fx:id="labelPostVideo" text="Vídeo" />
+                <Label fx:id="labelPostVideo" onDragDetected="#postagemVideo" onMouseClicked="#postagemVideo" text="Vídeo" />
                 <Separator orientation="VERTICAL" prefHeight="24.0" prefWidth="282.0" />
                 <Button fx:id="botaoPostar" alignment="BASELINE_RIGHT" mnemonicParsing="false" onMouseClicked="#postagem" text="Postar" />
               </children>
@@ -31,7 +31,7 @@
         </VBox>
         <ListView id="" fx:id="ltvAmigos" cache="false" layoutX="14.0" layoutY="163.0" mouseTransparent="false" pickOnBounds="false" prefHeight="200.0" prefWidth="108.0" />
         <Label layoutX="17.0" layoutY="140.0" text="Amigos" />
-        <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="128.0" prefHeight="254.60000610351562" prefWidth="490.0" visible="false" />
+        <ListView fx:id="listPosts" cache="true" editable="false" focusTraversable="true" layoutX="142.0" layoutY="128.0" prefHeight="254.60000610351562" prefWidth="490.0" visible="true" />
         <Label fx:id="lblNome" layoutX="14.0" layoutY="82.0" prefWidth="93.0" text="">
           <font>
             <Font name="Arial Rounded MT Bold" size="18.0" />

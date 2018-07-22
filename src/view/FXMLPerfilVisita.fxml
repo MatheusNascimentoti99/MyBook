@@ -36,7 +36,7 @@
           </font>
         </Label>
         <ImageView id="fotoPerfil" fx:id="imvFoto" fitHeight="118.99999692398409" fitWidth="93.0" layoutX="14.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
-        <ListView fx:id="ltvPostagens" cache="true" editable="false" layoutX="111.0" layoutY="43.0" pickOnBounds="false" prefHeight="298.0" prefWidth="463.0" styleClass="optionVisita">
+        <ListView fx:id="ltvPostagens" cache="true" editable="false" layoutX="111.0" layoutY="41.0" pickOnBounds="false" prefHeight="298.0" prefWidth="463.0" styleClass="optionVisita">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>

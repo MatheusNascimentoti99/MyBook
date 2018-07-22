@@ -68,7 +68,6 @@ public class Graph implements IGraph, Serializable {
         if(vertices.contains(u) && vertices.contains(v)){
             Edge novaAresta = new Edge(u, v, data);
             v.getArestas().put(novaAresta.hashCode(), novaAresta);
-            u.getArestas().put(novaAresta.hashCode(), novaAresta);
             arestas.add(novaAresta);
         }else{
             throw new  NullPointerException();

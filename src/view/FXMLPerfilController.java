@@ -9,17 +9,17 @@ import controller.ControllerUser;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.Iterator;
+import java.util.Map;
 
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,6 +32,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.stage.FileChooser;
@@ -53,15 +54,19 @@ public class FXMLPerfilController implements Initializable {
      * Initializes the controller class.
      */
     @FXML
+    private Pane pnSolicitacao;
+    @FXML
+    private ListView ltvSolicitacao;
+    @FXML
     private ImageView fotoPerfil;
     @FXML
     private Label lblMudaFoto;
     @FXML
     private Label lblNome;
     @FXML
-    private Label lblFoto;
+    private Label lblSolicitacoes;
     @FXML
-    private ListView listAmigos;
+    private ListView ltvAmigos;
     @FXML
     private Pane pnFundo;
     @FXML
@@ -91,6 +96,8 @@ public class FXMLPerfilController implements Initializable {
     private ImageView imvFotoSobre;
 
     @FXML
+    private Label lblHome;
+    @FXML
     private Pane pnPesquisa;
     @FXML
     private ListView listPesquisa;
@@ -113,14 +120,36 @@ public class FXMLPerfilController implements Initializable {
             image = new Image("icon/Person.png");
         }
         fotoPerfil.setImage(image);
-        for (int i = 0; i < atual.getArestas().size(); i++) {
-            User amigo = (User) ((Edge) atual.getArestas().get(i)).getPre().getValue();
-            Label amigos = new Label(amigo.getLogin());
-            amigos.setOnMouseClicked((Event event) -> {
-                AppView.getControlUser().setPerfilCorrent((User)AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
-            });
-            listAmigos.getItems().add(amigos);
+        Set<Integer> chaves = atual.getArestas().keySet();
+        for (Integer chave : chaves) {
+            if (chave != null) {
+                User amigo = (User) ((Edge)atual.getArestas().get(chave)).getPre().getValue();
+                HBox Perfilamigo = new HBox(5);
+                    Image imageAmigo;
+                    Label nomeAmigo = new Label(amigo.getLogin());
+                    try {
+                        if (!amigo.getDirFoto().equals("")) {
+                            image = new Image(amigo.getDirFoto());
+                        } else {
+                            image = new Image("icon/Person.png");
+                        }
+                    } catch (RuntimeException exe) {
+                        image = new Image("icon/Person.png");
+                    }
+                    ImageView fotoAmigo = new ImageView(image);
+                    fotoAmigo.setFitHeight(50);
+                    fotoAmigo.setFitWidth(50);
+                    Perfilamigo.getChildren().add(fotoAmigo);
+                    Perfilamigo.getChildren().add(nomeAmigo);
+                    ltvAmigos.getItems().add(Perfilamigo);
+                    ltvSolicitacao.getItems().remove(Perfilamigo);
 
+                    try {
+                        AppView.getControlUser().saveRegisters();
+                    } catch (Exception ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+            }
         }
 
     }
@@ -162,7 +191,8 @@ public class FXMLPerfilController implements Initializable {
             HBox perfilPesquisa = new HBox(5);
             Image foto;
             User user = (User) ((Vertex) it.next()).getValue();
-            if (user.getNome().substring(0, txtPesquisar.getText().length()).equalsIgnoreCase(txtPesquisar.getText())) {
+            int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
+            if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
                 try {
                     if (!user.getDirFoto().equals("")) {
                         foto = new Image(user.getDirFoto());
@@ -172,16 +202,16 @@ public class FXMLPerfilController implements Initializable {
                 } catch (RuntimeException exe) {
                     foto = new Image("icon/Person.png");
                 }
-                
+
                 ImageView fotoNode = new ImageView(foto);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
                 perfilPesquisa.getChildren().add(fotoNode);
                 perfilPesquisa.getChildren().add(nome);
-                
+
                 perfilPesquisa.setOnMouseClicked((Event event) -> {
-                    AppView.getControlUser().setPerfilCorrent((User)AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
                     Parent root = null;
                     try {
                         root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
@@ -228,6 +258,76 @@ public class FXMLPerfilController implements Initializable {
         pnPesquisa.setVisible(false);
 
         pnFundo.setVisible(true);
+    }
+
+    @FXML
+    private void aceitarSolicitacao(Event evento) {
+        if (pnSolicitacao.visibleProperty().getValue() == false) {
+            Iterator it = AppView.getControlUser().getLoginCorrent().getSolicitacoes().iterator();
+            while (it.hasNext()) {
+                HBox perfilSolicita = new HBox(5);
+                Image foto;
+                User user = (User) it.next();
+                try {
+                    if (!user.getDirFoto().equals("")) {
+                        foto = new Image(user.getDirFoto());
+                    } else {
+                        foto = new Image("icon/Person.png");
+                    }
+                } catch (RuntimeException exe) {
+                    foto = new Image("icon/Person.png");
+                }
+
+                ImageView fotoNode = new ImageView(foto);
+                fotoNode.setFitHeight(50);
+                fotoNode.setFitWidth(50);
+                Label nome = new Label(user.getLogin());
+                Button aceitar = new Button();
+                aceitar.setPrefSize(24, 24);
+                aceitar.setStyle("-fx-background-color: #FFFFFF;");
+                aceitar.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("solicitacao.png"))));
+                perfilSolicita.getChildren().add(fotoNode);
+                perfilSolicita.getChildren().add(nome);
+                perfilSolicita.getChildren().add(aceitar);
+
+                aceitar.setOnMouseClicked((Event event) -> {
+                    AppView.getControlUser().addAmizade(user, AppView.getControlUser().getLoginCorrent());
+                    AppView.getControlUser().getLoginCorrent().getSolicitacoes().remove(user);
+                    HBox novoamigo = new HBox(5);
+                    Image image;
+                    Label nomeAmigo = new Label(user.getLogin());
+                    try {
+                        if (!user.getDirFoto().equals("")) {
+                            image = new Image(user.getDirFoto());
+                        } else {
+                            image = new Image("icon/Person.png");
+                        }
+                    } catch (RuntimeException exe) {
+                        image = new Image("icon/Person.png");
+                    }
+                    ImageView fotoAmigo = new ImageView(image);
+                    fotoAmigo.setFitHeight(50);
+                    fotoAmigo.setFitWidth(50);
+                    novoamigo.getChildren().add(fotoAmigo);
+                    novoamigo.getChildren().add(nome);
+                    ltvAmigos.getItems().add(novoamigo);
+                    ltvSolicitacao.getItems().remove(perfilSolicita);
+
+                    try {
+                        AppView.getControlUser().saveRegisters();
+                    } catch (Exception ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                });
+                ltvSolicitacao.getItems().add(perfilSolicita);
+
+            }
+            pnSolicitacao.setVisible(true);
+        } else {
+            pnSolicitacao.setVisible(false);
+        }
+
     }
 
     @FXML

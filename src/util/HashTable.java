@@ -166,7 +166,7 @@ public class HashTable implements IHashTable, Serializable {
         return false;
     }
     
-    public class MyIterator implements Iterator {
+    public class MyIterator implements Iterator, Serializable {
 
         private final Vertex[] corrent;
         int size;

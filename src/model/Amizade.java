@@ -5,11 +5,13 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Matheus Nascimento
  */
-public class Amizade {
+public class Amizade implements Serializable{
     private int afinidade;
 
     public Amizade(int afinidade) {

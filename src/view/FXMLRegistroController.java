@@ -27,7 +27,7 @@ import javafx.stage.Stage;
 public class FXMLRegistroController implements Initializable {
 
     private final String styleError = "-fx-background-color: #EEEE00;";
-    private final String styleAcept = "-fx-background-color: #FFFFFFF;";
+    private final String styleAcept = "-fx-background-color: #FFFFFF;";
     @FXML
     TextField txtUserName;
     @FXML

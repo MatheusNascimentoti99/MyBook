@@ -5,13 +5,14 @@
  */
 package util;
 
+import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author Matheus Nascimento
  */
-public class Edge {
+public class Edge implements Serializable{
     private Vertex pre;
     private Vertex corrent;
     private Object peso;

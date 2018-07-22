@@ -13,6 +13,13 @@
         -fx-background-color: #FFFFFF;
         -fx-background-image: url("solicitacao.png");
     }
+    .solicitacoes{
+        width:2px;
+        height:1px;
+        
+        -fx-background-color: #FFFFFF;
+        -fx-background-image: url("solicitacoes.png");
+    }
   
     .mudarFoto{
         width:2px;

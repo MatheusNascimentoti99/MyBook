@@ -5,10 +5,12 @@
  */
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Matheus Nascimento
  */
-public class PostagemVideo {
+public class PostagemVideo implements Serializable{
     
 }

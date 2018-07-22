@@ -114,6 +114,7 @@ public class ControllerUser {
             if (grafoUsers.getEdge(grafoUsers.getVertex(user1), grafoUsers.getVertex(user2)) == null) {
                 Amizade nova = new Amizade(99);
                 grafoUsers.addEdge(grafoUsers.getVertex(user1), grafoUsers.getVertex(user2), nova);
+                grafoUsers.addEdge(grafoUsers.getVertex(user2), grafoUsers.getVertex(user1), nova);
                 user1.getSolicitacoes().remove(user2);
                 return true;
             }

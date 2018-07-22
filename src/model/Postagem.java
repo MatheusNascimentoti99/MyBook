@@ -21,6 +21,11 @@ public class Postagem implements Serializable{
     private Date dataPostagem;
     private Date horaPostagem;
 
+    public Postagem() {
+        this.urlImagem = new LinkedList();
+        this.urlVideo = new LinkedList();
+    }
+
     public Date getHoraPostagem() {
         return horaPostagem;
     }

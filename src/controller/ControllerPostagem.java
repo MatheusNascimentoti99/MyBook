@@ -15,6 +15,11 @@ public class ControllerPostagem {
     private LinkedList urlsVideo;
     private LinkedList urlsFoto;
 
+    public ControllerPostagem() {
+        urlsFoto = new LinkedList();
+        urlsVideo = new LinkedList();
+    }
+
     public LinkedList getUrlsVideo() {
         return urlsVideo;
     }

@@ -139,66 +139,59 @@ public class FXMLPerfilController implements Initializable {
 
     private boolean foto, video;
 
-    private LinkedList Urlfotos;
-
-    private LinkedList UrlVideo;
-    
-    private ControllerPostagem controlPost = new ControllerPostagem();
-
+    private ControllerPostagem controlPost;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        Urlfotos = UrlVideo = new LinkedList();
+        controlPost = new ControllerPostagem();
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
-        Image image;
+        Image imageUser;
         try {
             if (!AppView.getControlUser().getLoginCorrent().getDirFoto().equals("")) {
-                image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+                imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+                System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
             } else {
-                image = new Image("icon/Person.png");
+                imageUser = new Image("icon/Person.png");
             }
         } catch (RuntimeException exe) {
-            image = new Image("icon/Person.png");
+            imageUser = new Image("icon/Person.png");
         }
-        fotoPerfil.setImage(image);
+        fotoPerfil.setImage(imageUser);
         Set<Integer> chaves = atual.getArestas().keySet();
         for (Integer chave : chaves) {
             if (chave != null) {
                 User amigo = (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue();
                 HBox perfilamigo = new HBox(5);
-                Image imageAmigo;
                 Label nomeAmigo = new Label(amigo.getLogin());
                 try {
                     if (!amigo.getDirFoto().equals("")) {
-                        image = new Image(amigo.getDirFoto());
+                        imageUser = new Image(amigo.getDirFoto());
+
                     } else {
-                        image = new Image("icon/Person.png");
+                        imageUser = new Image("icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    image = new Image("icon/Person.png");
+                    imageUser = new Image("icon/Person.png");
                 }
-                ImageView fotoAmigo = new ImageView(image);
+                ImageView fotoAmigo = new ImageView(imageUser);
                 fotoAmigo.setFitHeight(50);
                 fotoAmigo.setFitWidth(50);
                 perfilamigo.getChildren().add(fotoAmigo);
                 perfilamigo.getChildren().add(nomeAmigo);
-                perfilamigo.setOnMouseClicked(new EventHandler() {
-                    @Override
-                    public void handle(Event event) {
-                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
-                        Parent root = null;
-                        try {
-                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Scene cenaPerfil = new Scene(root);
-                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        palco.setScene(cenaPerfil);
-                        palco.show();
+                perfilamigo.setOnMouseClicked((Event event) -> {
+                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                    Scene cenaPerfil = new Scene(root);
+                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
+                    palco.show();
                 });
                 ltvAmigos.getItems().add(perfilamigo);
                 ltvSolicitacao.getItems().remove(perfilamigo);
@@ -210,9 +203,9 @@ public class FXMLPerfilController implements Initializable {
                 }
             }
         }
-        
+
         Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
-        while(iterador.hasNext()){
+        while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
             VBox campoPostagem = new VBox(5);
             Label txtPost = new Label(postagem.getTextoPostagem());
@@ -239,20 +232,32 @@ public class FXMLPerfilController implements Initializable {
                     + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
                     + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 
-            if(!postagem.getUrlImagem().isEmpty()){
+            if (!postagem.getUrlImagem().isEmpty()) {
                 Iterator it = postagem.getUrlImagem().iterator();
-                while(it.hasNext()){
-                    String urlImage = (String) it.next();
-                    Image imagemPost = new Image(urlImage);
-                    ImageView imageView = new ImageView(imagemPost);
+                while (it.hasNext()) {
+                    Image imagePost;
+
+                    String urlImagem = (String) it.next();
+                    System.out.println(urlImagem);
+                    try {
+                        if (urlImagem != null) {
+                            imagePost = new Image(urlImagem);
+                        } else {
+                            imagePost = new Image("icon/Empty.png");
+                        }
+                    } catch (RuntimeException exe) {
+                        imagePost = new Image("icon/Empty.png");
+                    }
+                    System.out.println(imagePost);
+                    ImageView imageView = new ImageView(imagePost);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
                     campoPostagem.getChildren().add(imageView);
                 }
             }
-            if(!postagem.getUrlVideo().isEmpty()){
+            if (!postagem.getUrlVideo().isEmpty()) {
                 Iterator it = postagem.getUrlVideo().iterator();
-                while(it.hasNext()){
+                while (it.hasNext()) {
                     String urlVideo = (String) it.next();
                     Media media = new Media(urlVideo);
                     MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -262,9 +267,9 @@ public class FXMLPerfilController implements Initializable {
                     campoPostagem.getChildren().add(mediaView);
                 }
             }
-         listPosts.getItems().add(campoPostagem);
+            listPosts.getItems().add(campoPostagem);
         }
-        
+
     }
 
     @FXML
@@ -441,21 +446,18 @@ public class FXMLPerfilController implements Initializable {
     }
 
     public void abrirPerfil(HBox novoamigo, Event evento, User user) {
-        novoamigo.setOnMouseClicked(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-                AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
-                Parent root = null;
-                try {
-                    root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-                } catch (IOException ex) {
-                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-                Scene cenaPerfil = new Scene(root);
-                Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
-                palco.setScene(cenaPerfil);
-                palco.show();
+        novoamigo.setOnMouseClicked((Event event) -> {
+            AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+            Parent root = null;
+            try {
+                root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+            } catch (IOException ex) {
+                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
             }
+            Scene cenaPerfil = new Scene(root);
+            Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+            palco.setScene(cenaPerfil);
+            palco.show();
         });
     }
 
@@ -478,6 +480,7 @@ public class FXMLPerfilController implements Initializable {
                     fotoPerfil.setImage(image);
                     ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
                     AppView.getControlUser().getLoginCorrent().setDirFoto(file.getAbsolutePath());
+                    System.out.println(file.getAbsolutePath());
                 }
 
             }
@@ -499,18 +502,20 @@ public class FXMLPerfilController implements Initializable {
             postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
             postagem.getUrlImagem().addAll(controlPost.getUrlsVideo());
 
-            AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
+            
             VBox campoPostagem = new VBox(5);
             Label txtPost = new Label(post.getText());
             txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
-            Date date = new Date();
+            Date dateDia = new Date();
+            postagem.setDataPostagem(dateDia);
 
             DateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
-            Date date2 = new Date();
+            Date dataHora = new Date();
+            postagem.setHoraPostagem(dataHora);
             Label nome = new Label(AppView.getControlUser().getLoginCorrent().getLogin());
             Label data = new Label("----- Postagem do Dia: "
-                    + dateFormat.format(date) + " às: " + dateFormat2.format(date2) + " -----\n");
+                    + dateFormat.format(dateDia) + " às: " + dateFormat2.format(dataHora) + " -----\n");
             data.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
                     + "    -fx-font-size: 9pt;");
             nome.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
@@ -542,31 +547,36 @@ public class FXMLPerfilController implements Initializable {
                 }
 
             }
+            AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
+            ((User)AppView.getControlUser().getGrafoUsers().
+                    getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(postagem);
             listPosts.getItems().add(campoPostagem);
         } else {
             System.out.println("Sem nada para se postar");
+        }
+        
+        try {
+            AppView.getControlUser().saveRegisters();
+        } catch (Exception ex) {
+            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
         post.setText("");
         listPostagem.getItems().clear();
 
     }
 
-    public void postagemTexto() {
-        if (post.getText() != null) {
-            Label label = new Label(post.getText());
-            listPostagem.getItems().add(label);
-        }
-    }
+
 
     public void postagemFoto(Event evento) {
-        foto = true;
-        FileChooser filechooser = new FileChooser();
+        FileChooser fileChooser = new FileChooser();
+
+        //Set extension filter
         FileChooser.ExtensionFilter extFilterJPG = new FileChooser.ExtensionFilter("JPG files (*.jpg)", "*.JPG");
         FileChooser.ExtensionFilter extFilterPNG = new FileChooser.ExtensionFilter("PNG files (*.png)", "*.PNG");
-        filechooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
+        fileChooser.getExtensionFilters().addAll(extFilterJPG, extFilterPNG);
 
         try {
-            File file = filechooser.showOpenDialog(null);
+            File file = fileChooser.showOpenDialog(null);
             if (file != null) {
                 BufferedImage bufferedImage = ImageIO.read(file);
                 if (bufferedImage != null) {
@@ -575,8 +585,8 @@ public class FXMLPerfilController implements Initializable {
                     imageView.setFitHeight(50);
                     imageView.setFitWidth(50);
                     listPostagem.getItems().add(imageView);
-                    Urlfotos.add(file.getAbsolutePath());
-                    controlPost.getUrlsFoto().add(file.getAbsolutePath());
+                    controlPost.getUrlsFoto().add("file:" + file.getAbsolutePath());
+                    System.out.println(file.getAbsolutePath());
                 }
             }
         } catch (IOException | RuntimeException ex) {
@@ -585,7 +595,6 @@ public class FXMLPerfilController implements Initializable {
     }
 
     public void postagemVideo(Event evento) throws MalformedURLException {
-        video = true;
         FileChooser filechooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterAVI = new FileChooser.ExtensionFilter("AVI files (*.avi)", "*.AVI");
         FileChooser.ExtensionFilter extFilterMPG = new FileChooser.ExtensionFilter("MPEG files (*.mpg)", "*.MPEG");
@@ -601,8 +610,7 @@ public class FXMLPerfilController implements Initializable {
                 mediaView.setFitHeight(50);
                 mediaView.setFitWidth(50);
                 listPostagem.getItems().add(mediaView);
-                UrlVideo.add(file.getAbsolutePath());
-                controlPost.getUrlsVideo().add(file.getAbsolutePath());
+                controlPost.getUrlsVideo().add("file:" + file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

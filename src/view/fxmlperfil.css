@@ -13,7 +13,7 @@
         -fx-background-color: #FFFFFF;
         -fx-background-image: url("solicitacao.png");
     }
-
+  
     .mudarFoto{
         width:2px;
         height:1px;
@@ -43,4 +43,17 @@
         -fx-background-color: #FFFFFF;
  
     }
+    
+    .optionVisita {
+    -fx-padding: 5 22 5 22;   
+    -fx-border-color: #e2e2e2;
+    -fx-border-width: 2;
+    -fx-background-radius: 0;
+    -fx-background-color: #FFFFFF;
+    -fx-font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+    -fx-font-size: 9pt;
+    -fx-text-fill: #3CB371;
+    -fx-background-insets: 0 0 0 0, 0, 1, 2;
+}
+   
 }

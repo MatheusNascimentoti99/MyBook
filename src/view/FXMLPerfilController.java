@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -147,6 +148,9 @@ public class FXMLPerfilController implements Initializable {
         for (int i = 0; i < atual.getArestas().size(); i++) {
             User amigo = (User) ((Edge) atual.getArestas().get(i)).getPre().getValue();
             Label amigos = new Label(amigo.getLogin());
+            amigos.setOnMouseClicked((Event event) -> {
+                AppView.getControlUser().setPerfilCorrent((User)AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+            });
             listAmigos.getItems().add(amigos);
 
         }
@@ -199,12 +203,27 @@ public class FXMLPerfilController implements Initializable {
                 } catch (RuntimeException exe) {
                     foto = new Image("icon/Person.png");
                 }
+                
                 ImageView fotoNode = new ImageView(foto);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
                 perfilPesquisa.getChildren().add(fotoNode);
                 perfilPesquisa.getChildren().add(nome);
+                
+                perfilPesquisa.setOnMouseClicked((Event event) -> {
+                    AppView.getControlUser().setPerfilCorrent((User)AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Scene cenaPerfil = new Scene(root);
+                    Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
+                    palco.show();
+                });
                 listPesquisa.getItems().add(perfilPesquisa);
             }
         }

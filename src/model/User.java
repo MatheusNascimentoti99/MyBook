@@ -23,6 +23,7 @@ public class User implements Serializable{
     private  String login;
     private  LinkedList solicitacoes;
     private String dirFoto;
+    private LinkedList postagens;
 
     public String getDirFoto() {
         return dirFoto;
@@ -43,6 +44,7 @@ public class User implements Serializable{
         this.endereco = endereco;
         this.login = login;
         solicitacoes = new LinkedList();
+        postagens = new LinkedList();
     }
 
 
@@ -123,6 +125,14 @@ public class User implements Serializable{
         return hashCode() == obj.hashCode();
         }
         return false;
+    }
+
+    public LinkedList getPostagens() {
+        return postagens;
+    }
+
+    public void setPostagens(LinkedList postagens) {
+        this.postagens = postagens;
     }
     
     

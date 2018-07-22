@@ -12,11 +12,11 @@ import model.User;
 import util.Vertex;
 import util.Graph;
 
-/**
- *
- * @author Matheus Nascimento
- */
-public class ControllerUser {
+    /**
+     *
+     * @author Matheus Nascimento
+     */
+    public class ControllerUser {
 
     private User loginCorrent;
     private Graph grafoUsers;
@@ -45,6 +45,7 @@ public class ControllerUser {
             return false;
         }
     }
+    
 
     public User getLoginCorrent() {
         return loginCorrent;
@@ -59,7 +60,6 @@ public class ControllerUser {
     }
 
     public boolean checkLogin(String login, String senha) {
-
         try {
             Iterator iterador = grafoUsers.vertices();
             while (iterador.hasNext()) {
@@ -132,6 +132,7 @@ public class ControllerUser {
         } else {
             return false;
         }
+        
     }
 
     public Iterator showUsers() {

@@ -357,6 +357,7 @@ public class FXMLPerfilController implements Initializable {
                     novoamigo.getChildren().add(fotoAmigo);
                     novoamigo.getChildren().add(nome);
                     ltvAmigos.getItems().add(novoamigo);
+                    ((User)AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getSolicitacoes().remove(user);
                     ltvSolicitacao.getItems().remove(perfilSolicita);
 
                     try {

@@ -47,7 +47,6 @@ public class FXMLLoginController implements Initializable {
                 String login = textoEntrada.getText();
                 String senha = String.valueOf(textoSenhaEntrada.getText());
                 if (AppView.getControlUser().checkLogin(login, senha)) {
-                    User user = AppView.getControlUser().verificaLogin(login);
                     Parent root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
                     Scene cenaPerfil = new Scene(root);
                     Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();

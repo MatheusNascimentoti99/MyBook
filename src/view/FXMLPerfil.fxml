@@ -17,14 +17,18 @@
         <VBox focusTraversable="true" layoutX="189.0" layoutY="14.0" prefHeight="82.0" prefWidth="435.0">
           <children>
             <TextArea fx:id="post" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="47.0" prefWidth="435.0" wrapText="true" />
-            <ListView id="ListPostagem" fx:id="listPostagem" prefHeight="21.0" prefWidth="435.0" />
+            <HBox fx:id="hbMidias" prefHeight="15.9609375" prefWidth="435.0" />
             <HBox prefHeight="24.0" prefWidth="429.0">
               <children>
                 <Label fx:id="labelPostFoto" onDragDetected="#postagemFoto" onMouseClicked="#postagemFoto" text="Imagem" />
                 <Separator orientation="VERTICAL" prefHeight="16.0" prefWidth="24.0" />
                 <Label fx:id="labelPostVideo" onDragDetected="#postagemVideo" onMouseClicked="#postagemVideo" text="Vídeo" />
                 <Separator orientation="VERTICAL" prefHeight="24.0" prefWidth="282.0" />
-                <Button fx:id="botaoPostar" alignment="BASELINE_RIGHT" mnemonicParsing="false" onMouseClicked="#postagem" text="Postar" />
+                <Button fx:id="botaoPostar" alignment="BASELINE_RIGHT" mnemonicParsing="false" onMouseClicked="#postagem" styleClass="mudarBotao" text="Postar">
+                  <stylesheets>
+                    <URL value="@fxmlregistro.css" />
+                  </stylesheets>
+                </Button>
               </children>
             </HBox>
           </children>

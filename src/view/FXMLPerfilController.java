@@ -71,7 +71,7 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private VBox VboxPosts;
     @FXML
-    private ListView listPostagem;
+    private HBox hbMidias;
     @FXML
     private Label fotoPostagem;
     @FXML
@@ -496,7 +496,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     public void postagem(Event evento) {
-        if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
+        if (!hbMidias.getChildren().isEmpty() || post.getText().length() > 0) {
             Postagem postagem = new Postagem();
             postagem.setTextoPostagem(post.getText());
             postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
@@ -530,7 +530,7 @@ public class FXMLPerfilController implements Initializable {
                     + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
                     + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 
-            Iterator it = listPostagem.getItems().iterator();
+            Iterator it = hbMidias.getChildren().iterator();
             while (it.hasNext()) {
                 Object o = it.next();
                 if (o instanceof ImageView) {
@@ -561,7 +561,7 @@ public class FXMLPerfilController implements Initializable {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
         post.setText("");
-        listPostagem.getItems().clear();
+        hbMidias.getChildren().clear();
 
     }
 
@@ -582,11 +582,10 @@ public class FXMLPerfilController implements Initializable {
                 if (bufferedImage != null) {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     ImageView imageView = new ImageView(image);
-                    imageView.setFitHeight(50);
-                    imageView.setFitWidth(50);
-                    listPostagem.getItems().add(imageView);
+                    imageView.setFitHeight(25);
+                    imageView.setFitWidth(25);
+                    hbMidias.getChildren().add(imageView);
                     controlPost.getUrlsFoto().add("file:" + file.getAbsolutePath());
-                    System.out.println(file.getAbsolutePath());
                 }
             }
         } catch (IOException | RuntimeException ex) {
@@ -607,9 +606,9 @@ public class FXMLPerfilController implements Initializable {
                 Media media = new Media(file.toURI().toURL().toString());
                 MediaPlayer mediaPlayer = new MediaPlayer(media);
                 MediaView mediaView = new MediaView(mediaPlayer);
-                mediaView.setFitHeight(50);
-                mediaView.setFitWidth(50);
-                listPostagem.getItems().add(mediaView);
+                mediaView.setFitHeight(25);
+                mediaView.setFitWidth(25);
+                hbMidias.getChildren().add(mediaView);
                 controlPost.getUrlsVideo().add("file:" + file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {

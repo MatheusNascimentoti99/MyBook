@@ -17,7 +17,7 @@
         <VBox focusTraversable="true" layoutX="189.0" layoutY="14.0" prefHeight="82.0" prefWidth="435.0">
           <children>
             <TextArea fx:id="post" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-1.0" minWidth="-1.0" prefHeight="47.0" prefWidth="435.0" wrapText="true" />
-            <HBox fx:id="hbMidias" prefHeight="15.9609375" prefWidth="435.0" />
+            <ListView id="ListPostagem" fx:id="listPostagem" orientation="HORIZONTAL" prefHeight="19.169921875" prefWidth="435.0" rotate="0.0" />
             <HBox prefHeight="24.0" prefWidth="429.0">
               <children>
                 <Label fx:id="labelPostFoto" onDragDetected="#postagemFoto" onMouseClicked="#postagemFoto" text="Imagem" />

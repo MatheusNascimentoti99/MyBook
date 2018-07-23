@@ -71,7 +71,7 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private VBox VboxPosts;
     @FXML
-    private HBox hbMidias;
+    private ListView listPostagem;
     @FXML
     private Label fotoPostagem;
     @FXML
@@ -496,7 +496,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     public void postagem(Event evento) {
-        if (!hbMidias.getChildren().isEmpty() || post.getText().length() > 0) {
+        if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
             Postagem postagem = new Postagem();
             postagem.setTextoPostagem(post.getText());
             postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
@@ -530,7 +530,7 @@ public class FXMLPerfilController implements Initializable {
                     + "-fx-border-width: 2;" + "-fx-border-insets: 5;"
                     + "-fx-border-radius: 5;" + "-fx-border-color: blue;");
 
-            Iterator it = hbMidias.getChildren().iterator();
+            Iterator it = listPostagem.getItems().iterator();
             while (it.hasNext()) {
                 Object o = it.next();
                 if (o instanceof ImageView) {
@@ -561,7 +561,7 @@ public class FXMLPerfilController implements Initializable {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
         post.setText("");
-        hbMidias.getChildren().clear();
+        listPostagem.getItems().clear();
 
     }
 
@@ -584,7 +584,7 @@ public class FXMLPerfilController implements Initializable {
                     ImageView imageView = new ImageView(image);
                     imageView.setFitHeight(25);
                     imageView.setFitWidth(25);
-                    hbMidias.getChildren().add(imageView);
+                    listPostagem.getItems().add(imageView);
                     controlPost.getUrlsFoto().add("file:" + file.getAbsolutePath());
                 }
             }
@@ -608,7 +608,7 @@ public class FXMLPerfilController implements Initializable {
                 MediaView mediaView = new MediaView(mediaPlayer);
                 mediaView.setFitHeight(25);
                 mediaView.setFitWidth(25);
-                hbMidias.getChildren().add(mediaView);
+                listPostagem.getItems().add(mediaView);
                 controlPost.getUrlsVideo().add("file:" + file.getAbsolutePath());
             }
         } catch (IOException | RuntimeException ex) {

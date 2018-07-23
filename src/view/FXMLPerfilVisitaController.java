@@ -83,7 +83,6 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     private Label lblHome;
 
-    
     @FXML
     private Label desNome;
     @FXML
@@ -102,6 +101,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     private Pane pnSobre;
     @FXML
     private Button desVoltar;
+
     /**
      * Initializes the controller class.
      */
@@ -135,7 +135,7 @@ public class FXMLPerfilVisitaController implements Initializable {
         }
         imvFoto.setImage(imagemPerfilVisit);
         Set<Integer> chaves = atual.getArestas().keySet();
-        
+
         for (Integer chave : chaves) {
             if (chave != null) {
                 User amigo = (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue();
@@ -157,17 +157,30 @@ public class FXMLPerfilVisitaController implements Initializable {
                 perfilamigo.getChildren().add(fotoAmigo);
                 perfilamigo.getChildren().add(nomeAmigo);
                 perfilamigo.setOnMouseClicked((Event event) -> {
-                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
-                    Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!amigo.equals(AppView.getControlUser().getLoginCorrent())) {
+                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
+                    } else {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
                     }
-                    Scene cenaPerfil = new Scene(root);
-                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    palco.setScene(cenaPerfil);
-                    palco.show();
                 });
                 ltvAmigos.getItems().add(perfilamigo);
 
@@ -241,7 +254,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                     campoPostagem.getChildren().add(mediaView);
                 }
             }
-            ltvPostagens.getItems().add(0,campoPostagem);
+            ltvPostagens.getItems().add(0, campoPostagem);
         }
         // TODO
     }
@@ -267,6 +280,7 @@ public class FXMLPerfilVisitaController implements Initializable {
         desFoto.setImage(image);
 
     }
+
     @FXML
     private void enviarSolicitacao(Event evento) {
         if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).
@@ -361,17 +375,30 @@ public class FXMLPerfilVisitaController implements Initializable {
                 perfilPesquisa.getChildren().add(nome);
 
                 perfilPesquisa.setOnMouseClicked((Event event) -> {
-                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
-                    Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
+                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
+                    } else {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
                     }
-                    Scene cenaPerfil = new Scene(root);
-                    Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
-                    palco.setScene(cenaPerfil);
-                    palco.show();
                 });
                 ltvPesquisa.getItems().add(perfilPesquisa);
             }

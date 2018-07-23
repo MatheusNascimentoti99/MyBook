@@ -181,17 +181,30 @@ public class FXMLPerfilController implements Initializable {
                 perfilamigo.getChildren().add(fotoAmigo);
                 perfilamigo.getChildren().add(nomeAmigo);
                 perfilamigo.setOnMouseClicked((Event event) -> {
-                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
-                    Parent root = null;
-                    try {
-                        root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-                    } catch (IOException ex) {
-                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    if (!amigo.equals(AppView.getControlUser().getLoginCorrent())) {
+                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
+                    } else {
+                        Parent root = null;
+                        try {
+                            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                        } catch (IOException ex) {
+                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                        Scene cenaPerfil = new Scene(root);
+                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                        palco.setScene(cenaPerfil);
+                        palco.show();
                     }
-                    Scene cenaPerfil = new Scene(root);
-                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    palco.setScene(cenaPerfil);
-                    palco.show();
                 });
                 ltvAmigos.getItems().add(perfilamigo);
                 ltvSolicitacao.getItems().remove(perfilamigo);
@@ -267,7 +280,7 @@ public class FXMLPerfilController implements Initializable {
                     campoPostagem.getChildren().add(mediaView);
                 }
             }
-            listPosts.getItems().add(0,campoPostagem);
+            listPosts.getItems().add(0, campoPostagem);
         }
 
     }
@@ -447,17 +460,30 @@ public class FXMLPerfilController implements Initializable {
 
     public void abrirPerfil(HBox novoamigo, Event evento, User user) {
         novoamigo.setOnMouseClicked((Event event) -> {
-            AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
-            Parent root = null;
-            try {
-                root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
-            } catch (IOException ex) {
-                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+            if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
+                AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene cenaPerfil = new Scene(root);
+                Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
+                palco.setScene(cenaPerfil);
+                palco.show();
+            } else {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene cenaPerfil = new Scene(root);
+                Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                palco.setScene(cenaPerfil);
+                palco.show();
             }
-            Scene cenaPerfil = new Scene(root);
-            Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
-            palco.setScene(cenaPerfil);
-            palco.show();
         });
     }
 
@@ -502,7 +528,6 @@ public class FXMLPerfilController implements Initializable {
             postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
             postagem.getUrlImagem().addAll(controlPost.getUrlsVideo());
 
-            
             VBox campoPostagem = new VBox(5);
             Label txtPost = new Label(post.getText());
             txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
@@ -548,13 +573,13 @@ public class FXMLPerfilController implements Initializable {
 
             }
             AppView.getControlUser().getLoginCorrent().getPostagens().add(postagem);
-            ((User)AppView.getControlUser().getGrafoUsers().
+            ((User) AppView.getControlUser().getGrafoUsers().
                     getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(postagem);
-            listPosts.getItems().add(0,campoPostagem);
+            listPosts.getItems().add(0, campoPostagem);
         } else {
             System.out.println("Sem nada para se postar");
         }
-        
+
         try {
             AppView.getControlUser().saveRegisters();
         } catch (Exception ex) {
@@ -564,8 +589,6 @@ public class FXMLPerfilController implements Initializable {
         listPostagem.getItems().clear();
 
     }
-
-
 
     public void postagemFoto(Event evento) {
         FileChooser fileChooser = new FileChooser();

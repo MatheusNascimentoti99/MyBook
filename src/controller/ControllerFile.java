@@ -34,7 +34,8 @@ public class ControllerFile {
         try {
 
             try (
-                    FileInputStream arquivoLeitura = new FileInputStream(local); ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura)) {
+                    FileInputStream arquivoLeitura = new FileInputStream(local);
+                    ObjectInputStream objLeitura = new ObjectInputStream(arquivoLeitura)) {
                 dado = objLeitura.readObject();
                 if(dado == null)
                    throw new FileNotFoundException();

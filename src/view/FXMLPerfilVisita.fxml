@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="728.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilVisitaController">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="728.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.FXMLPerfilVisitaController">
   <children>
     <Pane fx:id="pnPesquisa" focusTraversable="true" layoutX="5.0" layoutY="39.0" prefHeight="361.0" prefWidth="716.0" styleClass="fundo" visible="false">
       <children>

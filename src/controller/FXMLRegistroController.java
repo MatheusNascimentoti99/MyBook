@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -18,6 +18,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import view.AppView;
 
 /**
  * FXML Controller class
@@ -51,7 +52,7 @@ public class FXMLRegistroController implements Initializable {
     @FXML
     public void cancelar(Event evento) throws IOException {
         //Altera a cena para o login
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLLogin.fxml"));
         Scene cenaPerfil = new Scene(root);
 
         Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
@@ -152,7 +153,7 @@ public class FXMLRegistroController implements Initializable {
             if (AppView.getControlUser().addUser(nome, email, senha, telefone, dataNasc, endereco, userName)) {
                 try {
                     AppView.getControlUser().saveRegisters();
-                    Parent root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+                    Parent root = FXMLLoader.load(getClass().getResource("/view/FXMLLogin.fxml"));
                     Scene cenaPerfil = new Scene(root);
                     Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
                     palco.setScene(cenaPerfil);

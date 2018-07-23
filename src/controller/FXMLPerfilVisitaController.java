@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package view;
+package controller;
 
+import controller.FXMLPerfilController;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -42,6 +43,7 @@ import model.Postagem;
 import model.User;
 import util.Edge;
 import util.Vertex;
+import view.AppView;
 
 /**
  * FXML Controller class
@@ -161,7 +163,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                         AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
                         Parent root = null;
                         try {
-                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
                         } catch (IOException ex) {
                             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -172,7 +174,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                     } else {
                         Parent root = null;
                         try {
-                            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
                         } catch (IOException ex) {
                             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -313,7 +315,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     public void home(Event evento) {
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -333,7 +335,7 @@ public class FXMLPerfilVisitaController implements Initializable {
         }
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+            root = FXMLLoader.load(getClass().getResource("/view/FXMLLogin.fxml"));
         } catch (IOException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -389,7 +391,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                         AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
                         Parent root = null;
                         try {
-                            root = FXMLLoader.load(getClass().getResource("FXMLPerfilVisita.fxml"));
+                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
                         } catch (IOException ex) {
                             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -400,7 +402,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                     } else {
                         Parent root = null;
                         try {
-                            root = FXMLLoader.load(getClass().getResource("FXMLPerfil.fxml"));
+                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
                         } catch (IOException ex) {
                             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                         }

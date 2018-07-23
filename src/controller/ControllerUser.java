@@ -89,7 +89,7 @@ import util.Graph;
     }
 
     public void saveRegisters() throws Exception {
-        ControllerFile.save(grafoUsers, "resources/registros.txt");
+        ControllerFile.save(grafoUsers, "resources/registros.data");
     }
 
     public void setGrafoUsers(Graph grafoUsers) {
@@ -99,7 +99,7 @@ import util.Graph;
     public Graph readRegisters() {
         Graph temp;
         try {
-            temp = (Graph) ControllerFile.readDate("resources/registros.txt");
+            temp = (Graph) ControllerFile.readDate("resources/registros.data");
         } catch (FileNotFoundException e) {
             temp = null;
         }

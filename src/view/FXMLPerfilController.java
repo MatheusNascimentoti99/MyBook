@@ -269,14 +269,22 @@ public class FXMLPerfilController implements Initializable {
                 }
             }
             if (!postagem.getUrlVideo().isEmpty()) {
-                Iterator it = postagem.getUrlVideo().iterator();
-                while (it.hasNext()) {
-                    String urlVideo = (String) it.next();
-                    Media media = new Media(urlVideo);
+                for (Object urlVideo : postagem.getUrlVideo()) {
+                    Media media = new Media((String) urlVideo);
                     MediaPlayer mediaPlayer = new MediaPlayer(media);
                     MediaView mediaView = new MediaView(mediaPlayer);
                     mediaView.setFitHeight(150);
                     mediaView.setFitWidth(150);
+                    mediaView.setOnMouseEntered((Event event) -> {
+                        mediaPlayer.play();
+                        mediaView.setFitHeight(300);
+                        mediaView.setFitWidth(300);
+                    });
+                    mediaView.setOnMouseExited((Event event) -> {
+                        mediaPlayer.pause();
+                        mediaView.setFitHeight(150);
+                        mediaView.setFitWidth(150);
+                    });
                     campoPostagem.getChildren().add(mediaView);
                 }
             }
@@ -526,7 +534,7 @@ public class FXMLPerfilController implements Initializable {
             Postagem postagem = new Postagem();
             postagem.setTextoPostagem(post.getText());
             postagem.getUrlImagem().addAll(controlPost.getUrlsFoto());
-            postagem.getUrlImagem().addAll(controlPost.getUrlsVideo());
+            postagem.getUrlVideo().addAll(controlPost.getUrlsVideo());
 
             VBox campoPostagem = new VBox(5);
             Label txtPost = new Label(post.getText());
@@ -567,6 +575,16 @@ public class FXMLPerfilController implements Initializable {
                     MediaView videoPost = (MediaView) o;
                     videoPost.setFitHeight(150);
                     videoPost.setFitWidth(150);
+                    videoPost.setOnMouseEntered((Event event) -> {
+                    videoPost.getMediaPlayer().play();
+                    videoPost.setFitHeight(300);
+                    videoPost.setFitWidth(300);
+                });
+                videoPost.setOnMouseExited((Event event) -> {
+                        videoPost.getMediaPlayer().pause();
+                        videoPost.setFitHeight(150);
+                        videoPost.setFitWidth(150);
+                    });
                     campoPostagem.getChildren().add(videoPost);
 
                 }
@@ -631,8 +649,17 @@ public class FXMLPerfilController implements Initializable {
                 MediaView mediaView = new MediaView(mediaPlayer);
                 mediaView.setFitHeight(25);
                 mediaView.setFitWidth(25);
+                mediaView.setOnMouseEntered((Event event) -> {
+                    mediaPlayer.play();
+                });
+                mediaView.setOnMouseExited((Event event) -> {
+                    mediaPlayer.pause();
+                    mediaView.setFitHeight(25);
+                    mediaView.setFitWidth(25);
+                });
                 listPostagem.getItems().add(mediaView);
-                controlPost.getUrlsVideo().add("file:" + file.getAbsolutePath());
+                controlPost.getUrlsVideo().add(file.toURI().toURL().toString());
+
             }
         } catch (IOException | RuntimeException ex) {
             Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);

@@ -251,6 +251,16 @@ public class FXMLPerfilVisitaController implements Initializable {
                     MediaView mediaView = new MediaView(mediaPlayer);
                     mediaView.setFitHeight(150);
                     mediaView.setFitWidth(150);
+                    mediaView.setOnMouseEntered((Event event) -> {
+                        mediaPlayer.play();
+                        mediaView.setFitHeight(300);
+                        mediaView.setFitWidth(300);
+                    });
+                    mediaView.setOnMouseExited((Event event) -> {
+                        mediaPlayer.pause();
+                        mediaView.setFitHeight(150);
+                        mediaView.setFitWidth(150);
+                    });
                     campoPostagem.getChildren().add(mediaView);
                 }
             }

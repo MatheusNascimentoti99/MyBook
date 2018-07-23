@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="728.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilVisitaController">
+<AnchorPane id="AnchorPane" prefHeight="591.0" prefWidth="728.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="view.FXMLPerfilVisitaController">
   <children>
     <Pane fx:id="pnPesquisa" focusTraversable="true" layoutX="5.0" layoutY="39.0" prefHeight="361.0" prefWidth="716.0" styleClass="fundo" visible="false">
       <children>
@@ -25,7 +25,7 @@
         <URL value="@fxmlperfil.css" />
       </stylesheets>
     </Pane>
-    <Pane fx:id="pnFundo" depthTest="INHERIT" disable="false" focusTraversable="true" layoutX="0.0" layoutY="45.0" prefHeight="355.0" prefWidth="716.0" styleClass="fundo" visible="true">
+    <Pane fx:id="pnFundo" depthTest="INHERIT" disable="false" focusTraversable="true" layoutX="0.0" layoutY="45.0" prefHeight="532.0" prefWidth="716.0" styleClass="fundo" visible="true">
       <children>
         <VBox focusTraversable="true" layoutX="158.0" layoutY="-6.0" minHeight="15.9609375" prefHeight="32.0" prefWidth="435.0" />
         <ListView blendMode="OVERLAY" cache="true" editable="false" focusTraversable="false" layoutX="142.0" layoutY="160.0" prefHeight="223.0" prefWidth="490.0" visible="false" />
@@ -36,7 +36,7 @@
           </font>
         </Label>
         <ImageView id="fotoPerfil" fx:id="imvFoto" fitHeight="118.99999692398409" fitWidth="93.0" layoutX="14.0" layoutY="0.0" pickOnBounds="true" preserveRatio="true" />
-        <ListView fx:id="ltvPostagens" cache="true" editable="false" layoutX="111.0" layoutY="41.0" pickOnBounds="false" prefHeight="298.0" prefWidth="463.0" styleClass="optionVisita">
+        <ListView fx:id="ltvPostagens" cache="true" editable="false" layoutX="111.0" layoutY="41.0" pickOnBounds="false" prefHeight="477.0" prefWidth="463.0" styleClass="optionVisita">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -51,7 +51,7 @@
         </Button>
         <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" onAction="#sobre" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="9.520833333333334" radius="4.600446428571429" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="10.200892857142858" radius="4.77046130952381" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
@@ -62,7 +62,7 @@
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Button>
-        <ListView fx:id="ltvAmigos" layoutX="587.0" layoutY="57.0" prefHeight="272.0" prefWidth="127.0">
+        <ListView fx:id="ltvAmigos" layoutX="587.0" layoutY="57.0" prefHeight="461.0" prefWidth="127.0">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>

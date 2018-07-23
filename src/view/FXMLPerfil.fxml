@@ -1,16 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.net.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import java.net.URL?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="591.999977929685" prefWidth="727.0" styleClass="fundo" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="controller.FXMLPerfilController">
+<AnchorPane id="AnchorPane" focusTraversable="true" prefHeight="591.999977929685" prefWidth="727.0" styleClass="fundo" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.FXMLPerfilController">
   <children>
     <Pane fx:id="pnFundo" depthTest="INHERIT" disable="false" focusTraversable="true" layoutX="0.0" layoutY="39.0" prefHeight="553.0" prefWidth="726.0" styleClass="fundo" visible="true">
       <children>
@@ -56,11 +61,17 @@
               <stylesheets>
                 <URL value="@fxmlperfil.css" />
               </stylesheets>
+                     <tooltip>
+                        <Tooltip text="Mudar foto" />
+                     </tooltip>
             </Label>
             <Button fx:id="btnSobre" mnemonicParsing="false" onAction="#sobre" prefHeight="24.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="sobre" text="">
               <stylesheets>
                 <URL value="@fxmlperfil.css" />
               </stylesheets>
+                     <tooltip>
+                        <Tooltip text="Sobre" />
+                     </tooltip>
             </Button>
             <Label fx:id="lblSolicitacoes" focusTraversable="true" onDragDetected="#aceitarSolicitacao" onMouseClicked="#aceitarSolicitacao" prefHeight="24.0" prefWidth="24.0" scaleX="0.7" scaleY="0.7" styleClass="solicitacoes" text="">
               <stylesheets>

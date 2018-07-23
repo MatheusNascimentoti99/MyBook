@@ -154,10 +154,10 @@ public class FXMLPerfilController implements Initializable {
                 imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
                 System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
             } else {
-                imageUser = new Image("icon/Person.png");
+                imageUser = new Image("/icon/Person.png");
             }
         } catch (RuntimeException exe) {
-            imageUser = new Image("icon/Person.png");
+            imageUser = new Image("/icon/Person.png");
         }
         fotoPerfil.setImage(imageUser);
         Set<Integer> chaves = atual.getArestas().keySet();
@@ -171,10 +171,10 @@ public class FXMLPerfilController implements Initializable {
                         imageUser = new Image(amigo.getDirFoto());
 
                     } else {
-                        imageUser = new Image("icon/Person.png");
+                        imageUser = new Image("/icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    imageUser = new Image("icon/Person.png");
+                    imageUser = new Image("/icon/Person.png");
                 }
                 ImageView fotoAmigo = new ImageView(imageUser);
                 fotoAmigo.setFitHeight(50);
@@ -257,10 +257,10 @@ public class FXMLPerfilController implements Initializable {
                         if (urlImagem != null) {
                             imagePost = new Image(urlImagem);
                         } else {
-                            imagePost = new Image("icon/Empty.png");
+                            imagePost = new Image("/icon/Empty.png");
                         }
                     } catch (RuntimeException exe) {
-                        imagePost = new Image("icon/Empty.png");
+                        imagePost = new Image("/icon/Empty.png");
                     }
                     System.out.println(imagePost);
                     ImageView imageView = new ImageView(imagePost);
@@ -337,10 +337,10 @@ public class FXMLPerfilController implements Initializable {
                     if (!user.getDirFoto().equals("")) {
                         fotoP = new Image(user.getDirFoto());
                     } else {
-                        fotoP = new Image("icon/Person.png");
+                        fotoP = new Image("/icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    fotoP = new Image("icon/Person.png");
+                    fotoP = new Image("/icon/Person.png");
                 }
 
                 ImageView fotoNode = new ImageView(fotoP);
@@ -374,7 +374,7 @@ public class FXMLPerfilController implements Initializable {
         if (AppView.getControlUser().getLoginCorrent().getDirFoto() != null) {
             image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
         } else {
-            image = new Image("icon/Person.png");
+            image = new Image("/icon/Person.png");
         }
         imvFotoSobre.setImage(image);
 
@@ -407,10 +407,10 @@ public class FXMLPerfilController implements Initializable {
                     if (!user.getDirFoto().equals("")) {
                         fotoS = new Image(user.getDirFoto());
                     } else {
-                        fotoS = new Image("icon/Person.png");
+                        fotoS = new Image("/icon/Person.png");
                     }
                 } catch (RuntimeException exe) {
-                    fotoS = new Image("icon/Person.png");
+                    fotoS = new Image("/icon/Person.png");
                 }
 
                 ImageView fotoNode = new ImageView(fotoS);
@@ -421,7 +421,7 @@ public class FXMLPerfilController implements Initializable {
                 aceitar.setPrefSize(24, 24);
                 aceitar.setStyle("-fx-background-color: #FFFFFF;");
                 aceitar.setTooltip(new Tooltip("Aceitar solicitação"));
-                aceitar.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("solicitacao.png"))));
+                aceitar.setGraphic(new ImageView(new Image(getClass().getResourceAsStream("/view/solicitacao.png"))));
                 perfilSolicita.getChildren().add(fotoNode);
                 perfilSolicita.getChildren().add(nome);
                 perfilSolicita.getChildren().add(aceitar);
@@ -436,10 +436,10 @@ public class FXMLPerfilController implements Initializable {
                         if (!user.getDirFoto().equals("")) {
                             image = new Image(user.getDirFoto());
                         } else {
-                            image = new Image("icon/Person.png");
+                            image = new Image("/icon/Person.png");
                         }
                     } catch (RuntimeException exe) {
-                        image = new Image("icon/Person.png");
+                        image = new Image("/icon/Person.png");
                     }
                     ImageView fotoAmigo = new ImageView(image);
                     fotoAmigo.setFitHeight(50);

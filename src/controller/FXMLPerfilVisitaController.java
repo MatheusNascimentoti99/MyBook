@@ -6,6 +6,7 @@
 package controller;
 
 import controller.FXMLPerfilController;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
@@ -116,7 +117,8 @@ public class FXMLPerfilVisitaController implements Initializable {
 
         Image imageUserLogin;
         try {
-            if (!AppView.getControlUser().getLoginCorrent().getDirFoto().equals("")) {
+            File caminhoImagem = new File(AppView.getControlUser().getLoginCorrent().getDirFoto());
+            if (caminhoImagem.exists()) {
                 imageUserLogin = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
             } else {
                 imageUserLogin = new Image("/icon/Person.png");
@@ -127,7 +129,8 @@ public class FXMLPerfilVisitaController implements Initializable {
         imvUserLogin.setImage(imageUserLogin);
         Image imagemPerfilVisit;
         try {
-            if (!AppView.getControlUser().getPerfilCorrent().getDirFoto().equals("")) {
+            File caminhoImagem = new File(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+            if (caminhoImagem.exists()) {
                 imagemPerfilVisit = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
             } else {
                 imagemPerfilVisit = new Image("/icon/Person.png");
@@ -145,7 +148,8 @@ public class FXMLPerfilVisitaController implements Initializable {
                 Image imageAmigo;
                 Label nomeAmigo = new Label(amigo.getLogin());
                 try {
-                    if (!amigo.getDirFoto().equals("")) {
+                    File caminhoImagem = new File(amigo.getDirFoto());
+                    if (caminhoImagem.exists()) {
                         imageAmigo = new Image(amigo.getDirFoto());
                     } else {
                         imageAmigo = new Image("/icon/Person.png");
@@ -229,7 +233,9 @@ public class FXMLPerfilVisitaController implements Initializable {
                     String urlImagem = (String) it.next();
                     System.out.println(urlImagem);
                     try {
-                        if (urlImagem != null) {
+                        File caminhoImagem = new File(urlImagem);
+                        if (caminhoImagem.exists()) {
+
                             imagePost = new Image(urlImagem);
                         } else {
                             imagePost = new Image("/icon/Empty.png");
@@ -284,7 +290,8 @@ public class FXMLPerfilVisitaController implements Initializable {
         desDataNascimento.setText(AppView.getControlUser().getPerfilCorrent().getDataNasc());
         pnSobre.setVisible(true);
         Image image;
-        if (AppView.getControlUser().getPerfilCorrent().getDirFoto() != null) {
+        File caminhoImagem = new File(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+        if (caminhoImagem.exists()) {
             image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
         } else {
             image = new Image("/icon/Person.png");
@@ -295,14 +302,17 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     @FXML
     private void enviarSolicitacao(Event evento) {
-        if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).
-                getValue()).getSolicitacoes().
-                contains(AppView.getControlUser().getLoginCorrent())) {
-            if (!AppView.getControlUser().getLoginCorrent().equals(AppView.getControlUser().getPerfilCorrent())) {
+        if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()
+        ).getValue()).getSolicitacoes().contains(AppView.getControlUser().getLoginCorrent())
+                && !AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getArestas().containsKey(AppView.getControlUser().getPerfilCorrent().hashCode()
+                + AppView.getControlUser().getLoginCorrent().hashCode())) {
+            if (!AppView.getControlUser().getLoginCorrent().equals(AppView.getControlUser().getPerfilCorrent())
+                    ) {
                 ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().add(AppView.getControlUser().getLoginCorrent());
             }
 
         }
+        
         btnSolicitacao.setStyle("-fx-opacity: 0.5");
         try {
             AppView.getControlUser().saveRegisters();
@@ -370,7 +380,8 @@ public class FXMLPerfilVisitaController implements Initializable {
             User user = (User) ((Vertex) it.next()).getValue();
             if (user.getNome().substring(0, txtPesquisa.getText().length()).equalsIgnoreCase(txtPesquisa.getText())) {
                 try {
-                    if (!user.getDirFoto().equals("")) {
+                    File caminhoImagem = new File(user.getDirFoto());
+                    if (caminhoImagem.exists()) {
                         foto = new Image(user.getDirFoto());
                     } else {
                         foto = new Image("/icon/Person.png");

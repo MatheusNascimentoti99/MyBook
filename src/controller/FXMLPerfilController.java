@@ -151,7 +151,9 @@ public class FXMLPerfilController implements Initializable {
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image imageUser;
         try {
-            if (!AppView.getControlUser().getLoginCorrent().getDirFoto().equals("")) {
+            File caminhoFoto = new File(AppView.getControlUser().getLoginCorrent().getDirFoto());
+            if (caminhoFoto.exists()) {
+
                 imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
                 System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
             } else {
@@ -168,7 +170,8 @@ public class FXMLPerfilController implements Initializable {
                 HBox perfilamigo = new HBox(5);
                 Label nomeAmigo = new Label(amigo.getLogin());
                 try {
-                    if (!amigo.getDirFoto().equals("")) {
+                    File caminhoFoto = new File(amigo.getDirFoto());
+                    if (caminhoFoto.exists()) {
                         imageUser = new Image(amigo.getDirFoto());
 
                     } else {
@@ -253,9 +256,9 @@ public class FXMLPerfilController implements Initializable {
                     Image imagePost;
 
                     String urlImagem = (String) it.next();
-                    System.out.println(urlImagem);
+                    File caminhoImagem = new File(urlImagem);
                     try {
-                        if (urlImagem != null) {
+                        if (caminhoImagem.exists()) {
                             imagePost = new Image(urlImagem);
                         } else {
                             imagePost = new Image("/icon/Empty.png");
@@ -348,7 +351,8 @@ public class FXMLPerfilController implements Initializable {
             int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
                 try {
-                    if (!user.getDirFoto().equals("")) {
+                    File caminhoImagem = new File(user.getDirFoto());
+                    if (caminhoImagem.exists()) {
                         fotoP = new Image(user.getDirFoto());
                     } else {
                         fotoP = new Image("/icon/Person.png");
@@ -385,7 +389,8 @@ public class FXMLPerfilController implements Initializable {
         txtDataNascimento.setText(AppView.getControlUser().getLoginCorrent().getDataNasc());
         pnSobre.setVisible(true);
         Image image;
-        if (AppView.getControlUser().getLoginCorrent().getDirFoto() != null) {
+        File caminhoImagem = new File(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        if (caminhoImagem.exists()) {
             image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
         } else {
             image = new Image("/icon/Person.png");
@@ -418,7 +423,8 @@ public class FXMLPerfilController implements Initializable {
                 Image fotoS;
                 User user = (User) it.next();
                 try {
-                    if (!user.getDirFoto().equals("")) {
+                    File caminhoImagem = new File(user.getDirFoto());
+                    if (caminhoImagem.exists()) {
                         fotoS = new Image(user.getDirFoto());
                     } else {
                         fotoS = new Image("/icon/Person.png");
@@ -447,7 +453,8 @@ public class FXMLPerfilController implements Initializable {
                     Image image;
                     Label nomeAmigo = new Label(user.getLogin());
                     try {
-                        if (!user.getDirFoto().equals("")) {
+                        File caminhoImagem = new File(user.getDirFoto());
+                        if (caminhoImagem.exists()) {
                             image = new Image(user.getDirFoto());
                         } else {
                             image = new Image("/icon/Person.png");

@@ -12,7 +12,8 @@ import java.util.Objects;
  *
  * @author Matheus Nascimento
  */
-public class Edge implements Serializable{
+public class Edge implements Serializable {
+
     private Vertex pre;
     private Vertex corrent;
     private Object peso;
@@ -22,7 +23,7 @@ public class Edge implements Serializable{
         this.corrent = corrent;
         this.peso = peso;
     }
-    
+
     public Vertex getPre() {
         return pre;
     }
@@ -50,8 +51,8 @@ public class Edge implements Serializable{
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 103 * hash + Objects.hashCode(this.pre);
-        hash = 103 * hash + Objects.hashCode(this.corrent);
+        hash = hash + Objects.hashCode(this.pre);
+        hash = hash + Objects.hashCode(this.corrent);
         return hash;
     }
 
@@ -69,6 +70,5 @@ public class Edge implements Serializable{
         final Edge other = (Edge) obj;
         return true;
     }
-    
-    
+
 }

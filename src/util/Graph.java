@@ -97,6 +97,7 @@ public class Graph implements IGraph, Serializable {
 
     @Override
     public Vertex getVertex(Object value) {
+        this.vertices.get(value.hashCode());
         Iterator it = this.vertices();
         while(it.hasNext()){
             Vertex aux = (Vertex) it.next();

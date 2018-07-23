@@ -137,7 +137,8 @@ public class FXMLPerfilController implements Initializable {
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
-
+    @FXML
+    private Pane pnMudarFoto;
     private boolean foto, video;
 
     private ControllerPostagem controlPost;
@@ -292,6 +293,19 @@ public class FXMLPerfilController implements Initializable {
             listPosts.getItems().add(0, campoPostagem);
         }
 
+    }
+
+    @FXML
+    public void mousecimaFoto(Event evento) {
+        fotoPerfil.setStyle("-fx-opacity: 0.5");
+        lblMudaFoto.visibleProperty().set(true);
+
+    }
+
+    @FXML
+    public void mouseForaFoto(Event evento) {
+        fotoPerfil.setStyle("-fx-opacity: 1");
+        lblMudaFoto.visibleProperty().set(false);
     }
 
     @FXML
@@ -577,11 +591,11 @@ public class FXMLPerfilController implements Initializable {
                     videoPost.setFitHeight(150);
                     videoPost.setFitWidth(150);
                     videoPost.setOnMouseEntered((Event event) -> {
-                    videoPost.getMediaPlayer().play();
-                    videoPost.setFitHeight(300);
-                    videoPost.setFitWidth(300);
-                });
-                videoPost.setOnMouseExited((Event event) -> {
+                        videoPost.getMediaPlayer().play();
+                        videoPost.setFitHeight(300);
+                        videoPost.setFitWidth(300);
+                    });
+                    videoPost.setOnMouseExited((Event event) -> {
                         videoPost.getMediaPlayer().pause();
                         videoPost.setFitHeight(150);
                         videoPost.setFitWidth(150);

@@ -33,14 +33,16 @@ import model.User;
 public class FXMLLoginController implements Initializable {
 
     @FXML
-    TextField textoEntrada;
+    private TextField textoEntrada;
     @FXML
-    PasswordField textoSenhaEntrada;
+    private PasswordField textoSenhaEntrada;
     @FXML
-    Button entrar;
+    private Button entrar;
     @FXML
-    Label registrar;
-
+    private Label registrar;
+    @FXML
+    private Label lblErroLogin;
+    
     @FXML
     public void doLogin(ActionEvent event) throws IOException {
                 AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -52,11 +54,8 @@ public class FXMLLoginController implements Initializable {
                     Stage palco = (Stage)((Node)event.getSource()).getScene().getWindow();
                     palco.setScene(cenaPerfil);
                 } else {
-                    /*
-                    implementação futura:
-                    colocar uma caixa de dialogo ao invés do print
-                    */
-                    System.out.println("Usuário ou senha incorretos, tente novamente");
+                    
+                    lblErroLogin.setText("Nome do usuário ou senha está incorreto");
                 }
                 try {
                     AppView.getControlUser().saveRegisters();

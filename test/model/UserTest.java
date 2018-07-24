@@ -14,166 +14,56 @@ import static org.junit.Assert.*;
  * @author Matheus Nascimento
  */
 public class UserTest {
+    private User usuario01;
+    private Postagem postagem, postagem02;
     
-    public UserTest() {
-    }
     
     @Before
     public void setUp() {
-    }
-
-    /**
-     * Test of getDirFoto method, of class User.
-     */
-    @Test
-    public void testGetDirFoto() {
-    }
-
-    /**
-     * Test of setDirFoto method, of class User.
-     */
-    @Test
-    public void testSetDirFoto() {
-    }
-
-    /**
-     * Test of getNome method, of class User.
-     */
-    @Test
-    public void testGetNome() {
-    }
-
-    /**
-     * Test of setNome method, of class User.
-     */
-    @Test
-    public void testSetNome() {
-    }
-
-    /**
-     * Test of getEmail method, of class User.
-     */
-    @Test
-    public void testGetEmail() {
-    }
-
-    /**
-     * Test of setEmail method, of class User.
-     */
-    @Test
-    public void testSetEmail() {
-    }
-
-    /**
-     * Test of getPassword method, of class User.
-     */
-    @Test
-    public void testGetPassword() {
-    }
-
-    /**
-     * Test of setPassword method, of class User.
-     */
-    @Test
-    public void testSetPassword() {
-    }
-
-    /**
-     * Test of getTelefone method, of class User.
-     */
-    @Test
-    public void testGetTelefone() {
-    }
-
-    /**
-     * Test of setTelefone method, of class User.
-     */
-    @Test
-    public void testSetTelefone() {
-    }
-
-    /**
-     * Test of getDataNasc method, of class User.
-     */
-    @Test
-    public void testGetDataNasc() {
-    }
-
-    /**
-     * Test of setDataNasc method, of class User.
-     */
-    @Test
-    public void testSetDataNasc() {
-    }
-
-    /**
-     * Test of getEndereco method, of class User.
-     */
-    @Test
-    public void testGetEndereco() {
-    }
-
-    /**
-     * Test of setEndereco method, of class User.
-     */
-    @Test
-    public void testSetEndereco() {
-    }
-
-    /**
-     * Test of getLogin method, of class User.
-     */
-    @Test
-    public void testGetLogin() {
-    }
-
-    /**
-     * Test of setLogin method, of class User.
-     */
-    @Test
-    public void testSetLogin() {
-    }
-
-    /**
-     * Test of getSolicitacoes method, of class User.
-     */
-    @Test
-    public void testGetSolicitacoes() {
-    }
-
-    /**
-     * Test of setSolicitacoes method, of class User.
-     */
-    @Test
-    public void testSetSolicitacoes() {
-    }
-
-    /**
-     * Test of hashCode method, of class User.
-     */
-    @Test
-    public void testHashCode() {
-    }
-
-    /**
-     * Test of equals method, of class User.
-     */
-    @Test
-    public void testEquals() {
-    }
-
-    /**
-     * Test of getPostagens method, of class User.
-     */
-    @Test
-    public void testGetPostagens() {
-    }
-
-    /**
-     * Test of setPostagens method, of class User.
-     */
-    @Test
-    public void testSetPostagens() {
+        usuario01 = new User("Jose", "jose@gmail", "jose123", "88223344", "10122000", "Feira de santana", "JoseSantos");
+        postagem = new Postagem();
+        postagem02 = new Postagem();
     }
     
+    @Test
+   public void test(){
+      
+      assertEquals("Jose", usuario01.getNome());
+      usuario01.setNome("Fagner");
+      assertNotEquals("Jose", usuario01.getNome());
+      assertEquals("jose@gmail", usuario01.getEmail());
+      usuario01.setEmail("fagner@uefs");
+      assertNotEquals("jose@gmail", usuario01.getEmail());
+      
+      assertNotEquals("jose1234", usuario01.getPassword());
+      usuario01.setPassword("jose1234");
+      assertEquals("jose1234", usuario01.getPassword());
+      
+      assertEquals("88223344", usuario01.getTelefone());
+      usuario01.setTelefone("99112233");
+      assertNotEquals("88223344", usuario01.getTelefone());
+      
+      assertNotEquals("Salvador", usuario01.getEndereco());
+      usuario01.setEndereco("Salvador");
+      assertEquals("Salvador", usuario01.getEndereco());
+      
+      assertEquals("10122000", usuario01.getDataNasc());
+      usuario01.setDataNasc("02031994");
+      assertNotEquals("10122000", usuario01.getDataNasc());
+      
+      assertNotEquals("JoseFerreira", usuario01.getLogin());
+      usuario01.setLogin("JoseFerreira");
+      assertEquals("JoseFerreira", usuario01.getLogin());
+      
+      postagem.setTextoPostagem("Postagem");
+      postagem02.setTextoPostagem("Postagem 02");
+      usuario01.getPostagens().add(postagem);
+      assertEquals(false, usuario01.getPostagens().isEmpty());
+      assertEquals(true, usuario01.getPostagens().contains(postagem));
+      usuario01.getPostagens().add(postagem02);
+      assertEquals(2, usuario01.getPostagens().size());
+      usuario01.getPostagens().remove(postagem);
+      assertEquals(false, usuario01.getPostagens().contains(postagem));
+      assertEquals(true, usuario01.getPostagens().contains(postagem02));
+   }
 }

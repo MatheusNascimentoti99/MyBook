@@ -14,7 +14,7 @@ import org.junit.runners.Suite;
  * @author Matheus Nascimento
  */
 @RunWith(Suite.class)
-@Suite.SuiteClasses({model.AmizadeTest.class, model.IPostagemTest.class, model.UserTest.class, model.PostagemTest.class})
+@Suite.SuiteClasses({model.AmizadeTest.class, model.UserTest.class, model.PostagemTest.class})
 public class ModelSuite {
 
     @Before

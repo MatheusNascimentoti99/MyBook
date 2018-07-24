@@ -25,9 +25,6 @@ public class Vertex implements Serializable{
         this.arestas = arestas;
     }
 
-
-    
-
     public int getKey() {
         return key;
     }

@@ -14,82 +14,49 @@ import static org.junit.Assert.*;
  * @author Matheus Nascimento
  */
 public class PostagemTest {
-    
-    public PostagemTest() {
-    }
+    private Postagem postagem;
+    private String urlVideo01, urlVideo02;
+    private String urlFoto01, urlFoto02;
+    private String textoPost;
     
     @Before
     public void setUp() {
+        postagem = new Postagem();
+        urlVideo01 = "www.youtube.com/programandoEmJava";
+        urlFoto01 = "d:/Usuario/foto.png";
+        urlVideo02 = "c:/Usuario/java.mp4";
+        urlFoto02 = "www.google.com/imagens/imagem.jpg";
+        textoPost = "PostagemTeste";
     }
 
-    /**
-     * Test of getHoraPostagem method, of class Postagem.
-     */
-    @Test
-    public void testGetHoraPostagem() {
-    }
-
-    /**
-     * Test of setHoraPostagem method, of class Postagem.
-     */
-    @Test
-    public void testSetHoraPostagem() {
-    }
-
-    /**
-     * Test of getDataPostagem method, of class Postagem.
-     */
-    @Test
-    public void testGetDataPostagem() {
-    }
-
-    /**
-     * Test of setDataPostagem method, of class Postagem.
-     */
-    @Test
-    public void testSetDataPostagem() {
-    }
-
-    /**
-     * Test of getTextoPostagem method, of class Postagem.
-     */
-    @Test
-    public void testGetTextoPostagem() {
-    }
-
-    /**
-     * Test of setTextoPostagem method, of class Postagem.
-     */
-    @Test
-    public void testSetTextoPostagem() {
-    }
-
-    /**
-     * Test of getUrlImagem method, of class Postagem.
-     */
-    @Test
-    public void testGetUrlImagem() {
-    }
-
-    /**
-     * Test of setUrlImagem method, of class Postagem.
-     */
-    @Test
-    public void testSetUrlImagem() {
-    }
-
-    /**
-     * Test of getUrlVideo method, of class Postagem.
-     */
-    @Test
-    public void testGetUrlVideo() {
-    }
-
-    /**
-     * Test of setUrlVideo method, of class Postagem.
-     */
-    @Test
-    public void testSetUrlVideo() {
-    }
-    
+   @Test
+   public void test(){
+       assertEquals(null, postagem.getTextoPostagem());
+       postagem.setTextoPostagem(textoPost);
+       assertEquals(textoPost, postagem.getTextoPostagem());
+       
+       postagem.getUrlImagem().add(urlFoto02);
+       assertEquals(false, postagem.getUrlImagem().isEmpty());
+       assertNotEquals(true,postagem.getUrlImagem().contains(urlFoto01));
+       postagem.getUrlImagem().add(urlFoto01);
+       assertEquals(true, postagem.getUrlImagem().contains(urlFoto01));
+       assertEquals(2, postagem.getUrlImagem().size());
+       postagem.getUrlImagem().remove(urlFoto02);
+       assertEquals(true, postagem.getUrlImagem().contains(urlFoto01));
+       postagem.getUrlImagem().remove(urlFoto01);
+       assertEquals(true, postagem.getUrlImagem().isEmpty());
+       
+       
+        postagem.getUrlVideo().add(urlVideo02);
+       assertEquals(false, postagem.getUrlVideo().isEmpty());
+       assertNotEquals(true,postagem.getUrlVideo().contains(urlVideo01));
+       postagem.getUrlVideo().add(urlVideo01);
+       assertEquals(true, postagem.getUrlVideo().contains(urlVideo01));
+       assertEquals(2, postagem.getUrlVideo().size());
+       postagem.getUrlVideo().remove(urlVideo02);
+       assertEquals(true, postagem.getUrlVideo().contains(urlVideo01));
+       postagem.getUrlVideo().remove(urlVideo01);
+       assertEquals(true, postagem.getUrlVideo().isEmpty());
+       
+   }
 }

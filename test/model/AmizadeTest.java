@@ -14,26 +14,18 @@ import static org.junit.Assert.*;
  * @author Matheus Nascimento
  */
 public class AmizadeTest {
-    
-    public AmizadeTest() {
-    }
-    
+    private Amizade amizade;
+   
     @Before
     public void setUp() {
-    }
-
-    /**
-     * Test of getAfinidade method, of class Amizade.
-     */
-    @Test
-    public void testGetAfinidade() {
-    }
-
-    /**
-     * Test of setAfinidade method, of class Amizade.
-     */
-    @Test
-    public void testSetAfinidade() {
+        amizade = new Amizade(10);
     }
     
+    @Test
+    public void test(){
+        assertEquals(10,amizade.getAfinidade());
+        amizade.setAfinidade(20);
+        assertNotEquals(10, amizade.getAfinidade());
+        assertEquals(20, amizade.getAfinidade());
+    }
 }

@@ -5,6 +5,7 @@
  */
 package util;
 
+import model.User;
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -15,67 +16,21 @@ import static org.junit.Assert.*;
  */
 public class VertexTest {
     
-    public VertexTest() {
-    }
+
+        private Vertex vertex01, vertex02;
+        private User usuario01, usuario02;
+        
     
     @Before
     public void setUp() {
+        usuario01 = new User("Jose", "jose@gmail", "jose123", "88223344", "10122000", "Feira de santana", "JoseSantos");
+        usuario02 = new User("Antonio", "antonio@gmail", "antonio123", "99223344", "23041999", "Feira de santana", "AntonioFerreira");
+        vertex01 = new Vertex(usuario01.hashCode(), usuario01);
+        vertex02 = new Vertex(usuario02.hashCode(), usuario02);
     }
 
-    /**
-     * Test of getArestas method, of class Vertex.
-     */
     @Test
-    public void testGetArestas() {
+    public void test(){
+        
     }
-
-    /**
-     * Test of setArestas method, of class Vertex.
-     */
-    @Test
-    public void testSetArestas() {
-    }
-
-    /**
-     * Test of getKey method, of class Vertex.
-     */
-    @Test
-    public void testGetKey() {
-    }
-
-    /**
-     * Test of setKey method, of class Vertex.
-     */
-    @Test
-    public void testSetKey() {
-    }
-
-    /**
-     * Test of getValue method, of class Vertex.
-     */
-    @Test
-    public void testGetValue() {
-    }
-
-    /**
-     * Test of setValue method, of class Vertex.
-     */
-    @Test
-    public void testSetValue() {
-    }
-
-    /**
-     * Test of equals method, of class Vertex.
-     */
-    @Test
-    public void testEquals() {
-    }
-
-    /**
-     * Test of hashCode method, of class Vertex.
-     */
-    @Test
-    public void testHashCode() {
-    }
-    
 }

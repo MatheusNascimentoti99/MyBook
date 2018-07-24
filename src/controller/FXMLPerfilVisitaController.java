@@ -233,22 +233,25 @@ public class FXMLPerfilVisitaController implements Initializable {
                 Iterator it = postagem.getUrlVideo().iterator();
                 while (it.hasNext()) {
                     String urlVideo = (String) it.next();
-                    Media media = new Media(urlVideo);
-                    MediaPlayer mediaPlayer = new MediaPlayer(media);
-                    MediaView mediaView = new MediaView(mediaPlayer);
-                    mediaView.setFitHeight(150);
-                    mediaView.setFitWidth(150);
-                    mediaView.setOnMouseEntered((Event event) -> {
-                        mediaPlayer.play();
-                        mediaView.setFitHeight(300);
-                        mediaView.setFitWidth(300);
-                    });
-                    mediaView.setOnMouseExited((Event event) -> {
-                        mediaPlayer.pause();
+                    try {
+                        Media media = new Media(urlVideo);
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        MediaView mediaView = new MediaView(mediaPlayer);
                         mediaView.setFitHeight(150);
                         mediaView.setFitWidth(150);
-                    });
-                    campoPostagem.getChildren().add(mediaView);
+                        mediaView.setOnMouseEntered((Event event) -> {
+                            mediaPlayer.play();
+                            mediaView.setFitHeight(300);
+                            mediaView.setFitWidth(300);
+                        });
+                        mediaView.setOnMouseExited((Event event) -> {
+                            mediaPlayer.pause();
+                            mediaView.setFitHeight(150);
+                            mediaView.setFitWidth(150);
+                        });
+                        campoPostagem.getChildren().add(mediaView);
+                    } catch (RuntimeException ex) {
+                    }
                 }
             }
             ltvPostagens.getItems().add(0, campoPostagem);
@@ -353,7 +356,6 @@ public class FXMLPerfilVisitaController implements Initializable {
             User user = (User) ((Vertex) it.next()).getValue();
             if (user.getNome().substring(0, txtPesquisa.getText().length()).equalsIgnoreCase(txtPesquisa.getText())) {
 
-                
                 ImageView fotoNode = new ImageView();
                 carregarFoto(foto, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);

@@ -105,6 +105,19 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     private Button desVoltar;
 
+    public void carregarFoto(Image imagem, String dir, ImageView imageView) {
+        try {
+            imagem = new Image(dir);
+            if (imagem.isError()) {
+                imagem = new Image("/icon/Person.png");
+            }
+
+        } catch (RuntimeException ex) {
+        }
+        imageView.setImage(imagem);
+
+    }
+
     /**
      * Initializes the controller class.
      */
@@ -115,76 +128,64 @@ public class FXMLPerfilVisitaController implements Initializable {
         lblUserLogin.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent());
 
-        Image imageUserLogin;
+        Image imageUserLogin = null;
 
-        imageUserLogin = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        carregarFoto(imageUserLogin, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvUserLogin);
+        Image imagemPerfilVisit = null;
 
-        if (imageUserLogin.isError()) {
-            imageUserLogin = new Image("/icon/Person.png");
-        }
-        imvUserLogin.setImage(imageUserLogin);
-        Image imagemPerfilVisit;
+        carregarFoto(imagemPerfilVisit, AppView.getControlUser().getPerfilCorrent().getDirFoto(), imvFoto);
 
-        imagemPerfilVisit = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
-
-        if (imagemPerfilVisit.isError()) {
-            imagemPerfilVisit = new Image("/icon/Person.png");
-        }
-        imvFoto.setImage(imagemPerfilVisit);
         Set<Integer> chaves = atual.getArestas().keySet();
 
-        for (Integer chave : chaves) {
-            if (chave != null) {
-                User amigo = (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue();
-                HBox perfilamigo = new HBox(5);
-                Image imageAmigo;
-                Label nomeAmigo = new Label(amigo.getLogin());
+        chaves.stream().filter((chave) -> (chave != null)).map((chave) -> (User) ((Edge) atual.getArestas().get(chave)).getPre().getValue()).map((amigo) -> {
+            HBox perfilamigo = new HBox(5);
+            Image imageAmigo = null;
+            Label nomeAmigo = new Label(amigo.getLogin());
 
-                imageAmigo = new Image(amigo.getDirFoto());
+            ImageView fotoAmigo = new ImageView();
+            carregarFoto(imageAmigo, amigo.getDirFoto(), fotoAmigo);
 
-                if (imageAmigo.isError()) {
-                    imageAmigo = new Image("/icon/Person.png");
-                }
-                ImageView fotoAmigo = new ImageView(imageAmigo);
-                fotoAmigo.setFitHeight(50);
-                fotoAmigo.setFitWidth(50);
-                perfilamigo.getChildren().add(fotoAmigo);
-                perfilamigo.getChildren().add(nomeAmigo);
-                perfilamigo.setOnMouseClicked((Event event) -> {
-                    if (!amigo.equals(AppView.getControlUser().getLoginCorrent())) {
-                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
-                        Parent root = null;
-                        try {
-                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Scene cenaPerfil = new Scene(root);
-                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        palco.setScene(cenaPerfil);
-                        palco.show();
-                    } else {
-                        Parent root = null;
-                        try {
-                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Scene cenaPerfil = new Scene(root);
-                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        palco.setScene(cenaPerfil);
-                        palco.show();
+            fotoAmigo.setFitHeight(50);
+            fotoAmigo.setFitWidth(50);
+            perfilamigo.getChildren().add(fotoAmigo);
+            perfilamigo.getChildren().add(nomeAmigo);
+            perfilamigo.setOnMouseClicked((Event event) -> {
+                if (!amigo.equals(AppView.getControlUser().getLoginCorrent())) {
+                    AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(amigo).getValue());
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                });
-                ltvAmigos.getItems().add(perfilamigo);
-
-                try {
-                    AppView.getControlUser().saveRegisters();
-                } catch (Exception ex) {
-                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    Scene cenaPerfil = new Scene(root);
+                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
+                    palco.show();
+                } else {
+                    Parent root = null;
+                    try {
+                        root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
+                    } catch (IOException ex) {
+                        Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    Scene cenaPerfil = new Scene(root);
+                    Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    palco.setScene(cenaPerfil);
+                    palco.show();
                 }
+            });
+            return perfilamigo;
+        }).map((perfilamigo) -> {
+            ltvAmigos.getItems().add(perfilamigo);
+            return perfilamigo;
+        }).forEachOrdered((_item) -> {
+            try {
+                AppView.getControlUser().saveRegisters();
+            } catch (Exception ex) {
+                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
+        });
         Iterator iterador = AppView.getControlUser().getPerfilCorrent().getPostagens().iterator();
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
@@ -216,17 +217,13 @@ public class FXMLPerfilVisitaController implements Initializable {
             if (!postagem.getUrlImagem().isEmpty()) {
                 Iterator it = postagem.getUrlImagem().iterator();
                 while (it.hasNext()) {
-                    Image imagePost;
+                    Image imagePost = null;
 
                     String urlImagem = (String) it.next();
-                    System.out.println(urlImagem);
 
-                    imagePost = new Image(urlImagem);
+                    ImageView imageView = new ImageView();
+                    carregarFoto(imagePost, urlImagem, imageView);
 
-                    if (imagePost.isError()) {
-                        imagePost = new Image("/icon/Person.png");
-                    }
-                    ImageView imageView = new ImageView(imagePost);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
                     campoPostagem.getChildren().add(imageView);
@@ -271,14 +268,9 @@ public class FXMLPerfilVisitaController implements Initializable {
         desEndereco.setText(AppView.getControlUser().getPerfilCorrent().getEndereco());
         desDataNascimento.setText(AppView.getControlUser().getPerfilCorrent().getDataNasc());
         pnSobre.setVisible(true);
-        Image image;
+        Image image = null;
 
-        image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
-
-        if (image.isError()) {
-            image = new Image("/icon/Person.png");
-        }
-        desFoto.setImage(image);
+        carregarFoto(image, AppView.getControlUser().getPerfilCorrent().getDirFoto(), desFoto);
 
     }
 
@@ -357,17 +349,13 @@ public class FXMLPerfilVisitaController implements Initializable {
         Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
         while (it.hasNext()) {
             HBox perfilPesquisa = new HBox(5);
-            Image foto;
+            Image foto = null;
             User user = (User) ((Vertex) it.next()).getValue();
             if (user.getNome().substring(0, txtPesquisa.getText().length()).equalsIgnoreCase(txtPesquisa.getText())) {
 
-                foto = new Image(user.getDirFoto());
-
-                if (foto.isError()) {
-                    foto = new Image("/icon/Person.png");
-                }
-
-                ImageView fotoNode = new ImageView(foto);
+                
+                ImageView fotoNode = new ImageView();
+                carregarFoto(foto, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());

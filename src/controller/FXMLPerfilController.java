@@ -143,17 +143,32 @@ public class FXMLPerfilController implements Initializable {
 
     private ControllerPostagem controlPost;
 
+    public void carregarFoto(Image imagem, String dir, ImageView imageView) {
+        try {
+            imagem = new Image(dir);
+            if (imagem.isError()) {
+                imagem = new Image("/icon/Person.png");
+            }
+
+        } catch (RuntimeException ex) {
+        }
+        imageView.setImage(imagem);
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controlPost = new ControllerPostagem();
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
-        Image imageUser;
+        Image imageUser = null;
+        try {
+            imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        } catch (RuntimeException ex) {
+        }
 
-        imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-
-        if (imageUser.isError()) {
+        if (imageUser == null || imageUser.isError()) {
             imageUser = new Image("/icon/Person.png");
         }
         fotoPerfil.setImage(imageUser);
@@ -168,6 +183,9 @@ public class FXMLPerfilController implements Initializable {
                     imageUser = new Image(amigo.getDirFoto());
 
                 } catch (RuntimeException exe) {
+                    imageUser = new Image("/icon/Person.png");
+                }
+                if (imageUser.isError()) {
                     imageUser = new Image("/icon/Person.png");
                 }
                 ImageView fotoAmigo = new ImageView(imageUser);
@@ -243,16 +261,9 @@ public class FXMLPerfilController implements Initializable {
             if (!postagem.getUrlImagem().isEmpty()) {
                 Iterator it = postagem.getUrlImagem().iterator();
                 while (it.hasNext()) {
-                    Image imagePost;
-
-                    String urlImagem = (String) it.next();
-                    imagePost = new Image(urlImagem);
-                    if (imagePost.isError()) {
-                        imagePost = new Image("/icon/Person.png");
-                    }
-
-                    System.out.println(imagePost);
-                    ImageView imageView = new ImageView(imagePost);
+                    Image imagePost = null;
+                    ImageView imageView = new ImageView();
+                    carregarFoto(imagePost, (String) it.next(), imageView);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
                     campoPostagem.getChildren().add(imageView);
@@ -337,18 +348,13 @@ public class FXMLPerfilController implements Initializable {
         Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
         while (it.hasNext()) {
             HBox perfilPesquisa = new HBox(5);
-            Image fotoP;
+            Image fotoP = null;
             User user = (User) ((Vertex) it.next()).getValue();
             int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
 
-                fotoP = new Image(user.getDirFoto());
-
-                if (fotoP.isError()) {
-                    fotoP = new Image("/icon/Person.png");
-                }
-
-                ImageView fotoNode = new ImageView(fotoP);
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -375,15 +381,9 @@ public class FXMLPerfilController implements Initializable {
         txtEndereco.setText(AppView.getControlUser().getLoginCorrent().getEndereco());
         txtDataNascimento.setText(AppView.getControlUser().getLoginCorrent().getDataNasc());
         pnSobre.setVisible(true);
-        Image image;
+        Image image = null;
 
-        image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-
-        if (image.isError()) {
-            image = new Image("/icon/Person.png");
-        }
-
-        imvFotoSobre.setImage(image);
+        carregarFoto(image, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvFotoSobre);
 
     }
 
@@ -408,16 +408,12 @@ public class FXMLPerfilController implements Initializable {
             }
             while (it.hasNext()) {
                 HBox perfilSolicita = new HBox(5);
-                Image fotoS;
+                Image fotoS = null;
                 User user = (User) it.next();
+               
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoS, user.getDirFoto(), fotoNode);
 
-                fotoS = new Image(user.getDirFoto());
-
-                if (fotoS.isError()) {
-                    fotoS = new Image("/icon/Person.png");
-                }
-
-                ImageView fotoNode = new ImageView(fotoS);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -434,15 +430,12 @@ public class FXMLPerfilController implements Initializable {
                     AppView.getControlUser().addAmizade(user, AppView.getControlUser().getLoginCorrent());
                     AppView.getControlUser().getLoginCorrent().getSolicitacoes().remove(user);
                     HBox novoamigo = new HBox(5);
-                    Image image;
+                    Image image = null;
                     Label nomeAmigo = new Label(user.getLogin());
 
-                    image = new Image(user.getDirFoto());
-
-                    if (image.isError()) {
-                        image = new Image("/icon/Person.png");
-                    }
-                    ImageView fotoAmigo = new ImageView(image);
+                    
+                    ImageView fotoAmigo = new ImageView();
+                    carregarFoto(image, user.getDirFoto(), fotoAmigo);
                     fotoAmigo.setFitHeight(50);
                     fotoAmigo.setFitWidth(50);
                     novoamigo.getChildren().add(fotoAmigo);

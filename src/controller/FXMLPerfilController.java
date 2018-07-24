@@ -150,11 +150,10 @@ public class FXMLPerfilController implements Initializable {
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image imageUser;
-        try {
 
-            imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
 
-        } catch (RuntimeException exe) {
+        if (imageUser.isError()) {
             imageUser = new Image("/icon/Person.png");
         }
         fotoPerfil.setImage(imageUser);
@@ -247,13 +246,11 @@ public class FXMLPerfilController implements Initializable {
                     Image imagePost;
 
                     String urlImagem = (String) it.next();
-                    try {
-
-                        imagePost = new Image(urlImagem);
-
-                    } catch (RuntimeException exe) {
-                        imagePost = new Image("/icon/Empty.png");
+                    imagePost = new Image(urlImagem);
+                    if (imagePost.isError()) {
+                        imagePost = new Image("/icon/Person.png");
                     }
+
                     System.out.println(imagePost);
                     ImageView imageView = new ImageView(imagePost);
                     imageView.setFitHeight(150);
@@ -264,9 +261,9 @@ public class FXMLPerfilController implements Initializable {
             if (!postagem.getUrlVideo().isEmpty()) {
                 postagem.getUrlVideo().forEach((urlVideo) -> {
                     Media media;
-                    try{
+                    try {
                         media = new Media((String) urlVideo);
-                        
+
                         MediaPlayer mediaPlayer = new MediaPlayer(media);
                         MediaView mediaView = new MediaView(mediaPlayer);
                         mediaView.setFitHeight(150);
@@ -282,8 +279,8 @@ public class FXMLPerfilController implements Initializable {
                             mediaView.setFitWidth(150);
                         });
                         campoPostagem.getChildren().add(mediaView);
-                    }catch(RuntimeException ex){
-                        
+                    } catch (RuntimeException ex) {
+
                     }
                 });
             }
@@ -344,11 +341,10 @@ public class FXMLPerfilController implements Initializable {
             User user = (User) ((Vertex) it.next()).getValue();
             int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
-                try {
 
-                    fotoP = new Image(user.getDirFoto());
+                fotoP = new Image(user.getDirFoto());
 
-                } catch (RuntimeException exe) {
+                if (fotoP.isError()) {
                     fotoP = new Image("/icon/Person.png");
                 }
 
@@ -380,9 +376,10 @@ public class FXMLPerfilController implements Initializable {
         txtDataNascimento.setText(AppView.getControlUser().getLoginCorrent().getDataNasc());
         pnSobre.setVisible(true);
         Image image;
-        try {
-            image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        } catch (Exception ex) {
+
+        image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+
+        if (image.isError()) {
             image = new Image("/icon/Person.png");
         }
 
@@ -413,11 +410,10 @@ public class FXMLPerfilController implements Initializable {
                 HBox perfilSolicita = new HBox(5);
                 Image fotoS;
                 User user = (User) it.next();
-                try {
 
-                    fotoS = new Image(user.getDirFoto());
+                fotoS = new Image(user.getDirFoto());
 
-                } catch (RuntimeException exe) {
+                if (fotoS.isError()) {
                     fotoS = new Image("/icon/Person.png");
                 }
 
@@ -440,11 +436,10 @@ public class FXMLPerfilController implements Initializable {
                     HBox novoamigo = new HBox(5);
                     Image image;
                     Label nomeAmigo = new Label(user.getLogin());
-                    try {
 
-                        image = new Image(user.getDirFoto());
+                    image = new Image(user.getDirFoto());
 
-                    } catch (RuntimeException exe) {
+                    if (image.isError()) {
                         image = new Image("/icon/Person.png");
                     }
                     ImageView fotoAmigo = new ImageView(image);

@@ -116,20 +116,18 @@ public class FXMLPerfilVisitaController implements Initializable {
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent());
 
         Image imageUserLogin;
-        try {
 
-            imageUserLogin = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        imageUserLogin = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
 
-        } catch (RuntimeException exe) {
+        if (imageUserLogin.isError()) {
             imageUserLogin = new Image("/icon/Person.png");
         }
         imvUserLogin.setImage(imageUserLogin);
         Image imagemPerfilVisit;
-        try {
 
-            imagemPerfilVisit = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+        imagemPerfilVisit = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
 
-        } catch (RuntimeException exe) {
+        if (imagemPerfilVisit.isError()) {
             imagemPerfilVisit = new Image("/icon/Person.png");
         }
         imvFoto.setImage(imagemPerfilVisit);
@@ -141,11 +139,10 @@ public class FXMLPerfilVisitaController implements Initializable {
                 HBox perfilamigo = new HBox(5);
                 Image imageAmigo;
                 Label nomeAmigo = new Label(amigo.getLogin());
-                try {
 
-                    imageAmigo = new Image(amigo.getDirFoto());
+                imageAmigo = new Image(amigo.getDirFoto());
 
-                } catch (RuntimeException exe) {
+                if (imageAmigo.isError()) {
                     imageAmigo = new Image("/icon/Person.png");
                 }
                 ImageView fotoAmigo = new ImageView(imageAmigo);
@@ -223,14 +220,12 @@ public class FXMLPerfilVisitaController implements Initializable {
 
                     String urlImagem = (String) it.next();
                     System.out.println(urlImagem);
-                    try {
 
-                        imagePost = new Image(urlImagem);
+                    imagePost = new Image(urlImagem);
 
-                    } catch (RuntimeException exe) {
-                        imagePost = new Image("/icon/Empty.png");
+                    if (imagePost.isError()) {
+                        imagePost = new Image("/icon/Person.png");
                     }
-                    System.out.println(imagePost);
                     ImageView imageView = new ImageView(imagePost);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
@@ -277,10 +272,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         desDataNascimento.setText(AppView.getControlUser().getPerfilCorrent().getDataNasc());
         pnSobre.setVisible(true);
         Image image;
-        File caminhoImagem = new File(AppView.getControlUser().getPerfilCorrent().getDirFoto());
-        if (caminhoImagem.exists()) {
-            image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
-        } else {
+
+        image = new Image(AppView.getControlUser().getPerfilCorrent().getDirFoto());
+
+        if (image.isError()) {
             image = new Image("/icon/Person.png");
         }
         desFoto.setImage(image);
@@ -365,11 +360,10 @@ public class FXMLPerfilVisitaController implements Initializable {
             Image foto;
             User user = (User) ((Vertex) it.next()).getValue();
             if (user.getNome().substring(0, txtPesquisa.getText().length()).equalsIgnoreCase(txtPesquisa.getText())) {
-                try {
 
-                    foto = new Image(user.getDirFoto());
+                foto = new Image(user.getDirFoto());
 
-                } catch (RuntimeException exe) {
+                if (foto.isError()) {
                     foto = new Image("/icon/Person.png");
                 }
 

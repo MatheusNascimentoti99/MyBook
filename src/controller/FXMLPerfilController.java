@@ -121,6 +121,18 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private TextField txtPesquisar;
 
+    @FXML
+    private Button btnArquivos;
+    
+    @FXML
+    private Pane pnArquivos;
+    
+    @FXML
+    private ListView ltvArquivos;
+    
+    @FXML
+    private Button btnVoltarArquivos;
+    
 
     private ControllerPostagem controlPost;
 
@@ -288,6 +300,62 @@ public class FXMLPerfilController implements Initializable {
         }
 
     }
+    
+    @FXML
+    public void verArquivos(Event evento){
+        pnPesquisa.setVisible(false);
+        pnFundo.setVisible(false);
+        ltvArquivos.getItems().clear();
+        Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
+        while (iterador.hasNext()) {
+            Postagem postagem = (Postagem) iterador.next();
+            HBox campoPostagem = new HBox(20);
+            
+            
+
+            if (!postagem.getUrlImagem().isEmpty()) {
+                Iterator it = postagem.getUrlImagem().iterator();
+                while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
+                    Image imagePost = null;
+                    ImageView imageView = new ImageView();
+                    String caminho = (String) it.next();
+                    carregarFotoPostagem(imagePost, caminho, imageView);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(150);
+                    campoPostagem.getChildren().add(imageView);
+                }
+            }
+            if (!postagem.getUrlVideo().isEmpty()) {
+                Iterator it = postagem.getUrlVideo().iterator();
+                while(it.hasNext() && campoPostagem.getChildren().size() < 3){
+                    Media media;
+                    try {
+                        media = new Media((String) it.next());
+
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        MediaView mediaView = new MediaView(mediaPlayer);
+                        mediaView.setFitHeight(150);
+                        mediaView.setFitWidth(150);
+                        mediaView.setOnMouseEntered((Event event) -> {
+                            mediaPlayer.play();
+                            mediaView.setFitHeight(300);
+                            mediaView.setFitWidth(300);
+                        });
+                        mediaView.setOnMouseExited((Event event) -> {
+                            mediaPlayer.pause();
+                            mediaView.setFitHeight(150);
+                            mediaView.setFitWidth(150);
+                        });
+                        campoPostagem.getChildren().add(mediaView);
+                    } catch (RuntimeException ex) {
+
+                    }
+                }
+            }
+            ltvArquivos.getItems().add(0, campoPostagem);
+        }
+        pnArquivos.setVisible(true);
+    }
 
     @FXML
     public void mousecimaFoto(Event evento) {
@@ -378,6 +446,7 @@ public class FXMLPerfilController implements Initializable {
 
     @FXML
     public void voltar(Event evento) {
+        pnArquivos.setVisible(false);
         pnSobre.setVisible(false);
         pnPesquisa.setVisible(false);
         pnFundo.setVisible(true);
@@ -393,7 +462,7 @@ public class FXMLPerfilController implements Initializable {
                 Label aviso = new Label("Sem solicitações de amizade");
                 aviso.alignmentProperty().setValue(Pos.TOP_LEFT);
                 aviso.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
-                        + "    -fx-font-size: 12pt;");
+                        + "    -fx-font-size: 8pt;");
                 ltvSolicitacao.getItems().add(aviso);
             }
             while (it.hasNext()) {

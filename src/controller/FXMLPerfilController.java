@@ -143,23 +143,32 @@ public class FXMLPerfilController implements Initializable {
 
     private ControllerPostagem controlPost;
 
+    public void carregarFoto(Image imagem, String dir, ImageView imageView) {
+        try {
+            imagem = new Image(dir);
+            if (imagem.isError()) {
+                imagem = new Image("/icon/Person.png");
+            }
+
+        } catch (RuntimeException ex) {
+        }
+        imageView.setImage(imagem);
+
+    }
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         controlPost = new ControllerPostagem();
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
-        Image imageUser;
+        Image imageUser = null;
         try {
-            File caminhoFoto = new File(AppView.getControlUser().getLoginCorrent().getDirFoto());
-            if (caminhoFoto.exists()) {
+            imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
+        } catch (RuntimeException ex) {
+        }
 
-                imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-                System.out.println(AppView.getControlUser().getLoginCorrent().getDirFoto());
-            } else {
-                imageUser = new Image("/icon/Person.png");
-            }
-        } catch (RuntimeException exe) {
+        if (imageUser == null || imageUser.isError()) {
             imageUser = new Image("/icon/Person.png");
         }
         fotoPerfil.setImage(imageUser);
@@ -170,14 +179,13 @@ public class FXMLPerfilController implements Initializable {
                 HBox perfilamigo = new HBox(5);
                 Label nomeAmigo = new Label(amigo.getLogin());
                 try {
-                    File caminhoFoto = new File(amigo.getDirFoto());
-                    if (caminhoFoto.exists()) {
-                        imageUser = new Image(amigo.getDirFoto());
 
-                    } else {
-                        imageUser = new Image("/icon/Person.png");
-                    }
+                    imageUser = new Image(amigo.getDirFoto());
+
                 } catch (RuntimeException exe) {
+                    imageUser = new Image("/icon/Person.png");
+                }
+                if (imageUser.isError()) {
                     imageUser = new Image("/icon/Person.png");
                 }
                 ImageView fotoAmigo = new ImageView(imageUser);
@@ -253,45 +261,39 @@ public class FXMLPerfilController implements Initializable {
             if (!postagem.getUrlImagem().isEmpty()) {
                 Iterator it = postagem.getUrlImagem().iterator();
                 while (it.hasNext()) {
-                    Image imagePost;
-
-                    String urlImagem = (String) it.next();
-                    File caminhoImagem = new File(urlImagem);
-                    try {
-                        if (caminhoImagem.exists()) {
-                            imagePost = new Image(urlImagem);
-                        } else {
-                            imagePost = new Image("/icon/Empty.png");
-                        }
-                    } catch (RuntimeException exe) {
-                        imagePost = new Image("/icon/Empty.png");
-                    }
-                    System.out.println(imagePost);
-                    ImageView imageView = new ImageView(imagePost);
+                    Image imagePost = null;
+                    ImageView imageView = new ImageView();
+                    carregarFoto(imagePost, (String) it.next(), imageView);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
                     campoPostagem.getChildren().add(imageView);
                 }
             }
             if (!postagem.getUrlVideo().isEmpty()) {
-                for (Object urlVideo : postagem.getUrlVideo()) {
-                    Media media = new Media((String) urlVideo);
-                    MediaPlayer mediaPlayer = new MediaPlayer(media);
-                    MediaView mediaView = new MediaView(mediaPlayer);
-                    mediaView.setFitHeight(150);
-                    mediaView.setFitWidth(150);
-                    mediaView.setOnMouseEntered((Event event) -> {
-                        mediaPlayer.play();
-                        mediaView.setFitHeight(300);
-                        mediaView.setFitWidth(300);
-                    });
-                    mediaView.setOnMouseExited((Event event) -> {
-                        mediaPlayer.pause();
+                postagem.getUrlVideo().forEach((urlVideo) -> {
+                    Media media;
+                    try {
+                        media = new Media((String) urlVideo);
+
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        MediaView mediaView = new MediaView(mediaPlayer);
                         mediaView.setFitHeight(150);
                         mediaView.setFitWidth(150);
-                    });
-                    campoPostagem.getChildren().add(mediaView);
-                }
+                        mediaView.setOnMouseEntered((Event event) -> {
+                            mediaPlayer.play();
+                            mediaView.setFitHeight(300);
+                            mediaView.setFitWidth(300);
+                        });
+                        mediaView.setOnMouseExited((Event event) -> {
+                            mediaPlayer.pause();
+                            mediaView.setFitHeight(150);
+                            mediaView.setFitWidth(150);
+                        });
+                        campoPostagem.getChildren().add(mediaView);
+                    } catch (RuntimeException ex) {
+
+                    }
+                });
             }
             listPosts.getItems().add(0, campoPostagem);
         }
@@ -346,22 +348,13 @@ public class FXMLPerfilController implements Initializable {
         Iterator it = AppView.getControlUser().getGrafoUsers().vertices();
         while (it.hasNext()) {
             HBox perfilPesquisa = new HBox(5);
-            Image fotoP;
+            Image fotoP = null;
             User user = (User) ((Vertex) it.next()).getValue();
             int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
-                try {
-                    File caminhoImagem = new File(user.getDirFoto());
-                    if (caminhoImagem.exists()) {
-                        fotoP = new Image(user.getDirFoto());
-                    } else {
-                        fotoP = new Image("/icon/Person.png");
-                    }
-                } catch (RuntimeException exe) {
-                    fotoP = new Image("/icon/Person.png");
-                }
 
-                ImageView fotoNode = new ImageView(fotoP);
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -388,14 +381,9 @@ public class FXMLPerfilController implements Initializable {
         txtEndereco.setText(AppView.getControlUser().getLoginCorrent().getEndereco());
         txtDataNascimento.setText(AppView.getControlUser().getLoginCorrent().getDataNasc());
         pnSobre.setVisible(true);
-        Image image;
-        File caminhoImagem = new File(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        if (caminhoImagem.exists()) {
-            image = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        } else {
-            image = new Image("/icon/Person.png");
-        }
-        imvFotoSobre.setImage(image);
+        Image image = null;
+
+        carregarFoto(image, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvFotoSobre);
 
     }
 
@@ -420,20 +408,12 @@ public class FXMLPerfilController implements Initializable {
             }
             while (it.hasNext()) {
                 HBox perfilSolicita = new HBox(5);
-                Image fotoS;
+                Image fotoS = null;
                 User user = (User) it.next();
-                try {
-                    File caminhoImagem = new File(user.getDirFoto());
-                    if (caminhoImagem.exists()) {
-                        fotoS = new Image(user.getDirFoto());
-                    } else {
-                        fotoS = new Image("/icon/Person.png");
-                    }
-                } catch (RuntimeException exe) {
-                    fotoS = new Image("/icon/Person.png");
-                }
+               
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoS, user.getDirFoto(), fotoNode);
 
-                ImageView fotoNode = new ImageView(fotoS);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -450,19 +430,12 @@ public class FXMLPerfilController implements Initializable {
                     AppView.getControlUser().addAmizade(user, AppView.getControlUser().getLoginCorrent());
                     AppView.getControlUser().getLoginCorrent().getSolicitacoes().remove(user);
                     HBox novoamigo = new HBox(5);
-                    Image image;
+                    Image image = null;
                     Label nomeAmigo = new Label(user.getLogin());
-                    try {
-                        File caminhoImagem = new File(user.getDirFoto());
-                        if (caminhoImagem.exists()) {
-                            image = new Image(user.getDirFoto());
-                        } else {
-                            image = new Image("/icon/Person.png");
-                        }
-                    } catch (RuntimeException exe) {
-                        image = new Image("/icon/Person.png");
-                    }
-                    ImageView fotoAmigo = new ImageView(image);
+
+                    
+                    ImageView fotoAmigo = new ImageView();
+                    carregarFoto(image, user.getDirFoto(), fotoAmigo);
                     fotoAmigo.setFitHeight(50);
                     fotoAmigo.setFitWidth(50);
                     novoamigo.getChildren().add(fotoAmigo);

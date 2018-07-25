@@ -73,7 +73,7 @@ public class Graph implements IGraph, Serializable {
             throw new  NullPointerException();
         }
     }
-
+    
     @Override
     public Edge getEdge(Vertex u, Vertex v) { 
         return (Edge) u.getArestas().get(new Edge(u,v, null).hashCode());

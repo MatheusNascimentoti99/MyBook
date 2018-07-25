@@ -5,8 +5,6 @@
  */
 package controller;
 
-import controller.ControllerPostagem;
-import controller.ControllerUser;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -16,9 +14,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
-
-import java.util.LinkedList;
-
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -26,7 +21,6 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -42,7 +36,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -113,7 +106,7 @@ public class FXMLPerfilController implements Initializable {
     private Label txtEndereco;
     @FXML
     private ImageView imvFotoSobre;
-  
+
     @FXML
     private Pane pnPesquisa;
     @FXML
@@ -123,16 +116,15 @@ public class FXMLPerfilController implements Initializable {
 
     @FXML
     private Button btnArquivos;
-    
+
     @FXML
     private Pane pnArquivos;
-    
+
     @FXML
     private ListView ltvArquivos;
-    
+
     @FXML
     private Button btnVoltarArquivos;
-    
 
     private ControllerPostagem controlPost;
 
@@ -149,15 +141,16 @@ public class FXMLPerfilController implements Initializable {
         imageView.setImage(imagem);
 
     }
+
     public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
-            if (imagem.isError() ) {
+            if (imagem.isError()) {
                 imagem = new Image("/icon/Empty.png");
             }
 
         } catch (RuntimeException ex) {
-             imagem = new Image("/icon/Empty.png");
+            imagem = new Image("/icon/Empty.png");
         }
         imageView.setImage(imagem);
 
@@ -230,7 +223,7 @@ public class FXMLPerfilController implements Initializable {
             }
         }
 
-        quantSolisitacao.setText(""+AppView.getControlUser().getLoginCorrent().getSolicitacoes().size());
+        quantSolisitacao.setText("" + AppView.getControlUser().getLoginCorrent().getSolicitacoes().size());
         Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
@@ -300,9 +293,9 @@ public class FXMLPerfilController implements Initializable {
         }
 
     }
-    
+
     @FXML
-    public void verArquivos(Event evento){
+    public void verArquivos(Event evento) {
         pnPesquisa.setVisible(false);
         pnFundo.setVisible(false);
         ltvArquivos.getItems().clear();
@@ -310,8 +303,6 @@ public class FXMLPerfilController implements Initializable {
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
             HBox campoPostagem = new HBox(20);
-            
-            
 
             if (!postagem.getUrlImagem().isEmpty()) {
                 Iterator it = postagem.getUrlImagem().iterator();
@@ -327,7 +318,7 @@ public class FXMLPerfilController implements Initializable {
             }
             if (!postagem.getUrlVideo().isEmpty()) {
                 Iterator it = postagem.getUrlVideo().iterator();
-                while(it.hasNext() && campoPostagem.getChildren().size() < 3){
+                while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
                     Media media;
                     try {
                         media = new Media((String) it.next());

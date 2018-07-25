@@ -228,8 +228,12 @@ public class FXMLPerfilController implements Initializable {
         quantSolisitacao.setText("" + AppView.getControlUser().getLoginCorrent().getSolicitacoes().size());
         Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
         while (iterador.hasNext()) {
+            
             Postagem postagem = (Postagem) iterador.next();
             VBox campoPostagem = new VBox(5);
+            Button btnExcluir = new Button("Excluir");
+            btnExcluir.setAlignment(Pos.TOP_RIGHT);
+            campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(postagem.getTextoPostagem());
             txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -291,6 +295,8 @@ public class FXMLPerfilController implements Initializable {
                     }
                 });
             }
+            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent().getPostagens(), listPosts);
+
             listPosts.getItems().add(0, campoPostagem);
         }
 

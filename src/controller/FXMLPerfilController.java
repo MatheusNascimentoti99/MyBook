@@ -42,6 +42,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.Tooltip;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
@@ -70,13 +71,10 @@ public class FXMLPerfilController implements Initializable {
      */
 
     @FXML
-    private VBox VboxPosts;
+    private Label quantSolisitacao;
     @FXML
     private ListView listPostagem;
-    @FXML
-    private Label fotoPostagem;
-    @FXML
-    private Label videoPostagem;
+
     @FXML
     private ListView listPosts;
     @FXML
@@ -92,27 +90,15 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private Label lblNome;
     @FXML
-    private Label lblSolicitacoes;
-    private Label lblFoto;
-    @FXML
-    private Label labelPostFoto;
-    @FXML
-    private Label labelPostVideo;
-    @FXML
     private ListView ltvAmigos;
     @FXML
     private Pane pnFundo;
-    @FXML
-    private Button btnSobre;
+
     @FXML
     private Pane pnSobre;
     @FXML
     private Button btnVoltar;
-    @FXML
-    private Button btnVoltarPesquisa;
 
-    @FXML
-    private Label lblSair;
     @FXML
     private Label txtNome;
     @FXML
@@ -127,30 +113,39 @@ public class FXMLPerfilController implements Initializable {
     private Label txtEndereco;
     @FXML
     private ImageView imvFotoSobre;
-    @FXML
-    private Button botaoPostar;
-    @FXML
-    private Label lblHome;
+  
     @FXML
     private Pane pnPesquisa;
     @FXML
     private ListView listPesquisa;
     @FXML
     private TextField txtPesquisar;
-    @FXML
-    private Pane pnMudarFoto;
-    private boolean foto, video;
+
 
     private ControllerPostagem controlPost;
 
     public void carregarFoto(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
-            if (imagem.isError()) {
+            if (imagem.isError() || dir == null) {
                 imagem = new Image("/icon/Person.png");
             }
 
         } catch (RuntimeException ex) {
+            imagem = new Image("/icon/Person.png");
+        }
+        imageView.setImage(imagem);
+
+    }
+    public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
+        try {
+            imagem = new Image(dir);
+            if (imagem.isError() ) {
+                imagem = new Image("/icon/Empty.png");
+            }
+
+        } catch (RuntimeException ex) {
+             imagem = new Image("/icon/Empty.png");
         }
         imageView.setImage(imagem);
 
@@ -163,15 +158,8 @@ public class FXMLPerfilController implements Initializable {
         lblNome.setText(AppView.getControlUser().getLoginCorrent().getLogin());
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image imageUser = null;
-        try {
-            imageUser = new Image(AppView.getControlUser().getLoginCorrent().getDirFoto());
-        } catch (RuntimeException ex) {
-        }
 
-        if (imageUser == null || imageUser.isError()) {
-            imageUser = new Image("/icon/Person.png");
-        }
-        fotoPerfil.setImage(imageUser);
+        carregarFoto(imageUser, AppView.getControlUser().getLoginCorrent().getDirFoto(), fotoPerfil);
         Set<Integer> chaves = atual.getArestas().keySet();
         for (Integer chave : chaves) {
             if (chave != null) {
@@ -230,6 +218,7 @@ public class FXMLPerfilController implements Initializable {
             }
         }
 
+        quantSolisitacao.setText(""+AppView.getControlUser().getLoginCorrent().getSolicitacoes().size());
         Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
@@ -263,7 +252,7 @@ public class FXMLPerfilController implements Initializable {
                 while (it.hasNext()) {
                     Image imagePost = null;
                     ImageView imageView = new ImageView();
-                    carregarFoto(imagePost, (String) it.next(), imageView);
+                    carregarFotoPostagem(imagePost, (String) it.next(), imageView);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
                     campoPostagem.getChildren().add(imageView);
@@ -405,12 +394,13 @@ public class FXMLPerfilController implements Initializable {
                 aviso.alignmentProperty().setValue(Pos.TOP_LEFT);
                 aviso.setStyle("-fx-font-family: \"Segoe UI\", Helvetica, Arial, sans-serif;\n"
                         + "    -fx-font-size: 12pt;");
+                ltvSolicitacao.getItems().add(aviso);
             }
             while (it.hasNext()) {
                 HBox perfilSolicita = new HBox(5);
                 Image fotoS = null;
                 User user = (User) it.next();
-               
+
                 ImageView fotoNode = new ImageView();
                 carregarFoto(fotoS, user.getDirFoto(), fotoNode);
 
@@ -433,7 +423,6 @@ public class FXMLPerfilController implements Initializable {
                     Image image = null;
                     Label nomeAmigo = new Label(user.getLogin());
 
-                    
                     ImageView fotoAmigo = new ImageView();
                     carregarFoto(image, user.getDirFoto(), fotoAmigo);
                     fotoAmigo.setFitHeight(50);
@@ -508,8 +497,7 @@ public class FXMLPerfilController implements Initializable {
                     Image image = SwingFXUtils.toFXImage(bufferedImage, null);
                     fotoPerfil.setImage(image);
                     ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).setDirFoto(file.toURI().toURL().toString());
-                    AppView.getControlUser().getLoginCorrent().setDirFoto(file.getAbsolutePath());
-                    System.out.println(file.getAbsolutePath());
+                    AppView.getControlUser().getLoginCorrent().setDirFoto(file.toURI().toURL().toString());
                 }
 
             }
@@ -621,7 +609,7 @@ public class FXMLPerfilController implements Initializable {
                     imageView.setFitHeight(25);
                     imageView.setFitWidth(25);
                     listPostagem.getItems().add(imageView);
-                    controlPost.getUrlsFoto().add("file:" + file.getAbsolutePath());
+                    controlPost.getUrlsFoto().add(file.toURI().toURL().toString());
                 }
             }
         } catch (IOException | RuntimeException ex) {

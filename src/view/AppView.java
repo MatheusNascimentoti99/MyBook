@@ -36,7 +36,6 @@ public class AppView extends Application {
         
         Scene cena = new Scene(root);
         primaryStage.setScene(cena);
-        
         primaryStage.show();
     }
 

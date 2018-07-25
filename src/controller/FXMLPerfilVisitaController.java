@@ -113,6 +113,21 @@ public class FXMLPerfilVisitaController implements Initializable {
             }
 
         } catch (RuntimeException ex) {
+            imagem = new Image("/icon/Person.png");
+        }
+        imageView.setImage(imagem);
+
+    }
+
+    public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
+        try {
+            imagem = new Image(dir);
+            if (imagem.isError()) {
+                imagem = new Image("/icon/Empty.png");
+            }
+
+        } catch (RuntimeException ex) {
+            imagem = new Image("/icon/Empty.png");
         }
         imageView.setImage(imagem);
 
@@ -222,7 +237,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                     String urlImagem = (String) it.next();
 
                     ImageView imageView = new ImageView();
-                    carregarFoto(imagePost, urlImagem, imageView);
+                    carregarFotoPostagem(imagePost, urlImagem, imageView);
 
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
@@ -279,14 +294,8 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     @FXML
     private void enviarSolicitacao(Event evento) {
-        if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()
-        ).getValue()).getSolicitacoes().contains(AppView.getControlUser().getLoginCorrent())
-                && !AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getArestas().containsKey(AppView.getControlUser().getPerfilCorrent().hashCode()
-                        + AppView.getControlUser().getLoginCorrent().hashCode())) {
-            if (!AppView.getControlUser().getLoginCorrent().equals(AppView.getControlUser().getPerfilCorrent())) {
-                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().add(AppView.getControlUser().getLoginCorrent());
-            }
-
+        if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().contains(AppView.getControlUser().getLoginCorrent())) {
+            ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().add(AppView.getControlUser().getLoginCorrent());
         }
 
         btnSolicitacao.setStyle("-fx-opacity: 0.5");

@@ -50,9 +50,9 @@ public class Edge implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = hash + Objects.hashCode(this.pre);
-        hash = hash + Objects.hashCode(this.corrent);
+        int hash = 0;
+        hash = hash + pre.hashCode();
+        hash = hash + corrent.hashCode();
         return hash;
     }
 

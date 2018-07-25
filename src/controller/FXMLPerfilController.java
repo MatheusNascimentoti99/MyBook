@@ -14,6 +14,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -21,6 +22,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -572,6 +574,14 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, LinkedList postagens, ListView postagensView) {
+        excluir.setOnMouseClicked((Event event) -> {
+            postagens.remove(postagem);
+            listPosts.getItems().remove(postagemView);
+        });
+    }
+
+    @FXML
     public void postagem(Event evento) {
         if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
             Postagem postagem = new Postagem();
@@ -580,6 +590,9 @@ public class FXMLPerfilController implements Initializable {
             postagem.getUrlVideo().addAll(controlPost.getUrlsVideo());
 
             VBox campoPostagem = new VBox(5);
+            Button btnExcluir = new Button("Excluir");
+            btnExcluir.setAlignment(Pos.TOP_RIGHT);
+            campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(post.getText());
             txtPost.alignmentProperty().setValue(Pos.TOP_LEFT);
             DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -637,6 +650,8 @@ public class FXMLPerfilController implements Initializable {
             ((User) AppView.getControlUser().getGrafoUsers().
                     getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(postagem);
             listPosts.getItems().add(0, campoPostagem);
+            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent().getPostagens(), listPosts);
+
         } else {
             System.out.println("Sem nada para se postar");
         }

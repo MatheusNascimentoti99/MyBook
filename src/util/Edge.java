@@ -44,7 +44,7 @@ public class Edge implements Serializable {
         return peso;
     }
 
-    public void setPeso(int peso) {
+    public void setPeso(Object peso) {
         this.peso = peso;
     }
 

@@ -15,8 +15,6 @@ import static org.junit.Assert.*;
  */
 public class ControllerUserTest {
     
-    public ControllerUserTest() {
-    }
     
     @Before
     public void setUp() {

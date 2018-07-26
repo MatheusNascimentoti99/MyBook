@@ -145,6 +145,13 @@ public class FXMLPerfilVisitaController implements Initializable {
 
         Image imageUserLogin = null;
 
+        if(AppView.getControlUser().getGrafoUsers().getEdge(
+                AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent())
+                , AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()))
+                != null){
+            btnSolicitacao.setVisible(false);
+            
+        }
         carregarFoto(imageUserLogin, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvUserLogin);
         Image imagemPerfilVisit = null;
 

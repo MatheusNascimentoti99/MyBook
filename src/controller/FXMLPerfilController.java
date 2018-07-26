@@ -644,8 +644,8 @@ public class FXMLPerfilController implements Initializable {
      */
     public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, User user, ListView postagensView) {
         excluir.setOnMouseClicked((Event event) -> {
-            user.getPostagens().remove(postagem);
             ((User)AppView.getControlUser().getGrafoUsers().getVertex(user).getValue()).getPostagens().remove(postagem);
+            user.getPostagens().remove(postagem);
             listPosts.getItems().remove(postagemView);
             try {
                 AppView.getControlUser().saveRegisters();

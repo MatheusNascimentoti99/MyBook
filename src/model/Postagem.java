@@ -8,6 +8,7 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.Objects;
 
 /**
  *
@@ -64,6 +65,42 @@ public class Postagem implements Serializable{
 
     public void setUrlVideo(LinkedList urlVideo) {
         this.urlVideo = urlVideo;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Postagem other = (Postagem) obj;
+        if (!Objects.equals(this.textoPostagem, other.textoPostagem)) {
+            return false;
+        }
+        if (!Objects.equals(this.urlImagem, other.urlImagem)) {
+            return false;
+        }
+        if (!Objects.equals(this.urlVideo, other.urlVideo)) {
+            return false;
+        }
+        if (!Objects.equals(this.dataPostagem, other.dataPostagem)) {
+            return false;
+        }
+        if (!Objects.equals(this.horaPostagem, other.horaPostagem)) {
+            return false;
+        }
+        return true;
     }
 
  

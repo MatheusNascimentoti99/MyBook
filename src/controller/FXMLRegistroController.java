@@ -187,6 +187,11 @@ public class FXMLRegistroController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     * @throws IOException
+     */
     @FXML
     public void cancelar(Event evento) throws IOException {
         //Altera a cena para o login
@@ -206,6 +211,13 @@ public class FXMLRegistroController implements Initializable {
         return true;
     }
 
+    /**
+     *
+     * @param senha
+     * @param valor
+     * @param registroOk
+     * @return
+     */
     public boolean checkSenha(PasswordField senha, int valor, boolean registroOk) {
         if (senha.getText().length() < valor) {
             registroOk = false;
@@ -214,6 +226,11 @@ public class FXMLRegistroController implements Initializable {
         return true;
     }
 
+    /**
+     *
+     * @param evento
+     * @throws IOException
+     */
     @FXML
     public void registrar(Event evento) throws IOException {
 

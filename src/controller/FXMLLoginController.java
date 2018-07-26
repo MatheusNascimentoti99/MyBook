@@ -44,6 +44,11 @@ public class FXMLLoginController implements Initializable {
     @FXML
     private Label lblErroLogin;
     
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void doLogin(ActionEvent event) throws IOException {
                 AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -65,6 +70,11 @@ public class FXMLLoginController implements Initializable {
 
     }
     
+    /**
+     *
+     * @param event
+     * @throws IOException
+     */
     @FXML
     public void registrar(Event event) throws IOException{
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());

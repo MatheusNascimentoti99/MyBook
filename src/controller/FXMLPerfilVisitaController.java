@@ -105,6 +105,12 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     private Button desVoltar;
 
+    /**
+     *
+     * @param imagem
+     * @param dir
+     * @param imageView
+     */
     public void carregarFoto(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
@@ -119,6 +125,12 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param imagem
+     * @param dir
+     * @param imageView
+     */
     public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
@@ -135,6 +147,8 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     /**
      * Initializes the controller class.
+     * @param url
+     * @param rb
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -281,6 +295,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         // TODO
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void sobre(Event evento) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -313,6 +331,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void home(Event evento) {
         Parent root = null;
@@ -327,6 +349,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         palco.show();
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void logout(Event evento) {
         AppView.getControlUser().setLoginCorrent(null);
@@ -347,6 +373,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         palco.show();
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void voltar(Event evento) {
         pnPesquisa.setVisible(false);
@@ -354,12 +384,20 @@ public class FXMLPerfilVisitaController implements Initializable {
         pnFundo.setVisible(true);
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void clickPesquisar(Event evento) {
         if (txtPesquisa.getText().equals("Pesquisar"));
         txtPesquisa.setText("");
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void pesquisar(ActionEvent evento) {
         pnFundo.setVisible(false);

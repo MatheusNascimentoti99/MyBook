@@ -130,6 +130,12 @@ public class FXMLPerfilController implements Initializable {
 
     private ControllerPostagem controlPost;
 
+    /**
+     *
+     * @param imagem
+     * @param dir
+     * @param imageView
+     */
     public void carregarFoto(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
@@ -144,6 +150,12 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param imagem
+     * @param dir
+     * @param imageView
+     */
     public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
@@ -303,6 +315,10 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void verArquivos(Event evento) {
         pnPesquisa.setVisible(false);
@@ -357,6 +373,10 @@ public class FXMLPerfilController implements Initializable {
         pnArquivos.setVisible(true);
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void mousecimaFoto(Event evento) {
         fotoPerfil.setStyle("-fx-opacity: 0.5");
@@ -364,18 +384,30 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void mouseForaFoto(Event evento) {
         fotoPerfil.setStyle("-fx-opacity: 1");
         lblMudaFoto.visibleProperty().set(false);
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void clickPesquisar(Event evento) {
         if (txtPesquisar.getText().equals("Pesquisar"));
         txtPesquisar.setText("");
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void logout(Event evento) {
         AppView.getControlUser().setLoginCorrent(null);
@@ -396,6 +428,10 @@ public class FXMLPerfilController implements Initializable {
         palco.show();
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void pesquisar(ActionEvent evento) {
         pnFundo.setVisible(false);
@@ -426,6 +462,10 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void sobre(Event evento) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -444,6 +484,10 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void voltar(Event evento) {
         pnArquivos.setVisible(false);
@@ -519,6 +563,12 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param novoamigo
+     * @param evento
+     * @param user
+     */
     public void abrirPerfil(HBox novoamigo, Event evento, User user) {
         novoamigo.setOnMouseClicked((Event event) -> {
             if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
@@ -548,6 +598,10 @@ public class FXMLPerfilController implements Initializable {
         });
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void abrir(Event evento) {
         FileChooser fileChooser = new FileChooser();
@@ -581,6 +635,14 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param postagemView
+     * @param excluir
+     * @param postagem
+     * @param postagens
+     * @param postagensView
+     */
     public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, LinkedList postagens, ListView postagensView) {
         excluir.setOnMouseClicked((Event event) -> {
             postagens.remove(postagem);
@@ -588,6 +650,10 @@ public class FXMLPerfilController implements Initializable {
         });
     }
 
+    /**
+     *
+     * @param evento
+     */
     @FXML
     public void postagem(Event evento) {
         if (!listPostagem.getItems().isEmpty() || post.getText().length() > 0) {
@@ -674,6 +740,10 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    /**
+     *
+     * @param evento
+     */
     public void postagemFoto(Event evento) {
         FileChooser fileChooser = new FileChooser();
 
@@ -700,6 +770,11 @@ public class FXMLPerfilController implements Initializable {
         }
     }
 
+    /**
+     *
+     * @param evento
+     * @throws MalformedURLException
+     */
     public void postagemVideo(Event evento) throws MalformedURLException {
         FileChooser filechooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterAVI = new FileChooser.ExtensionFilter("AVI files (*.avi)", "*.AVI");

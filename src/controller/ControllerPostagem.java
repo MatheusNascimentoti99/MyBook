@@ -1,37 +1,53 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controller;
 
 import java.util.LinkedList;
 
 /**
- *
- * @author Usuário 01
+ *A classe <b>ControllerPostagem</b> faz o gerenciamento da escolha de arquivos que o usuário poderá postar.
+ * @author Matheus Nascimento e Elvis Serafim
+ * 
  */
 public class ControllerPostagem {
     private LinkedList urlsVideo;
     private LinkedList urlsFoto;
 
+    /**
+     *
+     */
     public ControllerPostagem() {
         urlsFoto = new LinkedList();
         urlsVideo = new LinkedList();
     }
 
+    /**
+     *
+     * @return
+     */
     public LinkedList getUrlsVideo() {
         return urlsVideo;
     }
 
+    /**
+     *
+     * @param urlsVideo
+     */
     public void setUrlsVideo(LinkedList urlsVideo) {
         this.urlsVideo = urlsVideo;
     }
 
+    /**
+     *
+     * @return
+     */
     public LinkedList getUrlsFoto() {
         return urlsFoto;
     }
 
+    /**
+     *
+     * @param urlsFoto
+     */
     public void setUrlsFoto(LinkedList urlsFoto) {
         this.urlsFoto = urlsFoto;
     }

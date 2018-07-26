@@ -24,10 +24,6 @@ public class AppView extends Application {
         return controlUser;
     }
 
-    public static void setControlUser(ControllerUser controlUser) {
-        AppView.controlUser = controlUser;
-    }
-
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -36,6 +32,7 @@ public class AppView extends Application {
         
         Scene cena = new Scene(root);
         primaryStage.setScene(cena);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 

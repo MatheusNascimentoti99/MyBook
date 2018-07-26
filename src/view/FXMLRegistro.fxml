@@ -20,12 +20,36 @@
   <children>
     <Pane layoutX="0.0" layoutY="0.0" prefHeight="400.0" prefWidth="600.0">
       <children>
-        <TextField id="userName" fx:id="txtUserName" layoutX="30.0" layoutY="145.0" prefWidth="200.0" />
-        <TextField id="dataNascimento" fx:id="txtDataNascimento" layoutX="349.0" layoutY="146.0" prefWidth="200.0" promptText="" text="" />
-        <TextField id="nomeCompleto" fx:id="txtNomeCompleto" layoutX="30.0" layoutY="200.0" prefWidth="200.0" />
-        <TextField id="endereco" fx:id="txtEndereco" layoutX="347.0" layoutY="200.0" prefWidth="200.0" />
-        <TextField id="telefone" fx:id="txtTelefone" layoutX="347.0" layoutY="252.0" prefWidth="200.0" />
-        <TextField id="email" fx:id="txtEmail" layoutX="30.0" layoutY="301.0" prefWidth="200.0" />
+        <TextField id="userName" fx:id="txtUserName" layoutX="30.0" layoutY="145.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="Insira um novo nome de usuário" />
+          </tooltip>
+        </TextField>
+        <TextField id="dataNascimento" fx:id="txtDataNascimento" layoutX="349.0" layoutY="146.0" prefWidth="200.0" promptText="" text="">
+          <tooltip>
+            <Tooltip text="Insira sua data de nascimento" />
+          </tooltip>
+        </TextField>
+        <TextField id="nomeCompleto" fx:id="txtNomeCompleto" layoutX="30.0" layoutY="200.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="insira seu nome completo" />
+          </tooltip>
+        </TextField>
+        <TextField id="endereco" fx:id="txtEndereco" layoutX="347.0" layoutY="200.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="Insira seu endereço" />
+          </tooltip>
+        </TextField>
+        <TextField id="telefone" fx:id="txtTelefone" layoutX="347.0" layoutY="252.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="Insira seu número de telefone" />
+          </tooltip>
+        </TextField>
+        <TextField id="email" fx:id="txtEmail" layoutX="30.0" layoutY="301.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="Insira seu email" />
+          </tooltip>
+        </TextField>
         <Button fx:id="botaoPronto" contentDisplay="RIGHT" defaultButton="false" layoutX="379.0" layoutY="323.0" mnemonicParsing="false" onAction="#registrar" opacity="0.85" prefHeight="51.630859375" prefWidth="136.0" styleClass="mudarBotao" text="PRONTO" textFill="WHITE">
           <effect>
             <Reflection bottomOpacity="0.6428571428571428" fraction="0.11507936507936506" topOpacity="0.10317460317460317" />
@@ -55,7 +79,11 @@
         <Label font="$x1" layoutX="347.0" layoutY="127.0" text="Data nascimento:" />
         <Label font="$x1" layoutX="347.0" layoutY="184.0" text="Endereço:" />
         <Label font="$x1" layoutX="347.0" layoutY="235.0" mnemonicParsing="false" text="Telefone:" />
-        <PasswordField id="senha" fx:id="passSenha" layoutX="30.0" layoutY="252.0" prefWidth="200.0" />
+        <PasswordField id="senha" fx:id="passSenha" layoutX="30.0" layoutY="252.0" prefWidth="200.0">
+          <tooltip>
+            <Tooltip text="Insira uma senha com no mínimo 8 caracteres" />
+          </tooltip>
+        </PasswordField>
         <Label font="$x1" layoutX="30.0" layoutY="333.0" prefWidth="256.0" text="" textFill="RED" />
         <Label layoutX="490.0" layoutY="11.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="34.0" prefWidth="102.0" text="MyBook" textFill="#007f58d3">
           <font>

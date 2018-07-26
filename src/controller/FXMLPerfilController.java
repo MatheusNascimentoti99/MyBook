@@ -231,7 +231,8 @@ public class FXMLPerfilController implements Initializable {
             
             Postagem postagem = (Postagem) iterador.next();
             VBox campoPostagem = new VBox(5);
-            Button btnExcluir = new Button("Excluir");
+            Button btnExcluir = new Button("Apagar");
+            btnExcluir.setPrefSize(5, 5);
             btnExcluir.setAlignment(Pos.TOP_RIGHT);
             campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(postagem.getTextoPostagem());
@@ -596,7 +597,8 @@ public class FXMLPerfilController implements Initializable {
             postagem.getUrlVideo().addAll(controlPost.getUrlsVideo());
 
             VBox campoPostagem = new VBox(5);
-            Button btnExcluir = new Button("Excluir");
+            Button btnExcluir = new Button("Apagar");
+            btnExcluir.setPrefSize(5, 5);
             btnExcluir.setAlignment(Pos.TOP_RIGHT);
             campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(post.getText());

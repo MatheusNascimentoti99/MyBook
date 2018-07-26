@@ -1,14 +1,17 @@
-
 package controller;
 
 import java.util.LinkedList;
 
 /**
- *A classe <b>ControllerPostagem</b> faz o gerenciamento da escolha de arquivos que o usuário poderá postar.
+ * A classe <b>ControllerPostagem</b> faz o gerenciamento da escolha de arquivos
+ * que o usuário poderá postar.
+ *
  * @author Matheus Nascimento e Elvis Serafim
- * 
+ * @since Jul 2018
+ * @version 1.0
  */
 public class ControllerPostagem {
+
     private LinkedList urlsVideo;
     private LinkedList urlsFoto;
 
@@ -22,7 +25,7 @@ public class ControllerPostagem {
 
     /**
      *
-     * @return
+     * @return Lista de vídeos anexados em uma postagem.
      */
     public LinkedList getUrlsVideo() {
         return urlsVideo;
@@ -30,26 +33,10 @@ public class ControllerPostagem {
 
     /**
      *
-     * @param urlsVideo
-     */
-    public void setUrlsVideo(LinkedList urlsVideo) {
-        this.urlsVideo = urlsVideo;
-    }
-
-    /**
-     *
-     * @return
+     * @return Lista de imagens anexadas em uma postagem.
      */
     public LinkedList getUrlsFoto() {
         return urlsFoto;
     }
 
-    /**
-     *
-     * @param urlsFoto
-     */
-    public void setUrlsFoto(LinkedList urlsFoto) {
-        this.urlsFoto = urlsFoto;
-    }
-    
 }

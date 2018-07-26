@@ -6,11 +6,14 @@
 package util;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
  *
- * @author Matheus Nascimento
+ * A classe <b>Edge</b> é responsavel para criar uma adjacência entre dois vertices.
+ *
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
  */
 public class Edge implements Serializable {
 

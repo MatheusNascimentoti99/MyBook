@@ -10,9 +10,13 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 /**
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>User</b> é utilizada para gravar os dados de um usuário.
+     *
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 public class User implements Serializable{
     private  String nome;
     private  String email;
@@ -114,9 +118,7 @@ public class User implements Serializable{
     
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 2 * hash + Objects.hashCode(this.login);
-        return hash;
+        return login.hashCode();
     }
 
     @Override

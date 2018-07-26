@@ -10,8 +10,8 @@ import java.util.Iterator;
 
 /**
  *
- * @author Matheus Nascimento e Elvis Nascimento Implementação retirada da aula
- * 08 de Estruturas de Dados, Profº Dr. João Rocha.
+ * @author Matheus Nascimento e Elvis Nascimento
+ * Implementação baseada na aula 08 de Estruturas de Dados, Prof. Dr. João Rocha.
  */
 public class HashTable implements IHashTable, Serializable {
 

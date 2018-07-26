@@ -53,13 +53,14 @@ import util.Vertex;
 import view.AppView;
 
 /**
- * FXML Controller class
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>FXMLPerfilController</b> faz o gerenciamento do arquivo FXMLPerfil.
+     *
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 public class FXMLPerfilController implements Initializable {
-
-    ControllerUser controlUser;
     /**
      * Initializes the controller class.
      */

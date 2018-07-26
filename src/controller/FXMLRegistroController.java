@@ -29,10 +29,13 @@ import javafx.util.converter.DateTimeStringConverter;
 import view.AppView;
 
 /**
- * FXML Controller class
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>FXMLRegistroController</b> faz o gerenciamento do arquivo FXMLRegistro.
+     *
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 public class FXMLRegistroController implements Initializable {
 
     private final String styleError = "-fx-background-color: #EEEE00;";
@@ -64,7 +67,7 @@ public class FXMLRegistroController implements Initializable {
      * Código retirado da página: https://pastebin.com/HNzmC2tu.
      * Utilizado para criar campo de texto adequado para o preenchimento do telefone.
      * @author Paulo Henrique Luvisoto - paulobitfranca@gmail.com
-     * @param textField 
+     * @param textField Campo de texto a ser formatado
      */
     public static void mascaraTelefone(TextField textField){
        

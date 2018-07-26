@@ -11,9 +11,13 @@ import java.util.LinkedList;
 import java.util.Objects;
 
 /**
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>Postagem</b> Contém todos os dados necessários para a realização de uma postagem.
+     *
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 
 public class Postagem implements Serializable{
     private String textoPostagem;

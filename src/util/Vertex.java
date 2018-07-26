@@ -5,7 +5,14 @@ import java.util.HashMap;
 import java.util.Objects;
 import model.User;
 
-
+/**
+ *
+ * A classe <b>Vertex</b> é responsavel pela criação e manutenção de um nó do grafo.
+ *
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ */
 public class Vertex implements Serializable{
 
     private int key;

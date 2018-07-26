@@ -12,11 +12,14 @@ import model.User;
 import util.Vertex;
 import util.Graph;
 
-    /**
-     *
-     * @author Matheus Nascimento e Elvis Serafim
-     */
-    public class ControllerUser {
+/**
+ * A classe <b>ControllerUser</b> faz o gerenciamento dos usuários. Manipulando o grafo e gerenciando o usuário que está conectado.
+ *
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ */
+public class ControllerUser {
 
     private User loginCorrent;
     private Graph grafoUsers;
@@ -31,15 +34,16 @@ import util.Graph;
 
     /**
      *
-     * @return
+     * @return Retorna o grafo que contém todos os usuários cadastrados no sistema.
      */
     public Graph getGrafoUsers() {
         return grafoUsers;
     }
 
     /**
-     *
-     * @return
+     *Pega o usuário que está atualmente com o perfil aberto.
+     * @return Retorna o usuário que está sendo visitado.
+     * 
      */
     public User getPerfilCorrent() {
         return perfilCorrent;
@@ -47,16 +51,16 @@ import util.Graph;
 
     /**
      *
-     * @param perfilCorrent
+     * @param perfilCorrent Novo usuário a ser visitado.
      */
     public void setPerfilCorrent(User perfilCorrent) {
         this.perfilCorrent = perfilCorrent;
     }
 
     /**
-     *
-     * @param novo
-     * @return
+     *<b>checkRegistred</b> Verifica se o novo usuário já está registrado no sistema.
+     * @param novo Novo usuário a ser registrado.
+     * @return Retorna <i>true</i> se o usuário já está registrado, caso contrário retorna <i>false</i>.
      */
     public boolean checkRegistred(User novo) {
         try {
@@ -65,10 +69,10 @@ import util.Graph;
             return false;
         }
     }
-    
+
     /**
      *
-     * @return
+     * @return Retorna o usuário que está acessando o MyBook atualmente.
      */
     public User getLoginCorrent() {
         return loginCorrent;
@@ -76,15 +80,15 @@ import util.Graph;
 
     /**
      *
-     * @param loginCorrent
+     * @param loginCorrent Altera o usuário que acessará o MyBook.
      */
     public void setLoginCorrent(User loginCorrent) {
         this.loginCorrent = loginCorrent;
     }
 
     /**
-     *
-     * @param local
+     *Alterar foto do perfil do usuário que está acessando o MyBook.
+     * @param local Caminho para acessar a nova foto do usuário.
      */
     public void alterarFoto(String local) {
         loginCorrent.setDirFoto(local);
@@ -203,7 +207,7 @@ import util.Graph;
         } else {
             return false;
         }
-        
+
     }
 
     /**

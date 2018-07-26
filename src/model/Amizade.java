@@ -8,9 +8,12 @@ package model;
 import java.io.Serializable;
 
 /**
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>Amizade</b> é utilizado para dar alguns atributos que podem influênciar na amizade entre dois usuários.
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 public class Amizade implements Serializable{
     private int afinidade;
 

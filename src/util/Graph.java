@@ -10,9 +10,13 @@ import java.util.HashSet;
 import java.util.Iterator;
 
 /**
- *
- * @author Matheus Nascimento
- */
+     *
+     * A classe <b>Grafo</b> é a estrutura de dados responvavel por manter as relações entre um conjunto de objetos.
+     *
+     * @author Matheus Nascimento e Elvis Serafim
+     * @since Jul 2018
+     * @version 1.0
+     */
 public class Graph implements IGraph, Serializable {
     private HashTable vertices;
     private HashSet<Edge> arestas;

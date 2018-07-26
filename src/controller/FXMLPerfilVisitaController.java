@@ -48,9 +48,12 @@ import util.Vertex;
 import view.AppView;
 
 /**
- * FXML Controller class
  *
- * @author Matheus Nascimento
+ * A classe <b>FXMLPerfilVisitaController</b> faz o gerenciamento do arquivo FXMLPerfilVisita.
+ *
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
  */
 public class FXMLPerfilVisitaController implements Initializable {
 
@@ -167,7 +170,7 @@ public class FXMLPerfilVisitaController implements Initializable {
 
         if (AppView.getControlUser().getGrafoUsers().getEdge(
                 AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()),
-                 AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()))
+                AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()))
                 != null) {
             btnSolicitacao.setVisible(false);
 

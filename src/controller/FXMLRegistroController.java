@@ -288,7 +288,7 @@ public class FXMLRegistroController implements Initializable {
             registroOk = false;
             passSenha.setStyle(styleError);
         }
-        if (checkRegistro(txtDataNascimento, 8, registroOk)) {
+        if (checkRegistro(txtDataNascimento, 10, registroOk)) {
             dataNasc = txtDataNascimento.getText();
             txtDataNascimento.setStyle(styleAcept);
         } else {

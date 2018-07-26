@@ -323,17 +323,16 @@ public class FXMLPerfilController implements Initializable {
         pnPesquisa.setVisible(false);
         pnFundo.setVisible(false);
         ltvArquivos.getItems().clear();
-        Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
+        Iterator iterador = ((User)AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().iterator();
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
             HBox campoPostagem = new HBox(20);
 
             if (!postagem.getUrlImagem().isEmpty()) {
-                Iterator it = postagem.getUrlImagem().iterator();
-                while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
+                for (Object o :postagem.getUrlImagem()) {
                     Image imagePost = null;
                     ImageView imageView = new ImageView();
-                    String caminho = (String) it.next();
+                    String caminho = (String) o;
                     carregarFotoPostagem(imagePost, caminho, imageView);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
@@ -345,6 +344,7 @@ public class FXMLPerfilController implements Initializable {
                 while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
                     Media media;
                     try {
+                        
                         media = new Media((String) it.next());
 
                         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -367,6 +367,7 @@ public class FXMLPerfilController implements Initializable {
                     }
                 }
             }
+            
             ltvArquivos.getItems().add(0, campoPostagem);
         }
         pnArquivos.setVisible(true);

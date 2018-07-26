@@ -51,13 +51,13 @@
         </Button>
         <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" onAction="#sobre" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="10.7109375" radius="4.897972470238095" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="10.79594494047619" radius="4.919224330357142" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Button>
-        <Button fx:id="btnArquivos" contentDisplay="CENTER" effect="$x1" layoutX="14.0" layoutY="193.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" prefHeight="27.0" prefWidth="93.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
+        <Button fx:id="btnArquivos" contentDisplay="CENTER" effect="$x1" layoutX="14.0" layoutY="193.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" onAction="#verArquivos" prefHeight="27.0" prefWidth="93.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>
@@ -117,6 +117,21 @@
       <stylesheets>
         <URL value="@fxmlperfil.css" />
       </stylesheets>
+    </Pane>
+    <Pane fx:id="pnArquivos" focusTraversable="true" layoutX="0.0" layoutY="17.0" prefHeight="582.0" prefWidth="732.0" visible="false">
+      <children>
+        <Button id="btnVoltar" fx:id="btnVoltarArquivos" layoutX="9.0" layoutY="34.0" mnemonicParsing="false" onAction="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="" visible="true">
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </Button>
+        <ListView fx:id="ltvArquivos" layoutX="44.0" layoutY="69.0" prefHeight="517.169921875" prefWidth="643.0" />
+        <Label layoutX="68.0" layoutY="39.0" text="Arquivos">
+          <font>
+            <Font name="Arial Rounded MT Bold" size="20.0" />
+          </font>
+        </Label>
+      </children>
     </Pane>
   </children>
   <stylesheets>

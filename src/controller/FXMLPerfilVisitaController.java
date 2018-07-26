@@ -54,12 +54,6 @@ import view.AppView;
 public class FXMLPerfilVisitaController implements Initializable {
 
     @FXML
-    private Button btnSobre;
-    @FXML
-    private Button btnArquivos;
-    @FXML
-    private Label lblLogout;
-    @FXML
     private ImageView imvFoto;
     @FXML
     private Label lblNome;
@@ -83,8 +77,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     private ListView ltvPesquisa;
     @FXML
     private Button btnVoltar;
-    @FXML
-    private Label lblHome;
+
 
     @FXML
     private Label desNome;
@@ -104,6 +97,18 @@ public class FXMLPerfilVisitaController implements Initializable {
     private Pane pnSobre;
     @FXML
     private Button desVoltar;
+    
+    @FXML
+    private Button btnArquivos;
+
+    @FXML
+    private Pane pnArquivos;
+
+    @FXML
+    private ListView ltvArquivos;
+
+    @FXML
+    private Button btnVoltarArquivos;
 
     /**
      *
@@ -293,6 +298,59 @@ public class FXMLPerfilVisitaController implements Initializable {
             ltvPostagens.getItems().add(0, campoPostagem);
         }
         // TODO
+    }
+    @FXML
+    public void verArquivos(Event evento) {
+        pnPesquisa.setVisible(false);
+        pnFundo.setVisible(false);
+        ltvArquivos.getItems().clear();
+        Iterator iterador = ((User)AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getPostagens().iterator();
+        while (iterador.hasNext()) {
+            Postagem postagem = (Postagem) iterador.next();
+            HBox campoPostagem = new HBox(20);
+
+            if (!postagem.getUrlImagem().isEmpty()) {
+                Iterator it = postagem.getUrlImagem().iterator();
+                for (Object o :postagem.getUrlImagem()) {
+                    Image imagePost = null;
+                    ImageView imageView = new ImageView();
+                    String caminho = (String) o;
+                    carregarFotoPostagem(imagePost, caminho, imageView);
+                    imageView.setFitHeight(150);
+                    imageView.setFitWidth(150);
+                    campoPostagem.getChildren().add(imageView);
+                }
+            }
+            if (!postagem.getUrlVideo().isEmpty()) {
+                Iterator it = postagem.getUrlVideo().iterator();
+                while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
+                    Media media;
+                    try {
+                        media = new Media((String) it.next());
+
+                        MediaPlayer mediaPlayer = new MediaPlayer(media);
+                        MediaView mediaView = new MediaView(mediaPlayer);
+                        mediaView.setFitHeight(150);
+                        mediaView.setFitWidth(150);
+                        mediaView.setOnMouseEntered((Event event) -> {
+                            mediaPlayer.play();
+                            mediaView.setFitHeight(300);
+                            mediaView.setFitWidth(300);
+                        });
+                        mediaView.setOnMouseExited((Event event) -> {
+                            mediaPlayer.pause();
+                            mediaView.setFitHeight(150);
+                            mediaView.setFitWidth(150);
+                        });
+                        campoPostagem.getChildren().add(mediaView);
+                    } catch (RuntimeException ex) {
+
+                    }
+                }
+            }
+            ltvArquivos.getItems().add(0, campoPostagem);
+        }
+        pnArquivos.setVisible(true);
     }
 
     /**

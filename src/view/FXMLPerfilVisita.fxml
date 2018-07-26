@@ -51,7 +51,7 @@
         </Button>
         <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" onAction="#sobre" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="10.79594494047619" radius="4.919224330357142" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="10.838448660714285" radius="4.929850260416666" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
@@ -125,12 +125,12 @@
             <URL value="@fxmlperfil.css" />
           </stylesheets>
         </Button>
-        <ListView fx:id="ltvArquivos" layoutX="44.0" layoutY="69.0" prefHeight="517.169921875" prefWidth="643.0" />
         <Label layoutX="68.0" layoutY="39.0" text="Arquivos">
           <font>
             <Font name="Arial Rounded MT Bold" size="20.0" />
           </font>
         </Label>
+        <TilePane fx:id="tpArquivos" layoutX="44.0" layoutY="69.0" prefHeight="517.169921875" prefWidth="645.0" />
       </children>
     </Pane>
   </children>

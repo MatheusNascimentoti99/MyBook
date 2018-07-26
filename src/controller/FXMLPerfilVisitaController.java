@@ -35,6 +35,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
@@ -78,7 +79,6 @@ public class FXMLPerfilVisitaController implements Initializable {
     @FXML
     private Button btnVoltar;
 
-
     @FXML
     private Label desNome;
     @FXML
@@ -97,7 +97,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     private Pane pnSobre;
     @FXML
     private Button desVoltar;
-    
+
     @FXML
     private Button btnArquivos;
 
@@ -105,7 +105,7 @@ public class FXMLPerfilVisitaController implements Initializable {
     private Pane pnArquivos;
 
     @FXML
-    private ListView ltvArquivos;
+    private TilePane tpArquivos;
 
     @FXML
     private Button btnVoltarArquivos;
@@ -152,6 +152,7 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     /**
      * Initializes the controller class.
+     *
      * @param url
      * @param rb
      */
@@ -164,12 +165,12 @@ public class FXMLPerfilVisitaController implements Initializable {
 
         Image imageUserLogin = null;
 
-        if(AppView.getControlUser().getGrafoUsers().getEdge(
-                AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent())
-                , AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()))
-                != null){
+        if (AppView.getControlUser().getGrafoUsers().getEdge(
+                AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()),
+                 AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()))
+                != null) {
             btnSolicitacao.setVisible(false);
-            
+
         }
         carregarFoto(imageUserLogin, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvUserLogin);
         Image imagemPerfilVisit = null;
@@ -299,33 +300,35 @@ public class FXMLPerfilVisitaController implements Initializable {
         }
         // TODO
     }
+
     @FXML
     public void verArquivos(Event evento) {
         pnPesquisa.setVisible(false);
         pnFundo.setVisible(false);
-        ltvArquivos.getItems().clear();
-        Iterator iterador = ((User)AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getPostagens().iterator();
+        tpArquivos.getChildren().clear();
+        tpArquivos.setHgap(10);
+        tpArquivos.setVgap(10);
+        Iterator iterador = ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getPostagens().iterator();
         while (iterador.hasNext()) {
             Postagem postagem = (Postagem) iterador.next();
-            HBox campoPostagem = new HBox(20);
 
             if (!postagem.getUrlImagem().isEmpty()) {
-                Iterator it = postagem.getUrlImagem().iterator();
-                for (Object o :postagem.getUrlImagem()) {
+                for (Object o : postagem.getUrlImagem()) {
                     Image imagePost = null;
                     ImageView imageView = new ImageView();
                     String caminho = (String) o;
                     carregarFotoPostagem(imagePost, caminho, imageView);
                     imageView.setFitHeight(150);
                     imageView.setFitWidth(150);
-                    campoPostagem.getChildren().add(imageView);
+                    tpArquivos.getChildren().add(imageView);
                 }
             }
             if (!postagem.getUrlVideo().isEmpty()) {
                 Iterator it = postagem.getUrlVideo().iterator();
-                while (it.hasNext() && campoPostagem.getChildren().size() < 3) {
+                while (it.hasNext()) {
                     Media media;
                     try {
+
                         media = new Media((String) it.next());
 
                         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -334,21 +337,19 @@ public class FXMLPerfilVisitaController implements Initializable {
                         mediaView.setFitWidth(150);
                         mediaView.setOnMouseEntered((Event event) -> {
                             mediaPlayer.play();
-                            mediaView.setFitHeight(300);
-                            mediaView.setFitWidth(300);
                         });
                         mediaView.setOnMouseExited((Event event) -> {
                             mediaPlayer.pause();
                             mediaView.setFitHeight(150);
                             mediaView.setFitWidth(150);
                         });
-                        campoPostagem.getChildren().add(mediaView);
+                        tpArquivos.getChildren().add(mediaView);
                     } catch (RuntimeException ex) {
 
                     }
                 }
             }
-            ltvArquivos.getItems().add(0, campoPostagem);
+
         }
         pnArquivos.setVisible(true);
     }
@@ -437,6 +438,8 @@ public class FXMLPerfilVisitaController implements Initializable {
      */
     @FXML
     public void voltar(Event evento) {
+        pnArquivos.setVisible(false);
+
         pnPesquisa.setVisible(false);
         pnSobre.setVisible(false);
         pnFundo.setVisible(true);
@@ -458,6 +461,7 @@ public class FXMLPerfilVisitaController implements Initializable {
      */
     @FXML
     public void pesquisar(ActionEvent evento) {
+        pnArquivos.setVisible(false);
         pnFundo.setVisible(false);
         btnVoltar.setVisible(true);
         ltvPesquisa.getItems().clear();

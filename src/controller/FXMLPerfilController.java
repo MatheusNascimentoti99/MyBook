@@ -240,11 +240,10 @@ public class FXMLPerfilController implements Initializable {
         quantSolisitacao.setText("" + AppView.getControlUser().getLoginCorrent().getSolicitacoes().size());
         Iterator iterador = AppView.getControlUser().getLoginCorrent().getPostagens().iterator();
         while (iterador.hasNext()) {
-            
+
             Postagem postagem = (Postagem) iterador.next();
             VBox campoPostagem = new VBox(5);
             Button btnExcluir = new Button("Apagar");
-            btnExcluir.setPrefSize(5, 5);
             btnExcluir.setAlignment(Pos.TOP_RIGHT);
             campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(postagem.getTextoPostagem());
@@ -308,7 +307,7 @@ public class FXMLPerfilController implements Initializable {
                     }
                 });
             }
-            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent().getPostagens(), listPosts);
+            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent(), listPosts);
 
             listPosts.getItems().add(0, campoPostagem);
         }
@@ -640,13 +639,19 @@ public class FXMLPerfilController implements Initializable {
      * @param postagemView
      * @param excluir
      * @param postagem
-     * @param postagens
+     * @param user
      * @param postagensView
      */
-    public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, LinkedList postagens, ListView postagensView) {
+    public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, User user, ListView postagensView) {
         excluir.setOnMouseClicked((Event event) -> {
-            postagens.remove(postagem);
+            user.getPostagens().remove(postagem);
+            ((User)AppView.getControlUser().getGrafoUsers().getVertex(user).getValue()).getPostagens().remove(postagem);
             listPosts.getItems().remove(postagemView);
+            try {
+                AppView.getControlUser().saveRegisters();
+            } catch (Exception ex) {
+                Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
 
@@ -664,7 +669,6 @@ public class FXMLPerfilController implements Initializable {
 
             VBox campoPostagem = new VBox(5);
             Button btnExcluir = new Button("Apagar");
-            btnExcluir.setPrefSize(5, 5);
             btnExcluir.setAlignment(Pos.TOP_RIGHT);
             campoPostagem.getChildren().add(btnExcluir);
             Label txtPost = new Label(post.getText());
@@ -724,7 +728,7 @@ public class FXMLPerfilController implements Initializable {
             ((User) AppView.getControlUser().getGrafoUsers().
                     getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(postagem);
             listPosts.getItems().add(0, campoPostagem);
-            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent().getPostagens(), listPosts);
+            excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent(), listPosts);
 
         } else {
             System.out.println("Sem nada para se postar");

@@ -13,7 +13,10 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -53,14 +56,16 @@ import util.Vertex;
 import view.AppView;
 
 /**
-     *
-     * A classe <b>FXMLPerfilController</b> faz o gerenciamento do arquivo FXMLPerfil.
-     *
-     * @author Matheus Nascimento e Elvis Serafim
-     * @since Jul 2018
-     * @version 1.0
-     */
+ *
+ * A classe <b>FXMLPerfilController</b> faz o gerenciamento do arquivo
+ * FXMLPerfil.
+ *
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ */
 public class FXMLPerfilController implements Initializable {
+
     /**
      * Initializes the controller class.
      */
@@ -314,6 +319,8 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
+    
+
     /**
      *
      * @param evento
@@ -431,6 +438,7 @@ public class FXMLPerfilController implements Initializable {
      */
     @FXML
     public void pesquisar(ActionEvent evento) {
+       // Queue fila = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
         pnArquivos.setVisible(false);
         pnFundo.setVisible(false);
         pnSobre.setVisible(false);

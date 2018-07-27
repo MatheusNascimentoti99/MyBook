@@ -17,6 +17,9 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.animation.Timeline;
+import javafx.animation.Transition;
+import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -41,6 +44,7 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import model.Postagem;
 import model.User;
 import util.Edge;
@@ -49,7 +53,8 @@ import view.AppView;
 
 /**
  *
- * A classe <b>FXMLPerfilVisitaController</b> faz o gerenciamento do arquivo FXMLPerfilVisita.
+ * A classe <b>FXMLPerfilVisitaController</b> faz o gerenciamento do arquivo
+ * FXMLPerfilVisita.
  *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018
@@ -299,9 +304,37 @@ public class FXMLPerfilVisitaController implements Initializable {
                     }
                 }
             }
+            Button compartilhar = new Button("Compartilhar");
+            compartilhar(compartilhar, postagem);
+            campoPostagem.getChildren().add(compartilhar);
             ltvPostagens.getItems().add(0, campoPostagem);
+
         }
         // TODO
+    }
+
+    public void compartilhar(Button compartilhar, Postagem post) {
+        compartilhar.setOnMouseClicked(new EventHandler() {
+            @Override
+            public void handle(Event event) {
+                
+                Postagem postCompar = new Postagem();
+                postCompar.setUrlVideo(post.getUrlVideo());
+                postCompar.setUrlImagem(post.getUrlImagem());
+                postCompar.setHoraPostagem(new Date());
+                postCompar.setDataPostagem(new Date());
+                postCompar.setTextoPostagem(post.getTextoPostagem());
+                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(0, postCompar);
+                AppView.getControlUser().getLoginCorrent().getPostagens().add(0, postCompar);
+                try {
+                    AppView.getControlUser().saveRegisters();
+                } catch (Exception ex) {
+                    Logger.getLogger(FXMLPerfilVisitaController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+
+            }
+        });
+
     }
 
     @FXML

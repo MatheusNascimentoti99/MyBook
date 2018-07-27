@@ -60,7 +60,7 @@
         </Label>
         <Button fx:id="btnArquivos" contentDisplay="CENTER" layoutX="14.0" layoutY="176.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" onAction="#verArquivos" prefHeight="27.0" prefWidth="105.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
           <effect>
-            <DropShadow color="#74ff33" height="10.870326450892858" radius="4.93781970796131" width="10.880952380952381" />
+            <DropShadow color="#74ff33" height="10.87563941592262" radius="4.93914794921875" width="10.880952380952381" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
@@ -137,7 +137,23 @@
     <Pane fx:id="pnPesquisa" focusTraversable="true" layoutX="0.0" layoutY="27.0" prefHeight="601.0" prefWidth="739.0" styleClass="fundo" visible="false">
       <children>
         <ListView fx:id="listPesquisa" layoutX="127.0" layoutY="16.0" onEditCommit="#pesquisar" onEditStart="#pesquisar" prefHeight="363.0" prefWidth="485.0" visible="true" />
-        <Button id="btnVoltar" fx:id="btnVoltarPesquisa" layoutX="6.0" layoutY="-8.0" mnemonicParsing="false" onAction="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="" visible="true">
+        <Button id="btnVoltar" fx:id="btnVoltarPesquisa" layoutX="6.0" layoutY="1.0" mnemonicParsing="false" onAction="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="" visible="true">
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </Button>
+        <Button id="btnGrafoLargura" font="$x1" layoutX="6.0" layoutY="61.0" mnemonicParsing="false" onMouseClicked="#percorrerLargura" prefHeight="20.0" prefWidth="120.0" styleClass="fundo" text="Por proximidade">
+          <effect>
+            <ColorAdjust hue="0.6106870229007633" saturation="0.13740458015267176" />
+          </effect>
+          <stylesheets>
+            <URL value="@fxmlperfil.css" />
+          </stylesheets>
+        </Button>
+        <Button id="btnGrafoLargura" font="$x1" layoutX="6.0" layoutY="93.0" minHeight="16.79998779296875" mnemonicParsing="false" onMouseClicked="#pesquisar" prefHeight="20.0" prefWidth="120.0" styleClass="fundo" text="Normal">
+          <effect>
+            <ColorAdjust hue="0.6106870229007633" saturation="0.13740458015267176" />
+          </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
           </stylesheets>

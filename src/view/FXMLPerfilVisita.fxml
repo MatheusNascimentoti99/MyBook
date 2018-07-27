@@ -51,7 +51,7 @@
         </Button>
         <Button fx:id="btnSobre" layoutX="14.0" layoutY="166.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="24.0" mnemonicParsing="false" onAction="#sobre" prefHeight="26.830078125" prefWidth="93.0" styleClass="optionVisita" text="Sobre">
           <effect>
-            <DropShadow color="#74ff33" height="10.838448660714285" radius="4.929850260416666" width="10.880952380952381" fx:id="x1" />
+            <DropShadow color="#74ff33" height="10.859700520833332" radius="4.935163225446429" width="10.880952380952381" fx:id="x1" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />
@@ -93,7 +93,7 @@
         <URL value="@fxmlregistro.css" />
       </stylesheets>
     </Pane>
-    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="-5.0" layoutY="0.0" prefHeight="620.0" prefWidth="736.0" styleClass="fundo" visible="false">
+    <Pane fx:id="pnSobre" disable="false" focusTraversable="true" layoutX="-5.0" layoutY="34.0" prefHeight="586.0" prefWidth="736.0" styleClass="fundo" visible="false">
       <children>
         <Label font="$x2" layoutX="43.0" layoutY="139.0" text="Nome:" />
         <Label font="$x2" layoutX="43.0" layoutY="171.0" text="E-mail:" />
@@ -118,7 +118,7 @@
         <URL value="@fxmlperfil.css" />
       </stylesheets>
     </Pane>
-    <Pane fx:id="pnArquivos" focusTraversable="true" layoutX="0.0" layoutY="17.0" prefHeight="582.0" prefWidth="732.0" visible="false">
+    <Pane fx:id="pnArquivos" focusTraversable="true" layoutX="0.0" layoutY="30.0" prefHeight="569.0" prefWidth="732.0" visible="false">
       <children>
         <Button id="btnVoltar" fx:id="btnVoltarArquivos" layoutX="9.0" layoutY="34.0" mnemonicParsing="false" onAction="#voltar" prefHeight="24.0" prefWidth="24.0" styleClass="voltar" text="" visible="true">
           <stylesheets>

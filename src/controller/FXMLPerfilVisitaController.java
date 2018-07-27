@@ -325,7 +325,7 @@ public class FXMLPerfilVisitaController implements Initializable {
                 postCompar.setDataPostagem(new Date());
                 postCompar.setTextoPostagem(post.getTextoPostagem());
                 ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(0, postCompar);
-                AppView.getControlUser().getLoginCorrent().getPostagens().add(0, postCompar);
+                AppView.getControlUser().getLoginCorrent().getPostagens().add(postCompar);
                 try {
                     AppView.getControlUser().saveRegisters();
                 } catch (Exception ex) {

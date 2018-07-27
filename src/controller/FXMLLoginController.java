@@ -56,7 +56,7 @@ public class FXMLLoginController implements Initializable {
      * @throws IOException
      */
     @FXML
-    public void doLogin(ActionEvent event) throws IOException {
+    public void doLogin(Event event) throws IOException {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
         String login = textoEntrada.getText();
         String senha = String.valueOf(textoSenhaEntrada.getText());

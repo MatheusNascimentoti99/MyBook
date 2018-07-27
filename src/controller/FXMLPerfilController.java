@@ -24,6 +24,7 @@ import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -69,7 +70,6 @@ public class FXMLPerfilController implements Initializable {
     /**
      * Initializes the controller class.
      */
-
     @FXML
     private Label quantSolisitacao;
     @FXML
@@ -121,8 +121,6 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private TextField txtPesquisar;
 
-    @FXML
-    private Button btnArquivos;
 
     @FXML
     private Pane pnArquivos;
@@ -130,8 +128,7 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private TilePane tpArquivos;
 
-    @FXML
-    private Button btnVoltarArquivos;
+ 
 
     private ControllerPostagem controlPost;
 
@@ -319,8 +316,6 @@ public class FXMLPerfilController implements Initializable {
 
     }
 
-    
-
     /**
      *
      * @param evento
@@ -432,13 +427,41 @@ public class FXMLPerfilController implements Initializable {
         palco.show();
     }
 
+    @FXML
+    public void percorrerLargura(Event event) {
+
+        listPesquisa.getItems().clear();
+        HashSet visitados = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
+        Iterator it = visitados.iterator();
+        while (it.hasNext()) {
+            HBox perfilPesquisa = new HBox(5);
+            Image fotoP = null;
+            User user = (User) ((Vertex) it.next()).getValue();
+            int tamanho = txtPesquisar.getText().length() < user.getNome().length() ? txtPesquisar.getText().length() : user.getNome().length();
+            if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
+
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
+                fotoNode.setFitHeight(50);
+                fotoNode.setFitWidth(50);
+                Label nome = new Label(user.getLogin());
+                perfilPesquisa.getChildren().add(fotoNode);
+                perfilPesquisa.getChildren().add(nome);
+                abrirPerfil(perfilPesquisa, event, user);
+
+                listPesquisa.getItems().add(perfilPesquisa);
+
+            }
+        }
+
+    }
+
     /**
      *
      * @param evento
      */
     @FXML
-    public void pesquisar(ActionEvent evento) {
-       // Queue fila = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
+    public void pesquisar(Event evento) {
         pnArquivos.setVisible(false);
         pnFundo.setVisible(false);
         pnSobre.setVisible(false);
@@ -560,6 +583,7 @@ public class FXMLPerfilController implements Initializable {
 
                 });
                 ltvSolicitacao.getItems().add(perfilSolicita);
+                quantSolisitacao.setText("" + ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getSolicitacoes().size());
 
             }
             pnSolicitacao.setVisible(true);

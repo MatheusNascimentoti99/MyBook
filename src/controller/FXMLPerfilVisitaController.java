@@ -12,7 +12,9 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
@@ -317,7 +319,7 @@ public class FXMLPerfilVisitaController implements Initializable {
         compartilhar.setOnMouseClicked(new EventHandler() {
             @Override
             public void handle(Event event) {
-                
+
                 Postagem postCompar = new Postagem();
                 postCompar.setUrlVideo(post.getUrlVideo());
                 postCompar.setUrlImagem(post.getUrlImagem());
@@ -491,12 +493,41 @@ public class FXMLPerfilVisitaController implements Initializable {
         txtPesquisa.setText("");
     }
 
+    @FXML
+    public void percorrerLargura(Event event) {
+
+        ltvPesquisa.getItems().clear();
+        LinkedList visitados = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
+        Iterator it = visitados.iterator();
+        while (it.hasNext()) {
+            HBox perfilPesquisa = new HBox(5);
+            Image fotoP = null;
+            User user = (User) ((Vertex) it.next()).getValue();
+            int tamanho = txtPesquisa.getText().length() < user.getNome().length() ? txtPesquisa.getText().length() : user.getNome().length();
+            if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisa.getText())) {
+
+                ImageView fotoNode = new ImageView();
+                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
+                fotoNode.setFitHeight(50);
+                fotoNode.setFitWidth(50);
+                Label nome = new Label(user.getLogin());
+                perfilPesquisa.getChildren().add(fotoNode);
+                perfilPesquisa.getChildren().add(nome);
+                abrirPerfil(perfilPesquisa, user);
+
+                ltvPesquisa.getItems().add(perfilPesquisa);
+
+            }
+        }
+
+    }
+
     /**
      *
      * @param evento
      */
     @FXML
-    public void pesquisar(ActionEvent evento) {
+    public void pesquisar(Event evento) {
         pnArquivos.setVisible(false);
         pnFundo.setVisible(false);
         btnVoltar.setVisible(true);
@@ -515,38 +546,41 @@ public class FXMLPerfilVisitaController implements Initializable {
                 Label nome = new Label(user.getLogin());
                 perfilPesquisa.getChildren().add(fotoNode);
                 perfilPesquisa.getChildren().add(nome);
-
-                perfilPesquisa.setOnMouseClicked((Event event) -> {
-                    if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
-                        AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
-                        Parent root = null;
-                        try {
-                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Scene cenaPerfil = new Scene(root);
-                        Stage palco = (Stage) ((Node) evento.getSource()).getScene().getWindow();
-                        palco.setScene(cenaPerfil);
-                        palco.show();
-                    } else {
-                        Parent root = null;
-                        try {
-                            root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
-                        } catch (IOException ex) {
-                            Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
-                        }
-                        Scene cenaPerfil = new Scene(root);
-                        Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                        palco.setScene(cenaPerfil);
-                        palco.show();
-                    }
-                });
+                abrirPerfil(perfilPesquisa, user);
                 ltvPesquisa.getItems().add(perfilPesquisa);
             }
         }
         pnPesquisa.setVisible(true);
 
+    }
+
+    public void abrirPerfil(HBox perfilPesquisa, User user) {
+        perfilPesquisa.setOnMouseClicked((Event event) -> {
+            if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
+                AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfilVisita.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene cenaPerfil = new Scene(root);
+                Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                palco.setScene(cenaPerfil);
+                palco.show();
+            } else {
+                Parent root = null;
+                try {
+                    root = FXMLLoader.load(getClass().getResource("/view/FXMLPerfil.fxml"));
+                } catch (IOException ex) {
+                    Logger.getLogger(FXMLPerfilController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                Scene cenaPerfil = new Scene(root);
+                Stage palco = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                palco.setScene(cenaPerfil);
+                palco.show();
+            }
+        });
     }
 
 }

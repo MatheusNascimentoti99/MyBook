@@ -431,7 +431,7 @@ public class FXMLPerfilController implements Initializable {
     public void percorrerLargura(Event event) {
 
         listPesquisa.getItems().clear();
-        HashSet visitados = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
+        LinkedList visitados = AppView.getControlUser().getGrafoUsers().percorrerLargura(AppView.getControlUser().getLoginCorrent());
         Iterator it = visitados.iterator();
         while (it.hasNext()) {
             HBox perfilPesquisa = new HBox(5);

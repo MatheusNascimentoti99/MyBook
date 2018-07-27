@@ -47,20 +47,21 @@ public class Graph implements IGraph, Serializable {
         this.arestas = arestas;
     }
 
-    public HashSet percorrerLargura(Object data) {
-        HashSet visited = new HashSet<>();
+    public LinkedList percorrerLargura(Object data) {
+        LinkedList visited = new LinkedList();
         Queue<Vertex> fila = new LinkedList<>();
         fila.add((Vertex) this.getVertex(data));
         visited.add((Vertex) this.getVertex(data));
         for (int i = 0; !fila.isEmpty(); i++) {
             Vertex v = fila.poll();
             Set<Integer> chaves = v.getArestas().keySet();
-            chaves.stream().filter((u) -> (!visited.contains(((Edge)v.getArestas().get(u)).getPre()))).map((u) -> {
-                fila.add(((Edge)v.getArestas().get(u)).getPre());
-                return u;
-            }).forEachOrdered((u) -> {
-                visited.add(((Edge)v.getArestas().get(u)).getPre());
-            });
+            for (Integer u : chaves) {
+                
+                if (!visited.contains(((Edge)v.getArestas().get(u)).getPre())) {
+                    fila.add(((Edge)v.getArestas().get(u)).getPre());
+                    visited.add(((Edge)v.getArestas().get(u)).getPre());
+                }
+            }
         }
         return visited;
     }

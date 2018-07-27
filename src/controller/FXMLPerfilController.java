@@ -121,14 +121,11 @@ public class FXMLPerfilController implements Initializable {
     @FXML
     private TextField txtPesquisar;
 
-
     @FXML
     private Pane pnArquivos;
 
     @FXML
     private TilePane tpArquivos;
-
- 
 
     private ControllerPostagem controlPost;
 
@@ -573,6 +570,8 @@ public class FXMLPerfilController implements Initializable {
                     novoamigo.getChildren().add(nome);
                     ltvAmigos.getItems().add(novoamigo);
                     ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getSolicitacoes().remove(user);
+                    quantSolisitacao.setText("" + ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getSolicitacoes().size());
+
                     ltvSolicitacao.getItems().remove(perfilSolicita);
                     abrirPerfil(novoamigo, evento, user);
                     try {
@@ -583,7 +582,6 @@ public class FXMLPerfilController implements Initializable {
 
                 });
                 ltvSolicitacao.getItems().add(perfilSolicita);
-                quantSolisitacao.setText("" + ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getSolicitacoes().size());
 
             }
             pnSolicitacao.setVisible(true);

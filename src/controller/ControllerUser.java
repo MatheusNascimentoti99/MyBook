@@ -13,7 +13,7 @@ import util.Vertex;
 import util.Graph;
 
 /**
- * A classe <b>ControllerUser</b> faz o gerenciamento dos usuários. Manipulando o grafo e gerenciando o usuário que está conectado.
+ * A classe <b>ControllerUser</b> gerência os usuários. Manipulando o grafo e gerenciando o usuário que está conectado.
  *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018
@@ -50,7 +50,7 @@ public class ControllerUser {
     }
 
     /**
-     *
+     *Altera o perfil a ser vísitado.
      * @param perfilCorrent Novo usuário a ser visitado.
      */
     public void setPerfilCorrent(User perfilCorrent) {
@@ -58,7 +58,7 @@ public class ControllerUser {
     }
 
     /**
-     *<b>checkRegistred</b> Verifica se o novo usuário já está registrado no sistema.
+     *Verifica se o novo usuário já está registrado no sistema.
      * @param novo Novo usuário a ser registrado.
      * @return Retorna <i>true</i> se o usuário já está registrado, caso contrário retorna <i>false</i>.
      */
@@ -71,7 +71,7 @@ public class ControllerUser {
     }
 
     /**
-     *
+     *Pega o usuário que está atualmente acessando o MyBook.
      * @return Retorna o usuário que está acessando o MyBook atualmente.
      */
     public User getLoginCorrent() {
@@ -79,7 +79,7 @@ public class ControllerUser {
     }
 
     /**
-     *
+     *Altera o usuário que está atualmente acessando o MyBook.
      * @param loginCorrent Altera o usuário que acessará o MyBook.
      */
     public void setLoginCorrent(User loginCorrent) {
@@ -95,10 +95,10 @@ public class ControllerUser {
     }
 
     /**
-     *
-     * @param login
-     * @param senha
-     * @return
+     *Verifica se o login e senha do usuário estão corretos, método utilizado para validar acesso do usuário ao sistema.
+     * @param login O Username do usuário.
+     * @param senha A senha do usuário.
+     * @return Retorna <i>true</i> se o usuário existir e se a senhar estiver correta, retorna <i>false</i> se o usuário não existir ou a senha estiver incorreta.
      */
     public boolean checkLogin(String login, String senha) {
         try {
@@ -118,41 +118,24 @@ public class ControllerUser {
     }
 
     /**
-     *
-     * @param login
-     * @return
-     */
-    public User verificaLogin(String login) {
-        Iterator iterador = grafoUsers.vertices();
-        while (iterador.hasNext()) {
-            Vertex entry = (Vertex) iterador.next();
-            User user = (User) entry.getValue();
-            if (user.getLogin().equals(login)) {
-                return user;
-            }
-        }
-        return null;
-    }
-
-    /**
-     *
-     * @throws Exception
+     *Salva o <i>Grafo de registros</i> em disco.
+     * @throws Exception Objeto corrompido, problemas na leitura do arquivo, etc. 
      */
     public void saveRegisters() throws Exception {
         ControllerFile.save(grafoUsers, "resources/registros.data");
     }
 
     /**
-     *
-     * @param grafoUsers
+     *Altera o grafo de registros.
+     * @param grafoUsers Novo grafo de registros.
      */
     public void setGrafoUsers(Graph grafoUsers) {
         this.grafoUsers = grafoUsers;
     }
 
     /**
-     *
-     * @return
+     *Ler grafo salvo em disco.
+     * @return Retorna o grafo que está salvo em disco. Caso não exista, então retorna um novo grafo.
      */
     public Graph readRegisters() {
         Graph temp;
@@ -168,34 +151,31 @@ public class ControllerUser {
     }
 
     /**
-     *
-     * @param user1
+     *Cria uma adjacência entre dois verteces(usuários) do grafo, assim criando uma relação entre os dois objetos.
+     * @param user1 
      * @param user2
-     * @return
      */
-    public boolean addAmizade(User user1, User user2) {
+    public void addAmizade(User user1, User user2) {
         if (user1 instanceof User && user2 instanceof User) {
             if (grafoUsers.getEdge(grafoUsers.getVertex(user1), grafoUsers.getVertex(user2)) == null) {
                 Amizade nova = new Amizade(99);
                 grafoUsers.addEdge(grafoUsers.getVertex(user1), grafoUsers.getVertex(user2), nova);
                 grafoUsers.addEdge(grafoUsers.getVertex(user2), grafoUsers.getVertex(user1), nova);
                 user1.getSolicitacoes().remove(user2);
-                return true;
             }
         }
-        return true;
     }
 
     /**
-     *
-     * @param nome
-     * @param email
-     * @param password
-     * @param telefone
-     * @param dataNasc
-     * @param endereco
-     * @param login
-     * @return
+     *Adiciona um novo usuário ao MyBook.  
+     * @param nome Nome do usuário.
+     * @param email Email do usuário.
+     * @param password Senha do usuário.
+     * @param telefone Telefone do usuário.
+     * @param dataNasc Data de nascimento do usuário.
+     * @param endereco Endereço do usuário.
+     * @param login Username do usuário.
+     * @return Retorna <i>true</i> se o usuário foi registrado, retorna <i>false</i> se existir um usuário registrado com o mesmo Username no sistema.
      */
     public boolean addUser(String nome, String email, String password, String telefone,
             String dataNasc, String endereco, String login) {
@@ -212,18 +192,10 @@ public class ControllerUser {
 
     /**
      *
-     * @return
+     * @return Retorna o iterator de vertices do grafo de usuários.
      */
     public Iterator showUsers() {
         return grafoUsers.vertices();
     }
 
-    /**
-     *
-     * @param origem
-     * @param destino
-     */
-    public void solicitacao(User origem, User destino) {
-        destino.getSolicitacoes().add(origem);
-    }
 }

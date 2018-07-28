@@ -60,7 +60,7 @@
         </Label>
         <Button fx:id="btnArquivos" contentDisplay="CENTER" layoutX="14.0" layoutY="176.0" maxHeight="-1.0" maxWidth="-1.0" minHeight="17.0" mnemonicParsing="false" onAction="#verArquivos" prefHeight="27.0" prefWidth="105.0" styleClass="optionVisita" text="Arquivos" textAlignment="CENTER">
           <effect>
-            <DropShadow color="#74ff33" height="10.87563941592262" radius="4.93914794921875" width="10.880952380952381" />
+            <DropShadow color="#74ff33" height="10.8782958984375" radius="4.93981206984747" width="10.880952380952381" />
           </effect>
           <stylesheets>
             <URL value="@fxmlperfil.css" />

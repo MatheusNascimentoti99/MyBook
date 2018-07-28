@@ -14,7 +14,7 @@ import java.io.ObjectOutputStream;
 
 
 /**
- * A classe <b>ControllerFile</b> faz o gerenciamento de leitura e gravação de arquivos.
+ * A classe <b>ControllerFile</b> gerência a leitura e gravação de arquivos.
  *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018

@@ -55,7 +55,7 @@ import view.AppView;
 
 /**
  *
- * A classe <b>FXMLPerfilVisitaController</b> faz o gerenciamento do arquivo
+ * A classe <b>FXMLPerfilVisitaController</b> gerência o arquivo
  * FXMLPerfilVisita.
  *
  * @author Matheus Nascimento e Elvis Serafim

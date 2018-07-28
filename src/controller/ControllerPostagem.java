@@ -3,7 +3,7 @@ package controller;
 import java.util.LinkedList;
 
 /**
- * A classe <b>ControllerPostagem</b> faz o gerenciamento da escolha de arquivos
+ * A classe <b>ControllerPostagem</b> gerência a escolha dos arquivos
  * que o usuário poderá postar.
  *
  * @author Matheus Nascimento e Elvis Serafim

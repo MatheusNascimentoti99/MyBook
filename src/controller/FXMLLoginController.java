@@ -29,7 +29,7 @@ import view.AppView;
 
 /**
  *
- * A classe <b>FXMLLoginController</b> faz o gerenciamento do arquivo FXMLLogin.
+ * A classe <b>FXMLLoginController</b> gerência o arquivo FXMLLogin.
  *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018
@@ -41,19 +41,15 @@ public class FXMLLoginController implements Initializable {
     private TextField textoEntrada;
     @FXML
     private PasswordField textoSenhaEntrada;
-    @FXML
-    private Button entrar;
-    @FXML
-    private Label registrar;
+
     @FXML
     private Label lblErroLogin;
-    @FXML
-    private ProgressBar barra;
+  
 
     /**
-     *
-     * @param event
-     * @throws IOException
+     *Realiza o login do usuário.
+     * @param event Click Mouse ou Pressionar <i>Enter</i>.
+     * @throws IOException Ler grafo salvo em disco e ler o arquivo FXML.
      */
     @FXML
     public void doLogin(Event event) throws IOException {
@@ -77,9 +73,9 @@ public class FXMLLoginController implements Initializable {
     }
 
     /**
-     *
-     * @param event
-     * @throws IOException
+     *Registra um novo usuário
+     * @param event Click mouse.
+     * @throws IOException Ler grafo salvo em disco e ler o arquivo FXML.
      */
     @FXML
     public void registrar(Event event) throws IOException {

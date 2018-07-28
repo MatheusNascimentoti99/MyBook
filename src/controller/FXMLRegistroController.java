@@ -30,7 +30,7 @@ import view.AppView;
 
 /**
      *
-     * A classe <b>FXMLRegistroController</b> faz o gerenciamento do arquivo FXMLRegistro.
+     * A classe <b>FXMLRegistroController</b> gerência o arquivo FXMLRegistro.
      *
      * @author Matheus Nascimento e Elvis Serafim
      * @since Jul 2018

@@ -13,18 +13,14 @@ import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.SwingFXUtils;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -58,7 +54,7 @@ import view.AppView;
 
 /**
  *
- * A classe <b>FXMLPerfilController</b> faz o gerenciamento do arquivo
+ * A classe <b>FXMLPerfilController</b> gerência o arquivo
  * FXMLPerfil.
  *
  * @author Matheus Nascimento e Elvis Serafim
@@ -130,12 +126,12 @@ public class FXMLPerfilController implements Initializable {
     private ControllerPostagem controlPost;
 
     /**
-     *
-     * @param imagem
-     * @param dir
-     * @param imageView
+     *Insere um imagem qualquer em uma ImageView.
+     * @param imagem Instancia do tipo Image que gravará a imagem que está salva no <i>dir</i>.
+     * @param dir Caminho da imagem.
+     * @param imageView O objeto da interface que mostrará a foto do perfil. 
      */
-    public void carregarFoto(Image imagem, String dir, ImageView imageView) {
+    public void carregarFotoPerfil(Image imagem, String dir, ImageView imageView) {
         try {
             imagem = new Image(dir);
             if (imagem.isError() || dir == null) {
@@ -150,10 +146,10 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param imagem
-     * @param dir
-     * @param imageView
+     *Insere um imagem qualquer em uma ImageView.
+     * @param imagem Instancia do tipo Image que gravará a imagem que está salva no <i>dir</i>.
+     * @param dir Caminho da imagem.
+     * @param imageView O objeto da interface que mostrará a imagem. 
      */
     public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
         try {
@@ -177,7 +173,7 @@ public class FXMLPerfilController implements Initializable {
         Vertex atual = AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent());
         Image imageUser = null;
 
-        carregarFoto(imageUser, AppView.getControlUser().getLoginCorrent().getDirFoto(), fotoPerfil);
+        carregarFotoPerfil(imageUser, AppView.getControlUser().getLoginCorrent().getDirFoto(), fotoPerfil);
         Set<Integer> chaves = atual.getArestas().keySet();
         for (Integer chave : chaves) {
             if (chave != null) {
@@ -314,8 +310,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Abrir galeria de imagens e vídeos.
+     * @param evento Click mouse.
      */
     @FXML
     public void verArquivos(Event evento) {
@@ -370,8 +366,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Efeito para acionar a opção de mudar a foto do perfil.
+     * @param evento Mouse Entred
      */
     @FXML
     public void mousecimaFoto(Event evento) {
@@ -381,8 +377,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Efeito para sumir a opção de mudar a foto do perfil.
+     * @param evento Mouse exited
      */
     @FXML
     public void mouseForaFoto(Event evento) {
@@ -391,8 +387,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Apagar a palavra "Pesquisar" quando o usuário clicar no campo de texto de pesquisa.
+     * @param evento Mouse click
      */
     @FXML
     public void clickPesquisar(Event evento) {
@@ -401,8 +397,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Sair do MyBook.
+     * @param evento Click mouse.
      */
     @FXML
     public void logout(Event evento) {
@@ -424,6 +420,10 @@ public class FXMLPerfilController implements Initializable {
         palco.show();
     }
 
+    /**
+     *Opção de pesquisa para ver os resultados por nível de proximidade do usuário. 
+     * @param event Mouse click
+     */
     @FXML
     public void percorrerLargura(Event event) {
 
@@ -438,7 +438,7 @@ public class FXMLPerfilController implements Initializable {
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
 
                 ImageView fotoNode = new ImageView();
-                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
+                carregarFotoPerfil(fotoP, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -454,8 +454,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Busca por nomes de usuários que iniciam com o mesmo dado passado pelo usuário no campo de texto de pesquisa.
+     * @param evento Pressionar Enter
      */
     @FXML
     public void pesquisar(Event evento) {
@@ -473,7 +473,7 @@ public class FXMLPerfilController implements Initializable {
             if (user.getNome().substring(0, tamanho).equalsIgnoreCase(txtPesquisar.getText())) {
 
                 ImageView fotoNode = new ImageView();
-                carregarFoto(fotoP, user.getDirFoto(), fotoNode);
+                carregarFotoPerfil(fotoP, user.getDirFoto(), fotoNode);
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
                 Label nome = new Label(user.getLogin());
@@ -489,8 +489,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Lista as informações básicas do usuário. 
+     * @param evento Mouse click
      */
     @FXML
     public void sobre(Event evento) {
@@ -506,13 +506,13 @@ public class FXMLPerfilController implements Initializable {
         pnSobre.setVisible(true);
         Image image = null;
 
-        carregarFoto(image, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvFotoSobre);
+        carregarFotoPerfil(image, AppView.getControlUser().getLoginCorrent().getDirFoto(), imvFotoSobre);
 
     }
 
     /**
-     *
-     * @param evento
+     *Volta para o perfil inicial.
+     * @param evento Mouse click
      */
     @FXML
     public void voltar(Event evento) {
@@ -522,6 +522,10 @@ public class FXMLPerfilController implements Initializable {
         pnFundo.setVisible(true);
     }
 
+    /**
+     * Lista os usuários que enviaram solicitação de amizade.
+     * @param evento Mouse click
+     */
     @FXML
     private void aceitarSolicitacao(Event evento) {
         ltvSolicitacao.getItems().clear();
@@ -541,7 +545,7 @@ public class FXMLPerfilController implements Initializable {
                 User user = (User) it.next();
 
                 ImageView fotoNode = new ImageView();
-                carregarFoto(fotoS, user.getDirFoto(), fotoNode);
+                carregarFotoPerfil(fotoS, user.getDirFoto(), fotoNode);
 
                 fotoNode.setFitHeight(50);
                 fotoNode.setFitWidth(50);
@@ -563,7 +567,7 @@ public class FXMLPerfilController implements Initializable {
                     Label nomeAmigo = new Label(user.getLogin());
 
                     ImageView fotoAmigo = new ImageView();
-                    carregarFoto(image, user.getDirFoto(), fotoAmigo);
+                    carregarFotoPerfil(image, user.getDirFoto(), fotoAmigo);
                     fotoAmigo.setFitHeight(50);
                     fotoAmigo.setFitWidth(50);
                     novoamigo.getChildren().add(fotoAmigo);

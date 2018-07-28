@@ -32,16 +32,6 @@ public class ControllerPostagem {
     }
 
     /**
-     *
-     * @return Lista de imagens anexadas em uma postagem.
-     * Método que designa uma nova lista de urls de videos.
-     * @param urlsVideo nova lista de urls.
-     */
-    public void setUrlsVideo(LinkedList urlsVideo) {
-        this.urlsVideo = urlsVideo;
-    }
-
-    /**
      * Método que retorna uma lista contendo Urls de fotos.
      * @return lista de urls de fotos.
      */

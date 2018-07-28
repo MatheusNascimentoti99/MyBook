@@ -6,7 +6,8 @@ import java.util.Iterator;
 
 /**
  * Classe <b>HashTable</b> , classe que implementa a interface <b>IGraph</b> . 
- * @author Matheus Nascimento e Elvis Nascimento Implementação retirada da aula
+ * @author Matheus Nascimento e Elvis Nascimento.
+ * Implementação baseada na aula
  * 08 de Estruturas de Dados, Profº Dr. João Rocha.
  * @since Jul 2018.
  */

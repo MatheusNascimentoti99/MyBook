@@ -5,26 +5,18 @@
  */
 package controller;
 
-import controller.FXMLPerfilController;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.animation.Timeline;
-import javafx.animation.Transition;
-import javafx.animation.TranslateTransition;
-import javafx.event.ActionEvent;
 import javafx.event.Event;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -46,7 +38,6 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
-import javafx.util.Duration;
 import model.Postagem;
 import model.User;
 import util.Edge;
@@ -121,10 +112,12 @@ public class FXMLPerfilVisitaController implements Initializable {
     private Button btnVoltarArquivos;
 
     /**
+     * Insere um imagem qualquer em uma ImageView.
      *
-     * @param imagem
-     * @param dir
-     * @param imageView
+     * @param imagem Instancia do tipo Image que gravará a imagem que está salva
+     * no <i>dir</i>.
+     * @param dir Caminho da imagem.
+     * @param imageView O objeto da interface que mostrará a foto do perfil.
      */
     public void carregarFoto(Image imagem, String dir, ImageView imageView) {
         try {
@@ -141,10 +134,12 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
+     * Insere um imagem qualquer em uma ImageView.
      *
-     * @param imagem
-     * @param dir
-     * @param imageView
+     * @param imagem Instancia do tipo Image que gravará a imagem que está salva
+     * no <i>dir</i>.
+     * @param dir Caminho da imagem.
+     * @param imageView O objeto da interface que mostrará a imagem.
      */
     public void carregarFotoPostagem(Image imagem, String dir, ImageView imageView) {
         try {
@@ -160,12 +155,7 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     }
 
-    /**
-     * Initializes the controller class.
-     *
-     * @param url
-     * @param rb
-     */
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         AppView.getControlUser().setGrafoUsers(AppView.getControlUser().readRegisters());
@@ -315,30 +305,34 @@ public class FXMLPerfilVisitaController implements Initializable {
         // TODO
     }
 
-    public void compartilhar(Button compartilhar, Postagem post) {
-        compartilhar.setOnMouseClicked(new EventHandler() {
-            @Override
-            public void handle(Event event) {
-
-                Postagem postCompar = new Postagem();
-                postCompar.setUrlVideo(post.getUrlVideo());
-                postCompar.setUrlImagem(post.getUrlImagem());
-                postCompar.setHoraPostagem(new Date());
-                postCompar.setDataPostagem(new Date());
-                postCompar.setTextoPostagem(post.getTextoPostagem());
-                ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(0, postCompar);
-                AppView.getControlUser().getLoginCorrent().getPostagens().add(postCompar);
-                try {
-                    AppView.getControlUser().saveRegisters();
-                } catch (Exception ex) {
-                    Logger.getLogger(FXMLPerfilVisitaController.class.getName()).log(Level.SEVERE, null, ex);
-                }
-
+    /**
+     * A postagem do Perfil que está sendo visitado pode ser adicionado as postagens do usuário que está acessando.
+     * @param compartilhar Botão que recebera o evento.
+     * @param post Postagem que será compartilhada.
+     */
+    private void compartilhar(Button compartilhar, Postagem post) {
+        compartilhar.setOnMouseClicked((Event event) -> {
+            Postagem postCompar = new Postagem();
+            postCompar.setUrlVideo(post.getUrlVideo());
+            postCompar.setUrlImagem(post.getUrlImagem());
+            postCompar.setHoraPostagem(new Date());
+            postCompar.setDataPostagem(new Date());
+            postCompar.setTextoPostagem(post.getTextoPostagem());
+            ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getLoginCorrent()).getValue()).getPostagens().add(0, postCompar);
+            AppView.getControlUser().getLoginCorrent().getPostagens().add(postCompar);
+            try {
+                AppView.getControlUser().saveRegisters();
+            } catch (Exception ex) {
+                Logger.getLogger(FXMLPerfilVisitaController.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
 
     }
 
+    /**
+     *Abrir galeria de imagens e vídeos.
+     * @param evento Click mouse.
+     */
     @FXML
     public void verArquivos(Event evento) {
         pnPesquisa.setVisible(false);
@@ -393,8 +387,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Lista as informações básicas do usuário. 
+     * @param evento Mouse click
      */
     @FXML
     public void sobre(Event evento) {
@@ -414,8 +408,12 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     }
 
+    /**
+     *Adiciona o usuário na lista de solicitações de amizades do outro usuário dono do perfil que está sendo visitado.
+     * @param evento Mouse click
+     */
     @FXML
-    private void enviarSolicitacao(Event evento) {
+    public void enviarSolicitacao(Event evento) {
         if (!((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().contains(AppView.getControlUser().getLoginCorrent())) {
             ((User) AppView.getControlUser().getGrafoUsers().getVertex(AppView.getControlUser().getPerfilCorrent()).getValue()).getSolicitacoes().add(AppView.getControlUser().getLoginCorrent());
         }
@@ -429,8 +427,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Volta para o perfil inicial. 
+     * @param evento Mouse click
      */
     @FXML
     public void home(Event evento) {
@@ -447,8 +445,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Sai do MyBook.
+     * @param evento Click mouse.
      */
     @FXML
     public void logout(Event evento) {
@@ -471,8 +469,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Volta para o perfil inicial.
+     * @param evento Mouse click
      */
     @FXML
     public void voltar(Event evento) {
@@ -484,8 +482,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Apaga a palavra "Pesquisar" quando o usuário clicar no campo de texto de pesquisa.
+     * @param evento Mouse click
      */
     @FXML
     public void clickPesquisar(Event evento) {
@@ -493,6 +491,10 @@ public class FXMLPerfilVisitaController implements Initializable {
         txtPesquisa.setText("");
     }
 
+    /**
+     *Opção de pesquisa para ver os resultados por nível de proximidade do usuário. 
+     * @param event Mouse click
+     */
     @FXML
     public void percorrerLargura(Event event) {
 
@@ -523,8 +525,8 @@ public class FXMLPerfilVisitaController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Busca por nomes de usuários que iniciam com o mesmo dado passado pelo usuário no campo de texto de pesquisa.
+     * @param evento Pressionar Enter
      */
     @FXML
     public void pesquisar(Event evento) {
@@ -554,6 +556,11 @@ public class FXMLPerfilVisitaController implements Initializable {
 
     }
 
+    /**
+     *Opção de abrir perfil de outros usuários.
+     * @param perfilPesquisa Opção de perfil a ser visidado.
+     * @param user Usuário a ser visidado.
+     */
     public void abrirPerfil(HBox perfilPesquisa, User user) {
         perfilPesquisa.setOnMouseClicked((Event event) -> {
             if (!user.equals(AppView.getControlUser().getLoginCorrent())) {

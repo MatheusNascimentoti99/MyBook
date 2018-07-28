@@ -149,7 +149,6 @@ public class ControllerUser {
      * Método que adiciona uma amizade entre dois usuários.
      * @param user1 Usuário.
      * @param user2 Usuário.
-     * @return true.
      */
     public void addAmizade(User user1, User user2) {
         if (user1 instanceof User && user2 instanceof User) {

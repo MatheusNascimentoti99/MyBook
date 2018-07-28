@@ -310,7 +310,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *Abrir galeria de imagens e vídeos.
+     *Abre galeria de imagens e vídeos.
      * @param evento Click mouse.
      */
     @FXML
@@ -387,7 +387,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *Apagar a palavra "Pesquisar" quando o usuário clicar no campo de texto de pesquisa.
+     *Apaga a palavra "Pesquisar" quando o usuário clicar no campo de texto de pesquisa.
      * @param evento Mouse click
      */
     @FXML
@@ -397,7 +397,7 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *Sair do MyBook.
+     *Sai do MyBook.
      * @param evento Click mouse.
      */
     @FXML
@@ -596,13 +596,13 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param novoamigo
-     * @param evento
-     * @param user
+     *Opção de abrir perfil de outros usuários.
+     * @param visitado Opção de perfil a ser visidado
+     * @param evento Mouse click
+     * @param user Usuário a ser visidado.
      */
-    public void abrirPerfil(HBox novoamigo, Event evento, User user) {
-        novoamigo.setOnMouseClicked((Event event) -> {
+    public void abrirPerfil(HBox visitado, Event evento, User user) {
+        visitado.setOnMouseClicked((Event event) -> {
             if (!user.equals(AppView.getControlUser().getLoginCorrent())) {
                 AppView.getControlUser().setPerfilCorrent((User) AppView.getControlUser().getGrafoUsers().getVertex(user).getValue());
                 Parent root = null;
@@ -631,8 +631,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Escolher imagem do diretório.
+     * @param evento Mouse click
      */
     @FXML
     public void abrir(Event evento) {
@@ -668,12 +668,12 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param postagemView
-     * @param excluir
-     * @param postagem
-     * @param user
-     * @param postagensView
+     *Apaga uma postagem escolhida pelo usuário.
+     * @param postagemView Node de postagem a ser removido.
+     * @param excluir Botão que recebera a ação de excluir postagem.
+     * @param postagem Objeto do tipo Postagem que será removido.
+     * @param user Usuário que terá postagem removida.
+     * @param postagensView ListView que contém todas as postagens do usuário.
      */
     public void excluirPostagem(VBox postagemView, Button excluir, Postagem postagem, User user, ListView postagensView) {
         excluir.setOnMouseClicked((Event event) -> {
@@ -689,8 +689,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Adiciona um Node na ListView contendo todos os dados de uma postagem, data, nome de usuário e o conteúdo da postagem.
+     * @param evento Mouse click
      */
     @FXML
     public void postagem(Event evento) {
@@ -763,10 +763,7 @@ public class FXMLPerfilController implements Initializable {
             listPosts.getItems().add(0, campoPostagem);
             excluirPostagem(campoPostagem, btnExcluir, postagem, AppView.getControlUser().getLoginCorrent(), listPosts);
 
-        } else {
-            System.out.println("Sem nada para se postar");
         }
-
         try {
             AppView.getControlUser().saveRegisters();
         } catch (Exception ex) {
@@ -779,8 +776,8 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
+     *Carrega uma imagem na postagem que será realizada.
+     * @param evento Mouse click
      */
     public void postagemFoto(Event evento) {
         FileChooser fileChooser = new FileChooser();
@@ -809,11 +806,10 @@ public class FXMLPerfilController implements Initializable {
     }
 
     /**
-     *
-     * @param evento
-     * @throws MalformedURLException
+     *Carrega um video na postagem que será realizada.
+     * @param evento Mouse click
      */
-    public void postagemVideo(Event evento) throws MalformedURLException {
+    public void postagemVideo(Event evento){
         FileChooser filechooser = new FileChooser();
         FileChooser.ExtensionFilter extFilterAVI = new FileChooser.ExtensionFilter("AVI files (*.avi)", "*.AVI");
         FileChooser.ExtensionFilter extFilterMPG = new FileChooser.ExtensionFilter("MPEG files (*.mpg)", "*.MPEG");

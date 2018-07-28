@@ -9,10 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes da classe User.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 public class UserTest {
     private User usuario01;
     private Postagem postagem, postagem02;

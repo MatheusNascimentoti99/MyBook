@@ -1,8 +1,4 @@
-/*
-     * To change this license header, choose License Headers in Project Properties.
-     * To change this template file, choose Tools | Templates
-     * and open the template in the editor.
- */
+
 package controller;
 
 import java.io.FileNotFoundException;
@@ -26,7 +22,7 @@ public class ControllerUser {
     private User perfilCorrent;
 
     /**
-     *
+     *Construtor da classe  <b>ControllerUser</b> .
      */
     public ControllerUser() {
         this.grafoUsers = new Graph();
@@ -39,7 +35,6 @@ public class ControllerUser {
     public Graph getGrafoUsers() {
         return grafoUsers;
     }
-
     /**
      *Pega o usuário que está atualmente com o perfil aberto.
      * @return Retorna o usuário que está sendo visitado.
@@ -87,8 +82,8 @@ public class ControllerUser {
     }
 
     /**
-     *Alterar foto do perfil do usuário que está acessando o MyBook.
-     * @param local Caminho para acessar a nova foto do usuário.
+     *
+     * @param local Altera o usuário que acessará o MyBook.
      */
     public void alterarFoto(String local) {
         loginCorrent.setDirFoto(local);
@@ -126,16 +121,16 @@ public class ControllerUser {
     }
 
     /**
-     *Altera o grafo de registros.
-     * @param grafoUsers Novo grafo de registros.
+     * Método que designa um novo grafo para o grafo de usuários.
+     * @param grafoUsers novo grafo.
      */
     public void setGrafoUsers(Graph grafoUsers) {
         this.grafoUsers = grafoUsers;
     }
 
     /**
-     *Ler grafo salvo em disco.
-     * @return Retorna o grafo que está salvo em disco. Caso não exista, então retorna um novo grafo.
+     * Método que lê os registros dos usuários.
+     * @return grafo dos usuários.
      */
     public Graph readRegisters() {
         Graph temp;
@@ -151,9 +146,10 @@ public class ControllerUser {
     }
 
     /**
-     *Cria uma adjacência entre dois verteces(usuários) do grafo, assim criando uma relação entre os dois objetos.
-     * @param user1 
-     * @param user2
+     * Método que adiciona uma amizade entre dois usuários.
+     * @param user1 Usuário.
+     * @param user2 Usuário.
+     * @return true.
      */
     public void addAmizade(User user1, User user2) {
         if (user1 instanceof User && user2 instanceof User) {
@@ -167,15 +163,15 @@ public class ControllerUser {
     }
 
     /**
-     *Adiciona um novo usuário ao MyBook.  
-     * @param nome Nome do usuário.
-     * @param email Email do usuário.
-     * @param password Senha do usuário.
-     * @param telefone Telefone do usuário.
-     * @param dataNasc Data de nascimento do usuário.
-     * @param endereco Endereço do usuário.
-     * @param login Username do usuário.
-     * @return Retorna <i>true</i> se o usuário foi registrado, retorna <i>false</i> se existir um usuário registrado com o mesmo Username no sistema.
+     * Método que adiciona um novo usuário ao sistema e ao grafo.
+     * @param nome nome do usuário.
+     * @param email email do usuário.
+     * @param password senha do usuário.
+     * @param telefone telefone do usuário.
+     * @param dataNasc data de nascimento do usuário.
+     * @param endereco endereço do usuário.
+     * @param login login do usuário.
+     * @return true, caso o usuário foi registrado, e false, caso não tenha sido.
      */
     public boolean addUser(String nome, String email, String password, String telefone,
             String dataNasc, String endereco, String login) {
@@ -191,8 +187,8 @@ public class ControllerUser {
     }
 
     /**
-     *
-     * @return Retorna o iterator de vertices do grafo de usuários.
+     * Método que retorna o iterator contendo todos os usuários registrados do grafo.
+     * @return iterator de todos os vertices.
      */
     public Iterator showUsers() {
         return grafoUsers.vertices();

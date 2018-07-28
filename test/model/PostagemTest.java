@@ -9,10 +9,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes da classe Postagem.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 public class PostagemTest {
     private Postagem postagem;
     private String urlVideo01, urlVideo02;
@@ -47,7 +50,7 @@ public class PostagemTest {
        assertEquals(true, postagem.getUrlImagem().isEmpty());
        
        
-        postagem.getUrlVideo().add(urlVideo02);
+       postagem.getUrlVideo().add(urlVideo02);
        assertEquals(false, postagem.getUrlVideo().isEmpty());
        assertNotEquals(true,postagem.getUrlVideo().contains(urlVideo01));
        postagem.getUrlVideo().add(urlVideo01);

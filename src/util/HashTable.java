@@ -1,17 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package util;
 
 import java.io.Serializable;
 import java.util.Iterator;
 
 /**
- *
- * @author Matheus Nascimento e Elvis Nascimento
- * Implementação baseada na aula 08 de Estruturas de Dados, Prof. Dr. João Rocha.
+ * Classe <b>HashTable</b> , classe que implementa a interface <b>IGraph</b> . 
+ * @author Matheus Nascimento e Elvis Nascimento Implementação retirada da aula
+ * 08 de Estruturas de Dados, Profº Dr. João Rocha.
+ * @since Jul 2018.
  */
 public class HashTable implements IHashTable, Serializable {
 
@@ -20,6 +17,10 @@ public class HashTable implements IHashTable, Serializable {
     private Vertex[] entries;
     private int size;
 
+    /**
+     * Construtor da classe <b>HashTable</b> . É recebido por parâmetro o tamanho da HashTable.
+     * @param size int tamanho da HashTable.
+     */
     public HashTable(int size) {
         entries = new Vertex[size];
     }
@@ -74,6 +75,11 @@ public class HashTable implements IHashTable, Serializable {
         }
     }
 
+    /**
+     * Método que adiciona um novo vértice a HashTable.
+     * @param key chave do objeto que será armazenado no vértice.
+     * @param value valor que será armazenado no vértice.
+     */
     @Override
     public void put(int key, Object value) {
         Vertex e = new Vertex(key, value);
@@ -87,6 +93,11 @@ public class HashTable implements IHashTable, Serializable {
         }
     }
 
+    /**
+     * Método que retorna um valor a partir de uma chave.
+     * @param key chave do valor armazenado. 
+     * @return objeto valor.
+     */
     @Override
     public Object get(int key) {
         try {
@@ -100,6 +111,11 @@ public class HashTable implements IHashTable, Serializable {
         return hashFunction(entries, key);
     }
 
+    /**
+     * Método que remove um valor armazenado em um vértice da HashTable a partir de uma dada chave.
+     * @param key chave do valor a ser removido;
+     * @return true, caso seja removido, e false, caso não.
+     */
     @Override
     public boolean removeKey(int key) {
         for (int i = hash(key); entries[i] != null; i = (i + 1) % entries.length) {
@@ -126,6 +142,10 @@ public class HashTable implements IHashTable, Serializable {
 
     }
 
+    /**
+     * Método que remove um valor de um vértice da HashTable.
+     * @param value valor a ser removido.
+     */
     @Override
     public void removeValue(Object value) {
         int i = 0;
@@ -141,21 +161,38 @@ public class HashTable implements IHashTable, Serializable {
         }
     }
 
+    /**
+     * Método que verifica se a HashTable está vazia.
+     * @return true, caso esteja, e false caso não.
+     */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /**
+     * Método que retorna a quantidade de vértices armazenados na HashTable.
+     * @return quantidade de vértices.
+     */
     @Override
     public int size() {
         return size;
     }
 
+    /**
+     * Método que retorna o iterator da HashTable.
+     * @return iterator.
+     */
     @Override
     public Iterator iterator() {
         return new MyIterator();
     }
 
+    /**
+     * Método que verifica se a HashTable contém um objeto.
+     * @param value objeto a ser verificado
+     * @return true, caso esteja na HashTable, e false, caso não.
+     */
     @Override
     public boolean contains(Object value) {
         Iterator it = this.iterator();
@@ -166,11 +203,17 @@ public class HashTable implements IHashTable, Serializable {
         return false;
     }
     
+    /**
+     * classe <b>MyIterator</b> , subclasse da classe <b>HashTable</b> .
+     */
     public class MyIterator implements Iterator, Serializable {
 
         private final Vertex[] corrent;
         int size;
 
+        /**
+         * Construtor da classe <b>MyIterator</b> .
+         */
         public MyIterator() {
             corrent = entries;
             size = 0;

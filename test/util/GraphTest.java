@@ -12,10 +12,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes da classe Graph.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 public class GraphTest {
     private Graph grafo;
     private HashTable vertice;

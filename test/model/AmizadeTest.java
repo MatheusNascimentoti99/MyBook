@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes da classe Amizade.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 public class AmizadeTest {
     private Amizade amizade;
    

@@ -26,55 +26,97 @@ public class Postagem implements Serializable{
     private Date dataPostagem;
     private Date horaPostagem;
 
+    /**
+     *
+     */
     public Postagem() {
         this.urlImagem = new LinkedList();
         this.urlVideo = new LinkedList();
     }
 
+    /**
+     *
+     * @return Retorna o horário da postagem.
+     */
     public Date getHoraPostagem() {
         return horaPostagem;
     }
 
+    /**
+     *
+     * @param horaPostagem Altera o horário da postagem.
+     */
     public void setHoraPostagem(Date horaPostagem) {
         this.horaPostagem = horaPostagem;
     }
     
+    /**
+     *
+     * @return Retorna a data da postagem.
+     */
     public Date getDataPostagem() {
         return dataPostagem;
     }
 
+    /**
+     *
+     * @param dataPostagem Altera a data da postagem.
+     */
     public void setDataPostagem(Date dataPostagem) {
         this.dataPostagem = dataPostagem;
     }
     
+    /**
+     *
+     * @return Retorna o texto da postagem.
+     */
     public String getTextoPostagem() {
         return textoPostagem;
     }
 
+    /**
+     *
+     * @param textoPostagem Altera o texto da postagem.
+     */
     public void setTextoPostagem(String textoPostagem) {
         this.textoPostagem = textoPostagem;
     }
 
+    /**
+     *
+     * @return Retorna a lista com os caminhos das imagens utilizadas na postagem.
+     */
     public LinkedList getUrlImagem() {
         return urlImagem;
     }
 
+    /**
+     *
+     * @param urlImagem Altera a lista de URL's de imagens.
+     */
     public void setUrlImagem(LinkedList urlImagem) {
         this.urlImagem = urlImagem;
     }
 
+    /**
+     *
+     * @return Retorna a lista com os caminhos dos vídeos utilizadas na postagem.
+     */
     public LinkedList getUrlVideo() {
         return urlVideo;
     }
 
+    /**
+     *
+     * @param urlVideo Altera a lista de URL's de vídeos.
+     */
     public void setUrlVideo(LinkedList urlVideo) {
         this.urlVideo = urlVideo;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        return hash;
+        return urlVideo.hashCode() + urlImagem.hashCode() + textoPostagem.hashCode();
     }
 
     @Override

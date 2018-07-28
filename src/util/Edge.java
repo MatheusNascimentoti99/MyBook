@@ -2,10 +2,11 @@
 package util;
 
 import java.io.Serializable;
-import java.util.Objects;
 
 /**
- *A classe <b>Edge</b> é a classe responsável pela aresta de um grafo.
+ *
+ * A classe <b>Edge</b> é responsavel para criar uma adjacência entre dois vertices.
+ *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018
  * @version 1.0

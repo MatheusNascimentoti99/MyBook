@@ -11,10 +11,13 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes da classe Edge.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 public class EdgeTest {
     
     private User usuario01,usuario02, usuario03, usuario04;

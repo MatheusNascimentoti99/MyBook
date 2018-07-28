@@ -7,14 +7,15 @@ import model.Amizade;
 import model.User;
 import util.Vertex;
 import util.Graph;
+
 /**
- * A classe <b>ControllerUser</b> faz o gerenciamento dos usuários do aplicativo.
+ * A classe <b>ControllerUser</b> faz o gerenciamento dos usuários. Manipulando o grafo e gerenciando o usuário que está conectado.
  *
  * @author Matheus Nascimento e Elvis Serafim
  * @since Jul 2018
  * @version 1.0
  */
-    public class ControllerUser {
+public class ControllerUser {
 
     private User loginCorrent;
     private Graph grafoUsers;
@@ -28,33 +29,32 @@ import util.Graph;
     }
 
     /**
-     * Método que retorna o grafo que contém todos os usuários.
-     * @return grafo dos usuários.
+     *
+     * @return Retorna o grafo que contém todos os usuários cadastrados no sistema.
      */
     public Graph getGrafoUsers() {
         return grafoUsers;
     }
-
     /**
-     * Método que retorna o usuário do perfil corrente do programa.
-     * @return usuário do perfil corrente.
+     *Pega o usuário que está atualmente com o perfil aberto.
+     * @return Retorna o usuário que está sendo visitado.
+     * 
      */
     public User getPerfilCorrent() {
         return perfilCorrent;
     }
 
-    /**
-     * Método que designa um novo usuário para o perfil corrente.
-     * @param perfilCorrent novo Usuário.
+     /**
+     *
+     * @param perfilCorrent Novo usuário a ser visitado.
      */
     public void setPerfilCorrent(User perfilCorrent) {
         this.perfilCorrent = perfilCorrent;
     }
-
-    /**
-     * Método que verifica se o usuário já está registrado.
-     * @param novo Usuário a ser conferido.
-     * @return true, caso esteja, e false, caso não.
+ /**
+     *<b>checkRegistred</b> Verifica se o novo usuário já está registrado no sistema.
+     * @param novo Novo usuário a ser registrado.
+     * @return Retorna <i>true</i> se o usuário já está registrado, caso contrário retorna <i>false</i>.
      */
     public boolean checkRegistred(User novo) {
         try {
@@ -63,26 +63,26 @@ import util.Graph;
             return false;
         }
     }
-    
+
     /**
-     * Método que retorna o usuário que está utilizando a plataforma.
-     * @return usuário que fez login.
+     *
+     * @return Retorna o usuário que está acessando o MyBook atualmente.
      */
     public User getLoginCorrent() {
         return loginCorrent;
     }
 
     /**
-     * Método que designa um novo usuário para o usuário que está "logado".
-     * @param loginCorrent Usuário.
+     * Método que designa o nome usuário que está acessando o Mybook.
+     * @param loginCorrent usuário.
      */
     public void setLoginCorrent(User loginCorrent) {
         this.loginCorrent = loginCorrent;
     }
 
     /**
-     * Método que altera a foto do perfil de um usuário.
-     * @param local endereço da imagem.
+     *
+     * @param local Altera o usuário que acessará o MyBook.
      */
     public void alterarFoto(String local) {
         loginCorrent.setDirFoto(local);
@@ -201,7 +201,7 @@ import util.Graph;
         } else {
             return false;
         }
-        
+
     }
 
     /**

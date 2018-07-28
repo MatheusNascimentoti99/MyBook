@@ -1,18 +1,17 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package model;
 
 import org.junit.Before;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
 
-/**
- *
- * @author Matheus Nascimento
- */
+ /**
+  * Classe de Testes que contém todos os testes do pacote Model.
+  * 
+ * @author Matheus Nascimento e Elvis Serafim
+ * @since Jul 2018
+ * @version 1.0
+ **/
 @RunWith(Suite.class)
 @Suite.SuiteClasses({model.AmizadeTest.class, model.UserTest.class, model.PostagemTest.class})
 public class ModelSuite {

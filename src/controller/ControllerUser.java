@@ -82,8 +82,8 @@ public class ControllerUser {
     }
 
     /**
-     *
-     * @param local Altera o usuário que acessará o MyBook.
+     * Método que altera foto do perfil de um usuário.
+     * @param local local da foto.
      */
     public void alterarFoto(String local) {
         loginCorrent.setDirFoto(local);
